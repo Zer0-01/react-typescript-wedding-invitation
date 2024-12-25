@@ -39,6 +39,19 @@ function App() {
     return () => clearInterval(interval);
   }, [targetDate]);
 
+  const place = {
+    name: "Eiffel Tower",
+    address: "Champ de Mars, 5 Avenue Anatole, 75007 Paris, France",
+    latitude: 48.8584,
+    longitude: 2.2945
+  };
+
+  // Function to open Google Maps at the specified location
+  const openMap = () => {
+    const mapUrl = `https://maps.app.goo.gl/wp83ctnYxTV5NfDm6`;
+    window.open(mapUrl, "_blank"); // Opens the map in a new tab
+  };
+
   return (
     <>
       <Container>
@@ -142,6 +155,27 @@ function App() {
                     </Card.Body>
                   </Col>
                 </Row>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Spacer height={100} />
+        <Row className="d-flex justify-content-center">
+          <Col xs="auto">
+            <Card>
+              <Card.Body className="text-center">
+                <Card.Title>{place.name}</Card.Title>
+                <Card.Subtitle className="mb-3 text-muted">{place.address}</Card.Subtitle>
+                <Button variant="primary" onClick={openMap}>View on Map</Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs="auto">
+            <Card>
+              <Card.Body className="text-center">
+                <Card.Title>{place.name}</Card.Title>
+                <Card.Subtitle className="mb-3 text-muted">{place.address}</Card.Subtitle>
+                <Button variant="primary" onClick={openMap}>View on Map</Button>
               </Card.Body>
             </Card>
           </Col>
