@@ -180,6 +180,17 @@ function App() {
             </Card>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
+          </Col>
+        </Row>
+        <Spacer height={100} />
+        <Row className="mt-4 text-center">
+          <Col style={{ fontSize: '39px' }}>Our Story</Col>
+        </Row>
+        <Spacer height={100} />
+
       </Container>
     </>
   );
