@@ -190,7 +190,33 @@ function App() {
           <Col style={{ fontSize: '39px' }}>Our Story</Col>
         </Row>
         <Spacer height={100} />
+        <Row>
+          <Col>
+            <Row>
+              <Card className='mb-4'>
+                <Row className="justify-content-center p-5">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor mauris odio tellus sem neque, pretium sem sed montes. Enim, cursus massa nec massa ultrices mauris donec id volutpat. Libero sed placerat morbi proin at nibh. Adipiscing nec pretium egestas.
+                </Row>
 
+              </Card>
+            </Row>
+            <Row>
+              <Card>
+                <Row className="justify-content-center p-5">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor mauris odio tellus sem neque, pretium sem sed montes. Enim, cursus massa nec massa ultrices mauris donec id volutpat. Libero sed placerat morbi proin at nibh. Adipiscing nec pretium egestas.
+                </Row>
+
+              </Card>
+            </Row>
+
+
+          </Col>
+          <Col>
+            <Card>
+              Meow
+            </Card>
+          </Col>
+        </Row>
       </Container>
     </>
   );
