@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Spacer from './components/Spacer';
 import Card from 'react-bootstrap/esm/Card';
 import Button from 'react-bootstrap/esm/Button';
+import Image from 'react-bootstrap/esm/Image';
 
 import { useState, useEffect } from 'react';
 
@@ -191,30 +192,16 @@ function App() {
         </Row>
         <Spacer height={100} />
         <Row>
-          <Col>
+          <Col className='d-flex justify-content-center'>
             <Row>
-              <Card className='mb-4'>
-                <Row className="justify-content-center p-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor mauris odio tellus sem neque, pretium sem sed montes. Enim, cursus massa nec massa ultrices mauris donec id volutpat. Libero sed placerat morbi proin at nibh. Adipiscing nec pretium egestas.
-                </Row>
-
-              </Card>
+              <Image src='https://placehold.co/400x400' />
             </Row>
-            <Row>
-              <Card>
-                <Row className="justify-content-center p-5">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor mauris odio tellus sem neque, pretium sem sed montes. Enim, cursus massa nec massa ultrices mauris donec id volutpat. Libero sed placerat morbi proin at nibh. Adipiscing nec pretium egestas.
-                </Row>
-
-              </Card>
-            </Row>
-
 
           </Col>
-          <Col>
-            <Card>
-              Meow
-            </Card>
+          <Col className='d-flex justify-content-center'>
+            <Image src='https://placehold.co/400x400' />
+
+
           </Col>
         </Row>
       </Container>
