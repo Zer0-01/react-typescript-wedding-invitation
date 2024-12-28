@@ -5,9 +5,11 @@ import Col from 'react-bootstrap/esm/Col';
 import Spacer from './components/Spacer';
 import Card from 'react-bootstrap/esm/Card';
 import Button from 'react-bootstrap/esm/Button';
+import Image from 'react-bootstrap/esm/Image';
 
 import { useState, useEffect } from 'react';
 import OurStory from './components/OurStory';
+import CardCouple from './components/CardCouple';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -80,7 +82,7 @@ function App() {
         <Row className="justify-content-center">
           <Col>
             <div className="fs-1 text-center fw-bold ">
-              Ali & Fatimah
+              Anas & Izzatul
             </div>
           </Col>
         </Row>
@@ -90,50 +92,7 @@ function App() {
               03 08 2025
             </div> </Col>
         </Row>
-        <Row className="d-flex justify-content-center">
-          <Col xs="auto">
-            <Card>
-              <Card.Body>
-                <Card.Title className="text-center" style={{ fontSize: 39 }}>
-                  Meet the happy couple
-                </Card.Title>
-                <Card.Subtitle className="mt-4 text-muted">
-                  Glory be to Allah SWT who has created creatures in pairs. Ya Allah, please accept and bless us
-                </Card.Subtitle>
-                <Row className="mt-4">
-                  <Col xs={6} className="text-center">
-                    <img
-                      src="https://via.placeholder.com/200"
-                      alt="Image 1"
-                      className="img-fluid"
-                      style={{ width: '100%', height: 'auto' }}
-                    />
-                    <div className="mt-2">
-                      <strong>Ali</strong>
-                    </div>
-                  </Col>
-                  <Col xs={6} className="text-center">
-                    <img
-                      src="https://via.placeholder.com/200"
-                      alt="Image 2"
-                      className="img-fluid"
-                      style={{ width: '100%', height: 'auto' }}
-                    />
-                    <div className="mt-2">
-                      <strong>Fatimah</strong>
-                    </div>
-                  </Col>
-                </Row>
-                <Row className="mt-4 text-center">
-                  <Col>
-                    <Button variant="primary">Our Story</Button>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-
+        <CardCouple />
         <Spacer height={100} />
         <Row className="d-flex justify-content-center">
           <Col xs="auto">
