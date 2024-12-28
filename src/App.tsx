@@ -5,9 +5,9 @@ import Col from 'react-bootstrap/esm/Col';
 import Spacer from './components/Spacer';
 import Card from 'react-bootstrap/esm/Card';
 import Button from 'react-bootstrap/esm/Button';
-import Image from 'react-bootstrap/esm/Image';
 
 import { useState, useEffect } from 'react';
+import OurStory from './components/OurStory';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -191,19 +191,7 @@ function App() {
           <Col style={{ fontSize: '39px' }}>Our Story</Col>
         </Row>
         <Spacer height={100} />
-        <Row>
-          <Col className='d-flex justify-content-center'>
-            <Row>
-              <Image src='https://placehold.co/400x400' />
-            </Row>
-
-          </Col>
-          <Col className='d-flex justify-content-center'>
-            <Image src='https://placehold.co/400x400' />
-
-
-          </Col>
-        </Row>
+        <OurStory />
       </Container>
     </>
   );
