@@ -56,46 +56,40 @@ function App() {
   return (
     <>
       <Container>
-        <Spacer height={154} />
-        <Row className="justify-content-center">
-          <Col xs='auto' style={{ fontSize: '20px', fontWeight: 'bold' }}>
-            <div>
+        <Row className="justify-content-center mt-5">
+          <Col>
+            <div className='text-center fs-1 fw-bold'>
               Ya Allah the Most Loving
             </div>
           </Col>
         </Row>
         <Row className="justify-content-center">
-          <Col xs='auto' style={{ fontSize: '20px' }}>
-            <div>
+          <Col>
+            <div className='text-center fs-3'>
               With Your blessing, you brought us together in a holy marriage bond
             </div>
           </Col>
         </Row>
-        <Spacer height={50} />
         <Row className="justify-content-center">
-          <Col xs='auto' style={{ fontSize: '40px', fontWeight: 'bold' }}>
-            <div>
+          <Col >
+            <div className='text-center fs-1 fw-bold'>
               THE WEDDING OF
             </div>
           </Col>
         </Row>
-        <Spacer height={50} />
         <Row className="justify-content-center">
-          <Col xs='auto' style={{ fontSize: '120px' }}>
-            <div>
+          <Col>
+            <div className="fs-1 text-center fw-bold ">
               Ali & Fatimah
             </div>
           </Col>
         </Row>
-        <Spacer height={42} />
         <Row className="justify-content-center">
-          <Col xs='auto' style={{ fontSize: '120px' }}>
-            <div>
+          <Col>
+            <div className="text-center fw-bold fs-1">
               03 08 2025
             </div> </Col>
         </Row>
-        <Spacer height={280} />
-
         <Row className="d-flex justify-content-center">
           <Col xs="auto">
             <Card>
