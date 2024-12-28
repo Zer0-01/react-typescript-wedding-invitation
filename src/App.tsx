@@ -57,25 +57,42 @@ function App() {
     <>
       <Container>
         <Spacer height={154} />
-        <Row className="text-center">
-          <Col style={{ fontSize: '20px', fontWeight: 'bold' }}>Ya Allah the Most Loving</Col>
+        <Row className="justify-content-center">
+          <Col xs='auto' style={{ fontSize: '20px', fontWeight: 'bold' }}>
+            <div>
+              Ya Allah the Most Loving
+            </div>
+          </Col>
         </Row>
-        <Row className="text-center">
-          <Col style={{ fontSize: '20px' }}>
-            With Your blessing, you brought us together in a holy marriage bond
+        <Row className="justify-content-center">
+          <Col xs='auto' style={{ fontSize: '20px' }}>
+            <div>
+              With Your blessing, you brought us together in a holy marriage bond
+            </div>
           </Col>
         </Row>
         <Spacer height={50} />
-        <Row className="text-center">
-          <Col style={{ fontSize: '40px', fontWeight: 'bold' }}>THE WEDDING OF</Col>
+        <Row className="justify-content-center">
+          <Col xs='auto' style={{ fontSize: '40px', fontWeight: 'bold' }}>
+            <div>
+              THE WEDDING OF
+            </div>
+          </Col>
         </Row>
         <Spacer height={50} />
-        <Row className="text-center">
-          <Col style={{ fontSize: '120px' }}>Ali & Fatimah</Col>
+        <Row className="justify-content-center">
+          <Col xs='auto' style={{ fontSize: '120px' }}>
+            <div>
+              Ali & Fatimah
+            </div>
+          </Col>
         </Row>
         <Spacer height={42} />
-        <Row className="text-center">
-          <Col style={{ fontSize: '120px' }}>03 08 2025</Col>
+        <Row className="justify-content-center">
+          <Col xs='auto' style={{ fontSize: '120px' }}>
+            <div>
+              03 08 2025
+            </div> </Col>
         </Row>
         <Spacer height={280} />
 
@@ -192,6 +209,16 @@ function App() {
         </Row>
         <Spacer height={100} />
         <OurStory />
+        <Row>
+          <Col>
+            <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
+          </Col>
+        </Row>
+        <Row className='justify-content-center'>
+          <Col xs="auto">
+            <div style={{ fontSize: '40 px' }}>Gallery</div>
+          </Col>
+        </Row>
       </Container>
     </>
   );
