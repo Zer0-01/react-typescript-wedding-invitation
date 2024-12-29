@@ -10,6 +10,7 @@ import Image from 'react-bootstrap/esm/Image';
 import { useState, useEffect } from 'react';
 import OurStory from './components/OurStory';
 import CardCouple from './components/CardCouple';
+import Countdown from './components/Countdown';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -27,7 +28,7 @@ function getTimeRemaining(targetDate: Date) {
 
 function App() {
   // Target date (03/08/2025)
-  const targetDate = new Date('2025-08-03T00:00:00');
+  const targetDate = new Date('2025-04-26T00:00:00');
 
   // State to hold the remaining time
   const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining(targetDate));
@@ -93,44 +94,7 @@ function App() {
             </div> </Col>
         </Row>
         <CardCouple />
-        <Spacer height={100} />
-        <Row className="d-flex justify-content-center">
-          <Col xs="auto">
-            <Card>
-              <Card.Body className="text-center">
-                <Card.Title>Countdown to Wedding</Card.Title>
-
-                <Row>
-                  <Col xs={3}>
-                    <Card.Body>
-                      <h4>{timeRemaining.days}</h4>
-                      <p>Days</p>
-                    </Card.Body>
-                  </Col>
-                  <Col xs={3}>
-                    <Card.Body>
-                      <h4>{timeRemaining.hours}</h4>
-                      <p>Hours</p>
-                    </Card.Body>
-                  </Col>
-                  <Col xs={3}>
-                    <Card.Body>
-                      <h4>{timeRemaining.minutes}</h4>
-                      <p>Minutes</p>
-                    </Card.Body>
-                  </Col>
-                  <Col xs={3}>
-                    <Card.Body>
-                      <h4>{timeRemaining.seconds}</h4>
-                      <p>Seconds</p>
-                    </Card.Body>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Spacer height={100} />
+        <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
         <Row className="d-flex justify-content-center">
           <Col xs="auto">
             <Card>
