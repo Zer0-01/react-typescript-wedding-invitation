@@ -2,15 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import Spacer from './components/Spacer';
-import Card from 'react-bootstrap/esm/Card';
-import Button from 'react-bootstrap/esm/Button';
-import Image from 'react-bootstrap/esm/Image';
-
 import { useState, useEffect } from 'react';
 import OurStory from './components/OurStory';
 import CardCouple from './components/CardCouple';
 import Countdown from './components/Countdown';
+import Place from './components/Place';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -44,15 +40,13 @@ function App() {
   }, [targetDate]);
 
   const place = {
-    name: "Eiffel Tower",
-    address: "Champ de Mars, 5 Avenue Anatole, 75007 Paris, France",
-    latitude: 48.8584,
-    longitude: 2.2945
+    name: "The Vow Event Venue",
+    address: "Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim",
   };
 
   // Function to open Google Maps at the specified location
   const openMap = () => {
-    const mapUrl = `https://maps.app.goo.gl/wp83ctnYxTV5NfDm6`;
+    const mapUrl = `https://maps.app.goo.gl/QtFQXGNhuCV1UPRY6`;
     window.open(mapUrl, "_blank"); // Opens the map in a new tab
   };
 
@@ -95,7 +89,49 @@ function App() {
         </Row>
         <CardCouple />
         <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
-        <Row className="d-flex justify-content-center">
+        <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
+        {/* <Row>
+          <Col xs={12} md={6}>
+            <Card style={{ height: "40vh" }}>
+              <Card.Img
+                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/584084015.jpg?k=83c62c9050a3d40c26329ef6bc6741be931b98ada4736eca37bb451a7299f33c&o=&hp=1"
+                style={{ height: "100%", objectFit: "cover" }}
+              />
+              <Card.ImgOverlay className="d-flex justify-content-center align-items-center text-center">
+                <Row>
+                  <Col>
+                    <div className='fs-1 fw-bold text-light'>Resepsi</div>
+                    <div className='fs-2 text-light'>1800 - 2100</div>
+                    <div className='fs-3 text-light'>{place.name}</div>
+                    <div className='fs-4 text-light'>{place.address}</div>
+                    <Button onClick={openMap}>Open Map</Button>
+                  </Col>
+                </Row>
+              </Card.ImgOverlay>
+            </Card>
+          </Col>
+          <Col xs={12} md={6}>
+            <Card style={{ height: "40vh" }}>
+              <Card.Img
+                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/584083788.jpg?k=f485db98e1e6dd35c431b4677481ce2e439e4fb30a02502e0b2315f7bb36e429&o=&hp=1"
+                style={{ height: "100%", objectFit: "cover" }}
+              />
+              <Card.ImgOverlay className="d-flex justify-content-center align-items-center text-center">
+                <Row>
+                  <Col>
+                    <div className='fs-1 fw-bold text-light'>Resepsi</div>
+                    <div className='fs-2 text-light'>1800 - 2100</div>
+                    <div className='fs-3 text-light'>{place.name}</div>
+                    <div className='fs-4 text-light'>{place.address}</div>
+                    <Button onClick={openMap}>Open Map</Button>
+                  </Col>
+                </Row>
+              </Card.ImgOverlay>
+            </Card>
+          </Col>
+        </Row> */}
+
+        {/* <Row className="d-flex justify-content-center">
           <Col xs="auto">
             <Card>
               <Card.Body className="text-center">
@@ -114,7 +150,7 @@ function App() {
               </Card.Body>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
         <Row>
           <Col>
             <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
