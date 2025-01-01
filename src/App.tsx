@@ -9,6 +9,10 @@ import Countdown from './components/Countdown';
 import Place from './components/Place';
 import Image from 'react-bootstrap/esm/Image';
 import Card from 'react-bootstrap/esm/Card';
+import Form from 'react-bootstrap/esm/Form';
+import { Button } from 'react-bootstrap';
+import { Clipboard, Gift } from 'react-bootstrap-icons';
+import GiftComponent from './components/GiftComponent';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -50,6 +54,17 @@ function App() {
   const openMap = () => {
     const mapUrl = `https://maps.app.goo.gl/QtFQXGNhuCV1UPRY6`;
     window.open(mapUrl, "_blank"); // Opens the map in a new tab
+  };
+
+  const copyToClipboard = (textToCopy: string) => {
+    navigator.clipboard.writeText(textToCopy).then(
+      () => {
+        alert('Copied to clipboard!');
+      },
+      () => {
+        alert('Failed to copy to clipboard. Please copy manually.');
+      }
+    );
   };
 
   return (
@@ -94,24 +109,12 @@ function App() {
         <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
         <OurStory />
         <Row>
-          <Col>
-            <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
+          <Col className='text-center'>
+            <div className='fs-1 fw-bold'>Give a gift</div>
+            <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
           </Col>
         </Row>
-        <Row className="mt-4 text-center">
-          <Col style={{ fontSize: '39px' }}>Our Story</Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
-          </Col>
-        </Row>
-        <Row className='justify-content-center'>
-          <Col xs="auto">
-            <div style={{ fontSize: '40 px' }}>Gallery</div>
-          </Col>
-        </Row>
+        <GiftComponent />
       </Container>
     </>
   );
