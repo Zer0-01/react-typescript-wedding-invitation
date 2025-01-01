@@ -7,6 +7,8 @@ import OurStory from './components/OurStory';
 import CardCouple from './components/CardCouple';
 import Countdown from './components/Countdown';
 import Place from './components/Place';
+import Image from 'react-bootstrap/esm/Image';
+import Card from 'react-bootstrap/esm/Card';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -90,67 +92,7 @@ function App() {
         <CardCouple />
         <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
         <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
-        {/* <Row>
-          <Col xs={12} md={6}>
-            <Card style={{ height: "40vh" }}>
-              <Card.Img
-                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/584084015.jpg?k=83c62c9050a3d40c26329ef6bc6741be931b98ada4736eca37bb451a7299f33c&o=&hp=1"
-                style={{ height: "100%", objectFit: "cover" }}
-              />
-              <Card.ImgOverlay className="d-flex justify-content-center align-items-center text-center">
-                <Row>
-                  <Col>
-                    <div className='fs-1 fw-bold text-light'>Resepsi</div>
-                    <div className='fs-2 text-light'>1800 - 2100</div>
-                    <div className='fs-3 text-light'>{place.name}</div>
-                    <div className='fs-4 text-light'>{place.address}</div>
-                    <Button onClick={openMap}>Open Map</Button>
-                  </Col>
-                </Row>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-          <Col xs={12} md={6}>
-            <Card style={{ height: "40vh" }}>
-              <Card.Img
-                src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/584083788.jpg?k=f485db98e1e6dd35c431b4677481ce2e439e4fb30a02502e0b2315f7bb36e429&o=&hp=1"
-                style={{ height: "100%", objectFit: "cover" }}
-              />
-              <Card.ImgOverlay className="d-flex justify-content-center align-items-center text-center">
-                <Row>
-                  <Col>
-                    <div className='fs-1 fw-bold text-light'>Resepsi</div>
-                    <div className='fs-2 text-light'>1800 - 2100</div>
-                    <div className='fs-3 text-light'>{place.name}</div>
-                    <div className='fs-4 text-light'>{place.address}</div>
-                    <Button onClick={openMap}>Open Map</Button>
-                  </Col>
-                </Row>
-              </Card.ImgOverlay>
-            </Card>
-          </Col>
-        </Row> */}
-
-        {/* <Row className="d-flex justify-content-center">
-          <Col xs="auto">
-            <Card>
-              <Card.Body className="text-center">
-                <Card.Title>{place.name}</Card.Title>
-                <Card.Subtitle className="mb-3 text-muted">{place.address}</Card.Subtitle>
-                <Button variant="primary" onClick={openMap}>View on Map</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col xs="auto">
-            <Card>
-              <Card.Body className="text-center">
-                <Card.Title>{place.name}</Card.Title>
-                <Card.Subtitle className="mb-3 text-muted">{place.address}</Card.Subtitle>
-                <Button variant="primary" onClick={openMap}>View on Map</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row> */}
+        <OurStory />
         <Row>
           <Col>
             <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />
@@ -159,7 +101,7 @@ function App() {
         <Row className="mt-4 text-center">
           <Col style={{ fontSize: '39px' }}>Our Story</Col>
         </Row>
-        <OurStory />
+
         <Row>
           <Col>
             <hr style={{ borderTop: '2px solid #ccc', margin: '30px 0' }} />

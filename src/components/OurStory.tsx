@@ -7,30 +7,48 @@ const OurStory = () => {
     return (
         <Row>
             <Col xs={12} md={6}>
-                <Row className="justify-content-center mb-4">
-                    <Col xs="auto">
-                        <Image src="https://via.placeholder.com/200" />
+                <Row>
+                    <Col className="text-center">
+                        <Image src="https://via.placeholder.com/200" rounded fluid />
                     </Col>
                 </Row>
-                <Row className='justify-content-center'>
+                <Row>
                     <Col>
-                        <Card className='p-4'>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae officiis velit obcaecati possimus eaque ipsam voluptatibus fuga consequuntur animi repudiandae quaerat doloremque id odit, veniam maxime eligendi expedita aspernatur perspiciatis.
+                        <Card>
+                            <Row>
+                                <Col>
+                                    <div>
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste,
+                                        sapiente. Tenetur fugit tempore ea sed ratione, voluptate
+                                        similique deserunt aliquam placeat at repudiandae dolorum ex
+                                        aspernatur corporis. Cupiditate, atque laboriosam.
+                                    </div>
+                                </Col>
+                            </Row>
                         </Card>
                     </Col>
                 </Row>
             </Col>
             <Col xs={12} md={6}>
-                <Row className='justify-content-center mb-4'>
+                <Row>
                     <Col>
-                        <Card className='p-4'>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae officiis velit obcaecati possimus eaque ipsam voluptatibus fuga consequuntur animi repudiandae quaerat doloremque id odit, veniam maxime eligendi expedita aspernatur perspiciatis.
+                        <Card>
+                            <Row>
+                                <Col>
+                                    <div>
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste,
+                                        sapiente. Tenetur fugit tempore ea sed ratione, voluptate
+                                        similique deserunt aliquam placeat at repudiandae dolorum ex
+                                        aspernatur corporis. Cupiditate, atque laboriosam.
+                                    </div>
+                                </Col>
+                            </Row>
                         </Card>
                     </Col>
                 </Row>
-                <Row className="justify-content-center">
-                    <Col xs="auto">
-                        <Image src="https://via.placeholder.com/200" />
+                <Row>
+                    <Col className="text-center">
+                        <Image src="https://via.placeholder.com/200" rounded fluid />
                     </Col>
                 </Row>
             </Col>
