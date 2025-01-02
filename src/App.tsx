@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
@@ -50,37 +51,37 @@ function App() {
   return (
     <>
       <Container>
-        <Row className="justify-content-center mt-5">
+        <Row className="justify-content-center pt-5 mb-3">
           <Col>
-            <div className='text-center fs-1 fw-bold'>
+            <div className='text-center fs-5 fw-bold'>
               Ya Allah the Most Loving
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center mb-5">
           <Col>
-            <div className='text-center fs-3'>
+            <div className='text-center fs-5'>
               With Your blessing, you brought us together in a holy marriage bond
             </div>
           </Col>
         </Row>
-        <Row className="justify-content-center">
+        <Row className="justify-content-center mb-5">
           <Col >
-            <div className='text-center fs-1 fw-bold'>
+            <div className='text-center fs-4 fw-bold'>
               THE WEDDING OF
             </div>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <Col>
-            <div className="fs-1 text-center fw-bold ">
+            <div className="fs-1 text-center fw-bold mb-5 ">
               Anas & Izzatul
             </div>
           </Col>
         </Row>
         <Row className="justify-content-center">
           <Col>
-            <div className="text-center fw-bold fs-1">
+            <div className="text-center fw-bold fs-3">
               03 08 2025
             </div> </Col>
         </Row>
