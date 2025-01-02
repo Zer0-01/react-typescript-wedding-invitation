@@ -56,17 +56,6 @@ function App() {
     window.open(mapUrl, "_blank"); // Opens the map in a new tab
   };
 
-  const copyToClipboard = (textToCopy: string) => {
-    navigator.clipboard.writeText(textToCopy).then(
-      () => {
-        alert('Copied to clipboard!');
-      },
-      () => {
-        alert('Failed to copy to clipboard. Please copy manually.');
-      }
-    );
-  };
-
   return (
     <>
       <Container>

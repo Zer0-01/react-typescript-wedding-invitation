@@ -3,26 +3,30 @@ import Card from "react-bootstrap/esm/Card"
 import Col from "react-bootstrap/esm/Col"
 import Row from "react-bootstrap/esm/Row"
 import { Clipboard } from "react-bootstrap-icons";
+import Image from "react-bootstrap/esm/Image"
 
 const GiftComponent = () => {
     const copyToClipboard = (textToCopy: string) => {
         navigator.clipboard.writeText(textToCopy).then(
-          () => {
-            alert('Copied to clipboard!');
-          },
-          () => {
-            alert('Failed to copy to clipboard. Please copy manually.');
-          }
+            () => {
+                alert('Copied to clipboard!');
+            },
+            () => {
+                alert('Failed to copy to clipboard. Please copy manually.');
+            }
         );
-      };
+    };
 
     return (
         <Row>
             <Col>
                 <Card className='p-3'>
-                    <Row>
-                        <Col>
-                            <div className='fs-4'>Anas Zulkifli bin Mohd Jeffry</div>
+                    <Row className="align-items-center">
+                        <Col xs={12} md={4}>
+                            <div className='fs-4'>Anas Zulkifli</div>
+                        </Col>
+                        <Col xs={12} md={8}>
+                            <Image src="src/assets/cimb.png" className="w-25" />
                         </Col>
                     </Row>
                     <Row>
@@ -41,9 +45,12 @@ const GiftComponent = () => {
                             </Card>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                            <div className='fs-4'>Nur Izzatul Khairiah binti Mubin</div>
+                    <Row className="align-items-center">
+                        <Col xs={12} md={4}>
+                            <div className='fs-4'>Nur Izzatul Khairiah</div>
+                        </Col>
+                        <Col xs={12} md={8}>
+                            <Image src="src/assets/maybank.png" className="w-25" />
                         </Col>
                     </Row>
                     <Row>
