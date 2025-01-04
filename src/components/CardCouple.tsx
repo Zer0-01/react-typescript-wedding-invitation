@@ -20,7 +20,7 @@ const CardCouple = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col xs={12} md={6}>
                             <Row>
                                 <Col className='text-center'>
                                     <Image src="https://via.placeholder.com/200" roundedCircle fluid />
@@ -42,7 +42,7 @@ const CardCouple = () => {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={6}>
                             <Row>
                                 <Col className='text-center'>
                                     <Image src="https://via.placeholder.com/200" roundedCircle fluid />
