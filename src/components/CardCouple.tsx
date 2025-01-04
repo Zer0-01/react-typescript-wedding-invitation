@@ -15,12 +15,12 @@ const CardCouple = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col className="mb-3">
                             <div className='fs-5 text-center'>Glory be to Allah SWT who has created creatures in pairs. Ya Allah, please accept and bless us</div>
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={6} className="mb-3 mb-md-0">
                             <Row>
                                 <Col className='text-center'>
                                     <Image src="https://via.placeholder.com/200" roundedCircle fluid />
