@@ -3,12 +3,13 @@ import Card from "react-bootstrap/esm/Card";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
+import "../App.css";
 
 const CardCouple = () => {
     return (
         <Row>
             <Col>
-                <Card className='p-4'>
+                <Card className='p-4 card-couple'>
                     <Row>
                         <Col>
                             <div className='fs-3 fw-bold text-center'>Meet the happy couple</div>
