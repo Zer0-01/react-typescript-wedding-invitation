@@ -1,12 +1,12 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBD6fqs-h3e7nCnxi8RfeiIB7SxMLaB-AU",
-    authDomain: "react-wedding-802af.firebaseapp.com",
-    projectId: "react-wedding-802af",
-    storageBucket: "react-wedding-802af.firebasestorage.app",
-    messagingSenderId: "923009925670",
-    appId: "1:923009925670:web:275431a10db18850c59ce7"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);

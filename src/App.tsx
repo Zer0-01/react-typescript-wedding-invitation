@@ -10,8 +10,6 @@ import Countdown from './components/Countdown';
 import Place from './components/Place';
 import GiftComponent from './components/GiftComponent';
 import FormRsvp from './components/FormRsvp';
-import app from './FIrebaseConfig';
-import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -24,10 +22,11 @@ function getTimeRemaining(targetDate: Date) {
   return { days, hours, minutes, seconds };
 }
 
+
+
 function App() {
   const targetDate = new Date('2025-04-26T00:00:00');
   const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining(targetDate));
-  const db = getFirestore(app);
 
 
   useEffect(() => {
@@ -46,6 +45,7 @@ function App() {
     const mapUrl = `https://maps.app.goo.gl/QtFQXGNhuCV1UPRY6`;
     window.open(mapUrl, "_blank"); // Opens the map in a new tab
   };
+
 
   return (
     <>
