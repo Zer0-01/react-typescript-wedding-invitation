@@ -8,13 +8,10 @@ import OurStory from './components/OurStory';
 import CardCouple from './components/CardCouple';
 import Countdown from './components/Countdown';
 import Place from './components/Place';
-import Image from 'react-bootstrap/esm/Image';
-import Card from 'react-bootstrap/esm/Card';
-import Form from 'react-bootstrap/esm/Form';
-import { Button } from 'react-bootstrap';
-import { Clipboard, Gift } from 'react-bootstrap-icons';
 import GiftComponent from './components/GiftComponent';
 import FormRsvp from './components/FormRsvp';
+import app from './FIrebaseConfig';
+import { getFirestore, collection, getDocs, addDoc } from 'firebase/firestore';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -30,6 +27,8 @@ function getTimeRemaining(targetDate: Date) {
 function App() {
   const targetDate = new Date('2025-04-26T00:00:00');
   const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining(targetDate));
+  const db = getFirestore(app);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
