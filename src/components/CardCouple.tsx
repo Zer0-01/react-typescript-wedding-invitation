@@ -4,6 +4,7 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
 import "../App.css";
+import { GiBeveledStar } from "react-icons/gi";
 
 const CardCouple = () => {
     return (
@@ -20,8 +21,9 @@ const CardCouple = () => {
                             <div className='fs-5 text-center'>Glory be to Allah SWT who has created creatures in pairs. Ya Allah, please accept and bless us</div>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col xs={12} md={6} className="mb-3 mb-md-0">
+                    <Row className="align-items-center">
+
+                        <Col md={6} className="my-3">
                             <Row>
                                 <Col className='text-center'>
                                     <Image src="https://via.placeholder.com/200" roundedCircle fluid />
@@ -43,7 +45,8 @@ const CardCouple = () => {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col xs={12} md={6}>
+                     
+                        <Col md={6} className="my-3">
                             <Row>
                                 <Col className='text-center'>
                                     <Image src="https://via.placeholder.com/200" roundedCircle fluid />
@@ -65,6 +68,7 @@ const CardCouple = () => {
                                 </Col>
                             </Row>
                         </Col>
+
                     </Row>
                     <Row>
                         <Col className='text-center'>
