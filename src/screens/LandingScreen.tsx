@@ -1,8 +1,15 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { ArrowThroughHeartFill } from "react-bootstrap-icons";
 import "../styles/LandingScreenStyle.css";
+import { useNavigate } from "react-router";
 
 const LandingScreen = () => {
+    let navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate("/home");
+    }; 
+
     return (
         <>
             <Container className="d-flex flex-column align-items-center justify-content-center" style={{ height: "100vh", backgroundColor: "#000000" }}>
@@ -26,7 +33,7 @@ const LandingScreen = () => {
                 </Row>
                 <Row className="mt-5">
                     <Col>
-                        <Button variant="light" className="glow-button" ><ArrowThroughHeartFill /> </Button>
+                        <Button variant="light" className="glow-button" onClick={handleClick} ><ArrowThroughHeartFill /> </Button>
                     </Col>
 
                 </Row>
