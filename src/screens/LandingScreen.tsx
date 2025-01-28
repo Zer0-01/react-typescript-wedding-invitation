@@ -1,4 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { ArrowThroughHeartFill } from "react-bootstrap-icons";
+import "../styles/LandingScreenStyle.css";
 
 const LandingScreen = () => {
     return (
@@ -22,30 +24,15 @@ const LandingScreen = () => {
                     </Col>
 
                 </Row>
-                <Row>
+                <Row className="mt-5">
                     <Col>
-                        <Button variant="light">Light</Button>
+                        <Button variant="light" className="glow-button" ><ArrowThroughHeartFill /> </Button>
                     </Col>
 
                 </Row>
-                <Row>
-                    <Col>
-                        <svg
-                            className="w-10 h-10 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="src/assets/floral_decoration_corner.svg"
-                           
-                            viewBox="0 0 24 24">
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeWidth="2"
-                                d="M5 7h14M5 12h14M5 17h14"
-                            />
-                        </svg>
-                    </Col>
-                </Row>
+
             </Container>
+
         </>
     );
 }
