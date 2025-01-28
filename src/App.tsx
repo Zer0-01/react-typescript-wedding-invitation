@@ -10,6 +10,7 @@ import Countdown from './components/Countdown';
 import Place from './components/Place';
 import GiftComponent from './components/GiftComponent';
 import FormRsvp from './components/FormRsvp';
+import { motion } from 'framer-motion';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -49,54 +50,63 @@ function App() {
 
   return (
     <>
-      <Container>
-        <Row className="pt-5 mb-3">
-          <Col>
-            <div className='text-center fs-3 fw-bold'>
-              Ya Allah the Most Loving
-            </div>
-          </Col>
-        </Row>
-        <Row className="mb-5">
-          <Col>
-            <div className='text-center fs-3'>
-              With Your blessing, you brought us together in a holy marriage bond
-            </div>
-          </Col>
-        </Row>
-        <Row className="mb-5">
-          <Col >
-            <div className='text-center fs-4 fw-bold'>
-              THE WEDDING OF
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <div className="fs-1 text-center fw-bold mb-5 ">
-              Anas & Izzatul
-            </div>
-          </Col>
-        </Row>
-        <Row className="justify-content-center">
-          <Col>
-            <div className="text-center fw-bold fs-3 mb-5">
-              03 08 2025
-            </div> </Col>
-        </Row>
-        <CardCouple />
-        <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
-        <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
-        <OurStory />
-        <Row>
-          <Col className='text-center'>
-            <div className='fs-1 fw-bold'>Give a gift</div>
-            <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
-          </Col>
-        </Row>
-        <GiftComponent />
-        <FormRsvp />
-      </Container>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Container>
+          <Row className="pt-5 mb-3">
+            <Col>
+              <div className='text-center fs-3 fw-bold'>
+                Ya Allah the Most Loving
+              </div>
+            </Col>
+          </Row>
+          <Row className="mb-5">
+            <Col>
+              <div className='text-center fs-3'>
+                With Your blessing, you brought us together in a holy marriage bond
+              </div>
+            </Col>
+          </Row>
+          <Row className="mb-5">
+            <Col >
+              <div className='text-center fs-4 fw-bold'>
+                THE WEDDING OF
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className="fs-1 text-center fw-bold mb-5 ">
+                Anas & Izzatul
+              </div>
+            </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col>
+              <div className="text-center fw-bold fs-3 mb-5">
+                03 08 2025
+              </div> </Col>
+          </Row>
+          <CardCouple />
+          <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
+          <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
+          <OurStory />
+          <Row>
+            <Col className='text-center'>
+              <div className='fs-1 fw-bold'>Give a gift</div>
+              <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
+            </Col>
+          </Row>
+          <GiftComponent />
+          <FormRsvp />
+        </Container>
+
+      </motion.div>
+
     </>
   );
 }
