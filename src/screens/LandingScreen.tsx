@@ -3,7 +3,8 @@ import { ArrowThroughHeartFill } from "react-bootstrap-icons";
 import "../styles/LandingScreenStyle.css";
 import { useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Lottie from "lottie-react";
+import doorAnimation from "../lotties/lottie_door.json";
 
 
 const LandingScreen = () => {
@@ -47,7 +48,7 @@ const LandingScreen = () => {
 
                     <Row className="mt-5">
                         <Col>
-                            <DotLottieReact src="https://lottie.host/embed/52c2ff7e-6645-49dd-a6d9-9dcb397574a1/cMTnzW7cci.lottie"  />
+                            <Lottie animationData={doorAnimation} loop={true} />
                         </Col>
 
                     </Row>
