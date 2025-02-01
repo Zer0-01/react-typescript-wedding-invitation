@@ -1,65 +1,51 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { ArrowThroughHeartFill } from "react-bootstrap-icons";
-import "../styles/LandingScreenStyle.css";
 import { useNavigate } from "react-router";
-import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import doorAnimation from "../lotties/lottie_door.json";
-
 
 const LandingScreen = () => {
     let navigate = useNavigate();
 
-    const handleClick = () => {
-        navigate("/home");
-    };
 
     return (
         <>
-            <motion.div initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -50 }}
-                transition={{ duration: 0.5 }}>
-                <Container className="d-flex flex-column align-items-center justify-content-center" style={{ height: "100vh", backgroundColor: "#000000" }}>
-                    <Row>
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">Izzatul</div>
-                        </Col>
 
-                    </Row>
-                    <Row>
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">&</div>
-                        </Col>
+            <Container className="d-flex flex-column align-items-center justify-content-center text-white dancing-script-500 min-vh-100" >
 
-                    </Row>
-                    <Row>
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">Anas</div>
-                        </Col>
+                <Row>
+                    <Col>
+                        <div className="text-center fs-1 fw-bold dancing-script-400" >Raikan Cinta</div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div className="text-center fs-1 fw-bold">Izzatul</div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div className="text-center fs-1 fw-bold">&</div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div className="text-center fs-1 fw-bold">Anas</div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <div className="text-center fs-1 fw-bold">18 May 2025</div>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Button onClick={() => { navigate("/home") }} ></Button>
+                    </Col>
+                </Row>
 
-                    </Row>
-                    <Row className="mt-5">
-                        <Col>
-                            <Button variant="light" className="glow-button" onClick={handleClick} ><ArrowThroughHeartFill /> </Button>
-                        </Col>
 
-                    </Row>
-
-                    <Row className="mt-5">
-                        <Col>
-                            <Lottie animationData={doorAnimation} loop={true} />
-                        </Col>
-
-                    </Row>
-
-                </Container>
-
-            </motion.div>
-
+            </Container>
 
         </>
     );
-}
+};
 
 export default LandingScreen;
