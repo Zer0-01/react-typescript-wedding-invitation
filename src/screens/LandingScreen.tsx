@@ -8,9 +8,9 @@ const LandingScreen = () => {
     return (
         <>
 
-            <Container className="d-flex flex-column align-items-center justify-content-center text-white dancing-script-500 min-vh-100" >
+            <Container className="d-flex flex-column align-items-center justify-content-center text-black dancing-script-500 min-vh-100" >
 
-                <Row>
+                <Row className="mb-5">
                     <Col>
                         <div className="text-center fs-1 fw-bold dancing-script-400" >Raikan Cinta</div>
                     </Col>
@@ -25,19 +25,19 @@ const LandingScreen = () => {
                         <div className="text-center fs-1 fw-bold">&</div>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mb-5">
                     <Col>
                         <div className="text-center fs-1 fw-bold">Anas</div>
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mb-5">
                     <Col>
                         <div className="text-center fs-1 fw-bold">18 May 2025</div>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <Button onClick={() => { navigate("/home") }} ></Button>
+                        <Button onClick={() => { navigate("/home") }} >Lets go</Button>
                     </Col>
                 </Row>
 

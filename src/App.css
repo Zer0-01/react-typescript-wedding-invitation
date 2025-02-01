@@ -43,8 +43,7 @@
 } */
 
 #root {
-  background-color: #000000;
-  color: #FFFAEC;
+  background-color: #FFFFFF;
 }
 
 body {
@@ -55,8 +54,8 @@ body {
   background-color: #578E7E;
 }
 
-.text-white {
-  color: #FFFFFF;
+.text-black {
+  color: #000000;
 }
 
 
