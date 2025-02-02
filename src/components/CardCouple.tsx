@@ -1,16 +1,14 @@
-import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
-import "../App.css";
-import { GiBeveledStar } from "react-icons/gi";
+import '../styles/HomeScreenStyle.css';
 
 const CardCouple = () => {
     return (
-        <Row>
+        <Row className="mb-5 p-3 bg-maroon">
             <Col>
-                <Card className='p-4 card-couple'>
+                <Card className='p-4 card-couple bg-maroon-light text-white'>
                     <Row>
                         <Col>
                             <div className='fs-3 fw-bold text-center'>Meet the happy couple</div>
@@ -26,7 +24,7 @@ const CardCouple = () => {
                         <Col md={6} className="my-3">
                             <Row>
                                 <Col className='text-center'>
-                                    <Image src="https://via.placeholder.com/200" roundedCircle fluid />
+                                    <Image src="https://placehold.co/200" roundedCircle fluid />
                                 </Col>
                             </Row>
                             <Row>
@@ -45,11 +43,11 @@ const CardCouple = () => {
                                 </Col>
                             </Row>
                         </Col>
-                     
+
                         <Col md={6} className="my-3">
                             <Row>
                                 <Col className='text-center'>
-                                    <Image src="https://via.placeholder.com/200" roundedCircle fluid />
+                                    <Image src="https://placehold.co/200" roundedCircle fluid />
                                 </Col>
                             </Row>
                             <Row>
@@ -70,15 +68,12 @@ const CardCouple = () => {
                         </Col>
 
                     </Row>
-                    <Row>
-                        <Col className='text-center'>
-                            <Button>Our Story</Button>
-                        </Col>
-                    </Row>
+
                 </Card>
             </Col>
-
         </Row>
+
+
     );
 }
 
