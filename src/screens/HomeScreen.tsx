@@ -2,10 +2,7 @@
 import '../styles/TextFontStyle.css';
 import '../styles/HomeScreenStyle.css';
 import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
 import { useState, useEffect } from 'react';
-import OurStory from '../components/OurStory';
 import CardCouple from '../components/CardCouple';
 import Countdown from '../components/Countdown';
 import Place from '../components/Place';
@@ -62,15 +59,11 @@ function HomeScreen() {
         <CardCouple />
         <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
         <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
+        <GiftComponent />
+
         <Container>
-          <OurStory />
-          <Row>
-            <Col className='text-center'>
-              <div className='fs-1 fw-bold'>Give a gift</div>
-              <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
-            </Col>
-          </Row>
-          <GiftComponent />
+          {/* <OurStory /> */}
+         
           <FormRsvp />
         </Container>
 

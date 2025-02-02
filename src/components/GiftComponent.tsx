@@ -3,7 +3,9 @@ import Card from "react-bootstrap/esm/Card"
 import Col from "react-bootstrap/esm/Col"
 import Row from "react-bootstrap/esm/Row"
 import { Clipboard } from "react-bootstrap-icons";
-import Image from "react-bootstrap/esm/Image"
+import { Container } from "react-bootstrap";
+
+import "../styles/GiftStyle.css"
 
 const GiftComponent = () => {
     const copyToClipboard = (textToCopy: string) => {
@@ -18,60 +20,73 @@ const GiftComponent = () => {
     };
 
     return (
-        <Row>
-            <Col>
-                <Card className='p-3'>
-                    <Row className="align-items-center">
-                        <Col xs={12} md={4}>
-                            <div className='fs-4'>Anas Zulkifli</div>
-                        </Col>
-                        <Col xs={12} md={8}>
-                            <Image src="src/assets/cimb.png" className="w-25" />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Card className='p-2'>
-                                <Row className='justify-content-between align-items-center'>
-                                    <Col>
-                                        <div className='fs-5'>1234345346456</div>
-                                    </Col>
-                                    <Col className='text-end'>
-                                        <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
-                                            <Clipboard />
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row className="align-items-center">
-                        <Col xs={12} md={4}>
-                            <div className='fs-4'>Nur Izzatul Khairiah</div>
-                        </Col>
-                        <Col xs={12} md={8}>
-                            <Image src="src/assets/maybank.png" className="w-25" />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Card className='p-2'>
-                                <Row className='justify-content-between align-items-center'>
-                                    <Col>
-                                        <div className='fs-5'>1234345346456</div>
-                                    </Col>
-                                    <Col className='text-end'>
-                                        <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
-                                            <Clipboard />
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Card>
-            </Col>
-        </Row>
+        <Container className="mb-5 gift-text">
+            <Row className="mb-5">
+                <Col className='text-center'>
+                    <div className='fs-1 fw-bold'>Give a gift</div>
+                    <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
+                </Col>
+            </Row>
+
+            <Row>
+                <Col xs={12} md={6} className="my-3">
+                    <Card className="p-3">
+                        <Row className="align-items-center">
+                            <Col>
+                                <div className='fs-4'>Anas Zulkifli</div>
+                            </Col>
+
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Card className='p-2'>
+                                    <Row className='justify-content-between align-items-center'>
+                                        <Col>
+                                            <div className='fs-5'>1234345346456</div>
+                                        </Col>
+                                        <Col className='text-end'>
+                                            <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
+                                                <Clipboard />
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            </Col>
+                        </Row>
+
+                    </Card>
+
+                </Col>
+
+                <Col xs={12} md={6} className="my-3">
+                    <Card className="p-3">
+                        <Row className="align-items-center">
+                            <Col >
+                                <div className='fs-4'>Nur Izzatul Khairiah</div>
+                            </Col>
+
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Card className='p-2'>
+                                    <Row className='justify-content-between align-items-center'>
+                                        <Col>
+                                            <div className='fs-5'>1234345346456</div>
+                                        </Col>
+                                        <Col className='text-end'>
+                                            <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
+                                                <Clipboard />
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
+
     );
 
 };

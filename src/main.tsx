@@ -4,7 +4,6 @@ import HomeScreen from './screens/HomeScreen.tsx'
 import LandingScreen from './screens/LandingScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
