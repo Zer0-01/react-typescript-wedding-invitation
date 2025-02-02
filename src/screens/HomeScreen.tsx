@@ -1,15 +1,15 @@
 
-import './styles/TextFontStyle.css';
+import '../styles/TextFontStyle.css';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { useState, useEffect } from 'react';
-import OurStory from './components/OurStory';
-import CardCouple from './components/CardCouple';
-import Countdown from './components/Countdown';
-import Place from './components/Place';
-import GiftComponent from './components/GiftComponent';
-import FormRsvp from './components/FormRsvp';
+import OurStory from '../components/OurStory';
+import CardCouple from '../components/CardCouple';
+import Countdown from '../components/Countdown';
+import Place from '../components/Place';
+import GiftComponent from '../components/GiftComponent';
+import FormRsvp from '../components/FormRsvp';
 import { motion } from 'framer-motion';
 
 function getTimeRemaining(targetDate: Date) {
@@ -25,7 +25,7 @@ function getTimeRemaining(targetDate: Date) {
 
 
 
-function App() {
+function HomeScreen() {
   const targetDate = new Date('2025-05-18T00:00:00');
   const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining(targetDate));
 
@@ -111,4 +111,4 @@ function App() {
   );
 }
 
-export default App;
+export default HomeScreen;
