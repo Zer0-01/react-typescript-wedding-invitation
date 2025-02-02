@@ -1,9 +1,10 @@
 import Col from "react-bootstrap/esm/Col";
+import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 
 const TitleComponent = () => {
     return (
-        <>
+        <Container>
             <Row className="pt-5 mb-3">
                 <Col>
                     <div className='text-center fs-3 fw-bold text-maroon '>
@@ -38,7 +39,10 @@ const TitleComponent = () => {
                         03 08 2025
                     </div> </Col>
             </Row>
-        </>
+
+        </Container>
+
+
     );
 }
 
