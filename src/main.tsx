@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router'
 import App from './App.tsx'
 import LandingScreen from './screens/LandingScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
