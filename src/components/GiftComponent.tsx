@@ -3,7 +3,10 @@ import Card from "react-bootstrap/esm/Card"
 import Col from "react-bootstrap/esm/Col"
 import Row from "react-bootstrap/esm/Row"
 import { Clipboard } from "react-bootstrap-icons";
-import { Container } from "react-bootstrap";
+import { Container, Image } from "react-bootstrap";
+import bankQrAnas from "../assets/bank-qr-anas.jpg";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "../styles/GiftStyle.css"
 
@@ -11,7 +14,17 @@ const GiftComponent = () => {
     const copyToClipboard = (textToCopy: string) => {
         navigator.clipboard.writeText(textToCopy).then(
             () => {
-                alert('Copied to clipboard!');
+                toast.success('Copied to clipboard!', {
+                    position: "top-right",
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "dark",
+                });
+               // alert('Copied to clipboard!');
             },
             () => {
                 alert('Failed to copy to clipboard. Please copy manually.');
@@ -21,6 +34,7 @@ const GiftComponent = () => {
 
     return (
         <Container className="mb-5 gift-text">
+            <ToastContainer />
             <Row className="mb-5">
                 <Col className='text-center'>
                     <div className='fs-1 fw-bold'>Give a gift</div>
@@ -36,6 +50,11 @@ const GiftComponent = () => {
                                 <div className='fs-4'>Anas Zulkifli</div>
                             </Col>
 
+                        </Row>
+                        <Row>
+                            <Col>
+                            <Image src={bankQrAnas} className='img-fluid' />
+                            </Col>
                         </Row>
                         <Row>
                             <Col>
