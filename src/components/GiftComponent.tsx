@@ -43,15 +43,15 @@ const GiftComponent = () => {
                 </Col>
             </Row>
 
-            <Row style={{ height: "60vh"}}>
+            <Row>
                 <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3 h-100">
+                    <Card className="p-3">
                         <Row className="align-items-center">
                             <Col>
                                 <div className='fs-4'>Anas Zulkifli</div>
                             </Col>
                         </Row>
-                        <Row className="flex-grow-1">
+                        <Row>
                             <Col>
                             <Image src={bankQrAnas} className='img-fluid' />
                             </Col>
@@ -78,15 +78,15 @@ const GiftComponent = () => {
                 </Col>
 
                 <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3 h-100">
+                    <Card className="p-3">
                         <Row className="align-items-center">
                             <Col >
                                 <div className='fs-4'>Nur Izzatul Khairiah</div>
                             </Col>
                         </Row>
-                        <Row className="flex-grow-1">
+                        <Row>
                             <Col>
-                            <Image src={bankQrAtul} className='img-fluid' />
+                            <Image src={bankQrAnas} className='img-fluid' />
                             </Col>
                         </Row>
                         <Row>
