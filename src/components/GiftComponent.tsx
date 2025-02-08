@@ -5,6 +5,7 @@ import Row from "react-bootstrap/esm/Row"
 import { Clipboard } from "react-bootstrap-icons";
 import { Container, Image } from "react-bootstrap";
 import bankQrAnas from "../assets/bank-qr-anas.jpg";
+import bankQrAtul from "../assets/bank-qr-atul.jpg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -42,16 +43,15 @@ const GiftComponent = () => {
                 </Col>
             </Row>
 
-            <Row>
+            <Row style={{ height: "60vh"}}>
                 <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3">
+                    <Card className="p-3 h-100">
                         <Row className="align-items-center">
                             <Col>
                                 <div className='fs-4'>Anas Zulkifli</div>
                             </Col>
-
                         </Row>
-                        <Row>
+                        <Row className="flex-grow-1">
                             <Col>
                             <Image src={bankQrAnas} className='img-fluid' />
                             </Col>
@@ -78,12 +78,16 @@ const GiftComponent = () => {
                 </Col>
 
                 <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3">
+                    <Card className="p-3 h-100">
                         <Row className="align-items-center">
                             <Col >
                                 <div className='fs-4'>Nur Izzatul Khairiah</div>
                             </Col>
-
+                        </Row>
+                        <Row className="flex-grow-1">
+                            <Col>
+                            <Image src={bankQrAtul} className='img-fluid' />
+                            </Col>
                         </Row>
                         <Row>
                             <Col>

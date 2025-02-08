@@ -16,7 +16,7 @@ interface PlaceProps {
 
 }
 
-const Place = ({ akadNikahTitle, akadNikahTime, akadNikahAddress, akadNikahOnClick, resepsiTitle, resepsiTime, resepsiAddress, resepsiOnClick }: PlaceProps) => {
+const Place = ({ akadNikahTime, akadNikahAddress, akadNikahOnClick, resepsiTitle, resepsiTime, resepsiAddress, resepsiOnClick }: PlaceProps) => {
     return (
         <Container fluid className="bg-maroon p-5 mb-5">
             <Row>
