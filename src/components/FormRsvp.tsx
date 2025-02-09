@@ -2,7 +2,7 @@ import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/esm/Modal";
 
@@ -13,6 +13,15 @@ const FormRsvp = () => {
     const [phone, setPhone] = useState<string>("");
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [jumlahKehadiran, setJumlahKehadiran] = useState<number | null>(null);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    useEffect(() => {
+        if (attendance === true) {
+            setIsButtonDisabled(!(name && phone && jumlahKehadiran));
+        } else if (attendance === false) {
+            setIsButtonDisabled(!(name && phone));
+        }
+    }, [name, phone, attendance, jumlahKehadiran]); 
 
     const handleShowAttendanceModal = () => {
         setShowAttendanceModal(true);
@@ -29,6 +38,22 @@ const FormRsvp = () => {
         setAttendance(null);
         setJumlahKehadiran(null);
     };
+
+    const checkButtonDisabled = () => {
+        if (attendance === true) {
+            if (name && phone && attendance && jumlahKehadiran) {
+                setIsButtonDisabled(false);
+            } else {
+                setIsButtonDisabled(true);
+            }
+        } else if (attendance === false) {
+            if (name && phone && attendance) {
+                setIsButtonDisabled(false);
+            } else {
+                setIsButtonDisabled(true);
+            }
+        }
+    }
 
     return (
         <Container>
@@ -54,7 +79,10 @@ const FormRsvp = () => {
                                 type="text"
                                 name="name"
                                 value={name}
-                                onChange={(value) => { setName(value.target.value) }}
+                                onChange={(value) => {
+                                    setName(value.target.value)
+                                    checkButtonDisabled()
+                                }}
                                 autoFocus
                             />
                         </Form.Group>
@@ -65,7 +93,10 @@ const FormRsvp = () => {
                                 type="text"
                                 name="phone"
                                 value={phone}
-                                onChange={(value) => { setPhone(value.target.value) }}
+                                onChange={(value) => {
+                                    setPhone(value.target.value)
+                                    checkButtonDisabled()
+                                }}
                             />
                         </Form.Group>
 
@@ -77,7 +108,10 @@ const FormRsvp = () => {
                                     label="Attend"
                                     name="attendance"
                                     checked={attendance === true}
-                                    onChange={() => { setAttendance(true) }}
+                                    onChange={() => {
+                                        setAttendance(true)
+                                        checkButtonDisabled()
+                                    }}
 
                                 />
                                 <Form.Check
@@ -88,6 +122,7 @@ const FormRsvp = () => {
                                     onChange={() => {
                                         setAttendance(false)
                                         setJumlahKehadiran(null)
+                                        checkButtonDisabled()
                                     }}
                                 />
                             </div>
@@ -99,7 +134,11 @@ const FormRsvp = () => {
                                 <Form.Select
                                     className="w-auto"
                                     value={jumlahKehadiran ?? ""}
-                                    onChange={(event) => setJumlahKehadiran(Number(event.target.value))}
+                                    onChange={(event) => {
+                                        setJumlahKehadiran(Number(event.target.value))
+                                        checkButtonDisabled()
+                                    }
+                                    }
                                 >
                                     <option value="">Select</option>
                                     {[...Array(10)].map((_, i) => (
@@ -116,7 +155,7 @@ const FormRsvp = () => {
                 <Modal.Footer>
                     <Button
                         variant="primary"
-                        disabled={!name || !phone || !attendance || (attendance === true && !jumlahKehadiran)}
+                        disabled={isButtonDisabled}
                         onClick={handleCloseAttendanceModal}
                     >
                         Save Changes
