@@ -7,8 +7,12 @@ import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/esm/Modal";
 
 const FormRsvp = () => {
-   
+
     const [showAttendanceModal, setShowAttendanceModal] = useState(false);
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [attendance, setAttendance] = useState<boolean | null>(null);
+    const [jumlahKehadiran, setJumlahKehadiran] = useState<number | null>(null);
 
     const handleShowAttendanceModal = () => {
         setShowAttendanceModal(true);
@@ -16,21 +20,14 @@ const FormRsvp = () => {
 
     const handleCloseAttendanceModal = () => {
         setShowAttendanceModal(false);
+        resetValue();
     };
 
-
-    const [formData, setFormData] = useState({
-        name: "",
-        phone: "",
-        attendance: "",
-        jumlahKehadiran: "",
-    });
-
-    const isFormComplete = Object.values(formData).every((field) => field !== "");
-
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+    const resetValue = () => {
+        setName("");
+        setPhone("");
+        setAttendance(null);
+        setJumlahKehadiran(null);
     };
 
     return (
@@ -44,8 +41,9 @@ const FormRsvp = () => {
                 </Col>
             </Row>
 
-            <Modal show={showAttendanceModal} onHide={handleCloseAttendanceModal} centered>
-                <Modal.Header closeButton>
+            <Modal show={showAttendanceModal} onHide={handleCloseAttendanceModal} centered backdrop="static">
+                <Modal.Header closeButton
+                >
                     <Modal.Title>Attendance</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -55,8 +53,8 @@ const FormRsvp = () => {
                             <Form.Control
                                 type="text"
                                 name="name"
-                                value={formData.name}
-                                onChange={handleChange}
+                                value={name}
+                                onChange={(value) => { setName(value.target.value) }}
                                 autoFocus
                             />
                         </Form.Group>
@@ -66,8 +64,8 @@ const FormRsvp = () => {
                             <Form.Control
                                 type="text"
                                 name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
+                                value={phone}
+                                onChange={(value) => { setPhone(value.target.value) }}
                             />
                         </Form.Group>
 
@@ -78,40 +76,48 @@ const FormRsvp = () => {
                                     type="radio"
                                     label="Attend"
                                     name="attendance"
-                                    value="Attend"
-                                    checked={formData.attendance === "Attend"}
-                                    onChange={handleChange}
+                                    checked={attendance === true}
+                                    onChange={() => { setAttendance(true) }}
+
                                 />
                                 <Form.Check
                                     type="radio"
                                     label="Not Attend"
                                     name="attendance"
-                                    value="Not Attend"
-                                    checked={formData.attendance === "Not Attend"}
-                                    onChange={handleChange}
+                                    checked={attendance === false}
+                                    onChange={() => {
+                                        setAttendance(false)
+                                        setJumlahKehadiran(null)
+                                    }}
                                 />
                             </div>
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="jumlahKehadiran">
-                            <Form.Label>Jumlah Kehadiran</Form.Label>
-                            <Form.Control
-                                type="number"
-                                name="jumlahKehadiran"
-                                value={formData.jumlahKehadiran}
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
+                        {attendance === true && (
+                            <Form.Group className="mb-3" controlId="jumlahKehadiran">
+                                <Form.Label>Jumlah Kehadiran</Form.Label>
+                                <Form.Select
+                                    className="w-auto"
+                                    value={jumlahKehadiran ?? ""}
+                                    onChange={(event) => setJumlahKehadiran(Number(event.target.value))}
+                                >
+                                    <option value="">Select</option>
+                                    {[...Array(10)].map((_, i) => (
+                                        <option key={i + 1} value={i + 1}>
+                                            {i + 1}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                            </Form.Group>
+                        )}
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseAttendanceModal}>
-                        Close
-                    </Button>
                     <Button
                         variant="primary"
+                        disabled={!name || !phone || !attendance || (attendance === true && !jumlahKehadiran)}
                         onClick={handleCloseAttendanceModal}
-                        disabled={!isFormComplete}
                     >
                         Save Changes
                     </Button>
@@ -120,5 +126,4 @@ const FormRsvp = () => {
         </Container>
     );
 };
-
 export default FormRsvp;
