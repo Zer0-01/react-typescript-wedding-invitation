@@ -15,6 +15,7 @@ const FormRsvp = () => {
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [jumlahKehadiran, setJumlahKehadiran] = useState<number | null>(null);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    
 
     useEffect(() => {
         if (attendance) {
