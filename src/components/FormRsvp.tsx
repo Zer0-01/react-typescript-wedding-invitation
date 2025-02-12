@@ -17,7 +17,14 @@ const FormRsvp = () => {
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [jumlahKehadiran, setJumlahKehadiran] = useState<number | null>(null);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    const [showMessageModal, setShowMessageModal] = useState<boolean>(false);
+    const [sender, setSender] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
+    const [isButtonMessageDisabled, setIsButtonMessageDisabled] = useState(true);
+
     const guestsCollectionRef = collection(firestore, "Guests");
+    const messagesCollectionRef = collection(firestore, "Messages");
 
 
     useEffect(() => {
@@ -28,6 +35,14 @@ const FormRsvp = () => {
         }
     }, [name, phone, attendance, jumlahKehadiran]);
 
+    useEffect(() => {
+        if (sender && message) {
+            setIsButtonMessageDisabled(false);
+        } else {
+            setIsButtonMessageDisabled(true);
+        }
+    }, [sender, message]);
+
     const handleShowAttendanceModal = () => {
         setShowAttendanceModal(true);
     };
@@ -37,6 +52,15 @@ const FormRsvp = () => {
         resetValue();
     };
 
+    const handleShowMessageModal = () => {
+        setShowMessageModal(true);
+    }
+
+    const handleCloseMessageModal = () => {
+        setShowMessageModal(false);
+        resetMessageValue();
+    }
+
     const resetValue = () => {
         setName("");
         setPhone("");
@@ -45,23 +69,14 @@ const FormRsvp = () => {
         setIsButtonDisabled(true);
     };
 
-
-
-    const checkButtonDisabled = () => {
-        if (attendance === true) {
-            if (name && phone && attendance && jumlahKehadiran) {
-                setIsButtonDisabled(false);
-            } else {
-                setIsButtonDisabled(true);
-            }
-        } else if (attendance === false) {
-            if (name && phone && attendance) {
-                setIsButtonDisabled(false);
-            } else {
-                setIsButtonDisabled(true);
-            }
-        }
+    const resetMessageValue = () => {
+        setSender("");
+        setMessage("");
     }
+
+
+
+
 
     const handleSubmit = async () => {
         addDoc(guestsCollectionRef, {
@@ -74,6 +89,15 @@ const FormRsvp = () => {
         handleCloseAttendanceModal();
     }
 
+    const handleSendMessage = async () => {
+        addDoc(messagesCollectionRef, {
+            sender: sender,
+            message: message,
+        });
+
+        handleCloseMessageModal();
+    }
+
     return (
         <Container>
             <Row>
@@ -81,13 +105,12 @@ const FormRsvp = () => {
                     <Button variant="primary" onClick={handleShowAttendanceModal}>Attendance</Button>
                 </Col>
                 <Col>
-                    <Button variant="primary">Say Something</Button>
+                    <Button variant="primary" onClick={handleShowMessageModal}>Say Something</Button>
                 </Col>
             </Row>
 
             <Modal show={showAttendanceModal} onHide={handleCloseAttendanceModal} centered backdrop="static">
-                <Modal.Header closeButton
-                >
+                <Modal.Header closeButton>
                     <Modal.Title>Attendance</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -100,7 +123,6 @@ const FormRsvp = () => {
                                 value={name}
                                 onChange={(value) => {
                                     setName(value.target.value)
-                                    checkButtonDisabled()
                                 }}
                                 autoFocus
                             />
@@ -114,7 +136,6 @@ const FormRsvp = () => {
                                 value={phone}
                                 onChange={(value) => {
                                     setPhone(value.target.value)
-                                    checkButtonDisabled()
                                 }}
                             />
                         </Form.Group>
@@ -129,7 +150,6 @@ const FormRsvp = () => {
                                     checked={attendance === true}
                                     onChange={() => {
                                         setAttendance(true)
-                                        checkButtonDisabled()
                                     }}
 
                                 />
@@ -141,7 +161,6 @@ const FormRsvp = () => {
                                     onChange={() => {
                                         setAttendance(false)
                                         setJumlahKehadiran(null)
-                                        checkButtonDisabled()
                                     }}
                                 />
                             </div>
@@ -155,7 +174,6 @@ const FormRsvp = () => {
                                     value={jumlahKehadiran ?? ""}
                                     onChange={(event) => {
                                         setJumlahKehadiran(Number(event.target.value))
-                                        checkButtonDisabled()
                                     }
                                     }
                                 >
@@ -177,6 +195,45 @@ const FormRsvp = () => {
                         disabled={isButtonDisabled}
                         onClick={handleSubmit}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showMessageModal} onHide={handleCloseMessageModal} centered backdrop="static">
+                <Modal.Header closeButton>
+                    <Modal.Title>Message</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="name">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                value={sender}
+                                onChange={(value) => {
+                                    setSender(value.target.value)
+                                }}
+                                autoFocus
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Message</Form.Label>
+                            <Form.Control as="textarea" rows={3} value={message} onChange={(value) => {
+                                setMessage(value.target.value)
+                            }} />
+                        </Form.Group>
+
+
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button
+                        variant="primary"
+                        disabled={isButtonMessageDisabled}
+                        onClick={handleSendMessage}>
+                        Send
                     </Button>
                 </Modal.Footer>
             </Modal>
