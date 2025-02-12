@@ -1,8 +1,9 @@
+
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
-import { useState, useEffect } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/esm/Modal";
 
@@ -16,12 +17,12 @@ const FormRsvp = () => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     useEffect(() => {
-        if (attendance === true) {
+        if (attendance) {
             setIsButtonDisabled(!(name && phone && jumlahKehadiran));
-        } else if (attendance === false) {
+        } else  {
             setIsButtonDisabled(!(name && phone));
         }
-    }, [name, phone, attendance, jumlahKehadiran]); 
+    }, [name, phone, attendance, jumlahKehadiran]);
 
     const handleShowAttendanceModal = () => {
         setShowAttendanceModal(true);
@@ -37,7 +38,10 @@ const FormRsvp = () => {
         setPhone("");
         setAttendance(null);
         setJumlahKehadiran(null);
+        setIsButtonDisabled(true);
     };
+
+    
 
     const checkButtonDisabled = () => {
         if (attendance === true) {
@@ -156,8 +160,7 @@ const FormRsvp = () => {
                     <Button
                         variant="primary"
                         disabled={isButtonDisabled}
-                        onClick={handleCloseAttendanceModal}
-                    >
+                        onClick={handleCloseAttendanceModal}>
                         Save Changes
                     </Button>
                 </Modal.Footer>

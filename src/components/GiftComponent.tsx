@@ -5,7 +5,6 @@ import Row from "react-bootstrap/esm/Row"
 import { Clipboard } from "react-bootstrap-icons";
 import { Container, Image } from "react-bootstrap";
 import bankQrAnas from "../assets/bank-qr-anas.jpg";
-import bankQrAtul from "../assets/bank-qr-atul.jpg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +24,6 @@ const GiftComponent = () => {
                     progress: undefined,
                     theme: "dark",
                 });
-               // alert('Copied to clipboard!');
             },
             () => {
                 alert('Failed to copy to clipboard. Please copy manually.');
