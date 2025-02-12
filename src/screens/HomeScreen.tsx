@@ -1,7 +1,6 @@
 
 import '../styles/TextFontStyle.css';
 import '../styles/HomeScreenStyle.css';
-import Container from 'react-bootstrap/esm/Container';
 import { useState, useEffect } from 'react';
 import CardCouple from '../components/CardCouple';
 import Countdown from '../components/Countdown';

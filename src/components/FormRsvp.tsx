@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from "react";
+import { firestore } from "../FIrebaseConfig";
 import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
 import Row from "react-bootstrap/esm/Row";
 import Container from "react-bootstrap/esm/Container";
 import Modal from "react-bootstrap/esm/Modal";
+import { addDoc, collection } from "firebase/firestore/lite";
 
 const FormRsvp = () => {
 
@@ -15,12 +17,13 @@ const FormRsvp = () => {
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [jumlahKehadiran, setJumlahKehadiran] = useState<number | null>(null);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    
+    const guestsCollectionRef = collection(firestore, "Guests");
+
 
     useEffect(() => {
-        if (attendance) {
+        if (attendance === true) {
             setIsButtonDisabled(!(name && phone && jumlahKehadiran));
-        } else  {
+        } else if (attendance === false) {
             setIsButtonDisabled(!(name && phone));
         }
     }, [name, phone, attendance, jumlahKehadiran]);
@@ -42,7 +45,7 @@ const FormRsvp = () => {
         setIsButtonDisabled(true);
     };
 
-    
+
 
     const checkButtonDisabled = () => {
         if (attendance === true) {
@@ -58,6 +61,17 @@ const FormRsvp = () => {
                 setIsButtonDisabled(true);
             }
         }
+    }
+
+    const handleSubmit = async () => {
+        addDoc(guestsCollectionRef, {
+            name: name,
+            phone: phone,
+            attendance: attendance,
+            jumlahKehadiran: jumlahKehadiran ?? 0,
+        });
+
+        handleCloseAttendanceModal();
     }
 
     return (
@@ -161,7 +175,7 @@ const FormRsvp = () => {
                     <Button
                         variant="primary"
                         disabled={isButtonDisabled}
-                        onClick={handleCloseAttendanceModal}>
+                        onClick={handleSubmit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
