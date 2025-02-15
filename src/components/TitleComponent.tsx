@@ -1,46 +1,48 @@
-import Col from "react-bootstrap/esm/Col";
-import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/esm/Row";
+import { Card, Col, Container, Row } from "react-bootstrap";
+import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineEnvironment } from "react-icons/ai";
+
 
 const TitleComponent = () => {
     return (
-        <Container>
-            <Row className="pt-5 mb-3">
-                <Col>
-                    <div className='text-center fs-3 fw-bold text-maroon '>
-                        Ya Allah the Most Loving
-                    </div>
-                </Col>
-            </Row>
-            <Row className="mb-5">
-                <Col>
-                    <div className='text-center fs-3 text-maroon'>
-                        With Your blessing, you brought us together in a holy marriage bond
-                    </div>
-                </Col>
-            </Row>
-            <Row className="mb-5">
-                <Col >
-                    <div className='text-center fs-4 fw-bold text-maroon'>
-                        THE WEDDING OF
-                    </div>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <div className="fs-1 text-center fw-bold mb-5  text-maroon">
-                        Anas & Izzatul
-                    </div>
-                </Col>
-            </Row>
-            <Row className="justify-content-center">
-                <Col>
-                    <div className="text-center fw-bold fs-3 mb-5 text-maroon">
-                        03 08 2025
-                    </div> </Col>
-            </Row>
+        <Card className="shadow-lg py-3 ">
+            <Container>
+                <div className='text-center fs-4  text-maroon '>
+                    The Wedding of
+                </div>
+                <div className='text-center fs-1 text-maroon'>
+                    Izzatul & Anas
+                </div>
 
-        </Container>
+                <Row className="align-items-center">
+                    <Col xs="auto">
+                        <AiOutlineCalendar />
+                    </Col>
+                    <Col className="p-0">
+                        Sunday, 26th April 2025
+                    </Col>
+                </Row>
+                <Row className="align-items-center">
+                    <Col xs="auto">
+                        <AiOutlineEnvironment />
+                    </Col>
+                    <Col className="p-0">
+                        Sunday, 26th April 2025
+                    </Col>
+                </Row>
+                <Row className="align-items-center">
+                    <Col xs="auto">
+                        <AiOutlineClockCircle />
+                    </Col>
+                    <Col className="p-0">
+                        Sunday, 26th April 2025
+                    </Col>
+                </Row>
+
+            </Container>
+
+
+
+        </Card >
 
 
     );

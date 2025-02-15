@@ -9,6 +9,9 @@ import GiftComponent from '../components/GiftComponent';
 import FormRsvp from '../components/FormRsvp';
 import { motion } from 'framer-motion';
 import TitleComponent from '../components/TitleComponent';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -54,12 +57,28 @@ function HomeScreen() {
         exit={{ opacity: 0, y: 50 }}
         transition={{ duration: 0.5 }}
       >
-        <TitleComponent />
-        <CardCouple />
-        <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
-        <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
-        <GiftComponent />
-        <FormRsvp />
+        <Container fluid>
+          <Row>
+            <Col sm={0} md={2} lg={3} xl={4} className='bg-dark' />
+            <Col sm={12} md={8} lg={6} xl={4} className='bg-light-subtle'>
+              <Container >
+                <br />
+                <TitleComponent />
+                <br />
+                <CardCouple />
+                <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
+                <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
+                <GiftComponent />
+                <FormRsvp />
+              </Container>
+            </Col>
+            <Col sm={0} md={2} lg={3} xl={4} className='bg-dark' />
+          </Row>
+
+        </Container>
+
+
+
       </motion.div>
 
     </>
