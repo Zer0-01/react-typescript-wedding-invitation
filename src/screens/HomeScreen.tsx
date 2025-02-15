@@ -12,6 +12,7 @@ import TitleComponent from '../components/TitleComponent';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
+import RsvpForm from '../components/RsvpForm';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -58,21 +59,20 @@ function HomeScreen() {
         transition={{ duration: 0.5 }}
       >
         <Container fluid>
-          <Row>
-            <Col sm={0} md={2} lg={3} xl={4} className='bg-dark' />
+          <Row className='min-vh-100 align-items-center'>
+            <Col sm={0} md={2} lg={3} xl={4} className='bg-light-subtle d-none d-sm-block' />
             <Col sm={12} md={8} lg={6} xl={4} className='bg-light-subtle'>
-              <Container >
-                <br />
-                <TitleComponent />
-                <br />
-                <CardCouple />
-                <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
+              <br />
+              <TitleComponent />
+              <br />
+              <RsvpForm />
+              {/* <CardCouple /> */}
+              {/* <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
                 <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
-                <GiftComponent />
-                <FormRsvp />
-              </Container>
+                <GiftComponent /> */}
+              {/* <FormRsvp /> */}
             </Col>
-            <Col sm={0} md={2} lg={3} xl={4} className='bg-dark' />
+            <Col sm={0} md={2} lg={3} xl={4} className='bg-light-subtle d-none d-sm-block' />
           </Row>
 
         </Container>

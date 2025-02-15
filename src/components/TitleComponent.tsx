@@ -4,7 +4,7 @@ import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineEnvironment } from "r
 
 const TitleComponent = () => {
     return (
-        <Card className="shadow-lg py-3 ">
+        <Card className="shadow-sm py-3 ">
             <Container>
                 <div className='text-center fs-4  text-maroon '>
                     The Wedding of
@@ -12,7 +12,6 @@ const TitleComponent = () => {
                 <div className='text-center fs-1 text-maroon'>
                     Izzatul & Anas
                 </div>
-
                 <Row className="align-items-center">
                     <Col xs="auto">
                         <AiOutlineCalendar />
@@ -37,14 +36,8 @@ const TitleComponent = () => {
                         Sunday, 26th April 2025
                     </Col>
                 </Row>
-
             </Container>
-
-
-
         </Card >
-
-
     );
 }
 
