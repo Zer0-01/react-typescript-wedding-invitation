@@ -1,13 +1,11 @@
 
-import '../styles/TextFontStyle.css';
-import '../styles/HomeScreenStyle.css';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import TitleComponent from '../components/TitleComponent';
+import TitleComponent from '../components/big/TitleComponent';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import RsvpForm from '../components/RsvpForm';
+import RsvpForm from '../components/big/RsvpForm';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -53,11 +51,6 @@ function HomeScreen() {
               <TitleComponent />
               <br />
               <RsvpForm />
-              {/* <CardCouple /> */}
-              {/* <Countdown days={timeRemaining.days} hours={timeRemaining.hours} minutes={timeRemaining.minutes} seconds={timeRemaining.seconds} />
-                <Place akadNikahTitle={place.name} akadNikahAddress={place.address} akadNikahTime="1700 - 1800" akadNikahOnClick={openMap} resepsiTitle={place.name} resepsiAddress={place.address} resepsiTime="1800 - 2100" resepsiOnClick={openMap} />
-                <GiftComponent /> */}
-              {/* <FormRsvp /> */}
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className='bg-light-subtle d-none d-sm-block' />
           </Row>

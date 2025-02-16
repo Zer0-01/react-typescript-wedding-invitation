@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import '../styles/LandingScreenStyle.css';
 
 const LandingScreen = () => {
     let navigate = useNavigate();

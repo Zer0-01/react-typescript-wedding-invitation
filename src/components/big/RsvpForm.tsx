@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
-import RsvpSummary from "./RsvpSummary";
+import RsvpSummary from "../small/RsvpSummary";
 
 const RsvpForm = () => {
     const [form, setForm] = useState<{
