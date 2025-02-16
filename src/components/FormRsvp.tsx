@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { firestore } from "../FIrebaseConfig";
+import { db } from "../FirebaseConfig";
 import Button from "react-bootstrap/esm/Button";
 import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/esm/Form";
@@ -23,8 +23,8 @@ const FormRsvp = () => {
     const [message, setMessage] = useState<string>("");
     const [isButtonMessageDisabled, setIsButtonMessageDisabled] = useState(true);
 
-    const guestsCollectionRef = collection(firestore, "Guests");
-    const messagesCollectionRef = collection(firestore, "Messages");
+    const guestsCollectionRef = collection(db, "Guests");
+    const messagesCollectionRef = collection(db, "Messages");
 
 
     useEffect(() => {

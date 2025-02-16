@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
 import RsvpSummary from "../small/RsvpSummary";
+import { db } from "../../FirebaseConfig";
 
 const RsvpForm = () => {
     const [form, setForm] = useState<{
         name: string;
         phoneNumber: string;
         attendance: boolean | null;
-        guestCount: number;
+        additionalGuestCount: number;
         message: string;
     }>({
         name: '',
         phoneNumber: '',
         attendance: null,
-        guestCount: 0,
+        additionalGuestCount: 0,
         message: '',
     });
 
@@ -21,6 +23,7 @@ const RsvpForm = () => {
     const [nameError, setNameError] = useState(false);
     const [phoneNumberError, setPhoneNumberError] = useState(false);
     const [attendanceError, setAttendanceError] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = () => {
         const nameValid = !!form.name;
@@ -33,6 +36,36 @@ const RsvpForm = () => {
 
         if (nameValid && phoneValid && attendanceValid) {
             setShowModal(true);
+        }
+    };
+
+    const handleConfirmAndSubmit = async () => {
+        setIsLoading(true);
+
+        try {
+            await addDoc(collection(db, "Rsvp"), {
+                name: form.name,
+                phoneNumber: form.phoneNumber,
+                attendance: form.attendance,
+                additionalGuestCount: form.additionalGuestCount,
+                totalGuestCount: form.attendance ? 1 + form.additionalGuestCount : 0,
+                Timestamp: serverTimestamp(),
+            });
+
+            if (form.message.length > 0) {
+                await addDoc(collection(db, "Message"), {
+                    name: form.name,
+                    phoneNumber: form.phoneNumber,
+                    message: form.message,
+                    Timestamp: serverTimestamp(),
+                });
+            }
+
+
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -71,7 +104,7 @@ const RsvpForm = () => {
                                     name="attendance"
                                     type="radio"
                                     id="attendNo"
-                                    onChange={() => setForm({ ...form, attendance: false, guestCount: 0 })}
+                                    onChange={() => setForm({ ...form, attendance: false, additionalGuestCount: 0 })}
                                 />
                             </div>
                             {attendanceError && <div className="text-danger">Please select your attendance.</div>}
@@ -80,7 +113,7 @@ const RsvpForm = () => {
 
                         {!!form.attendance && <Form.Group className="mb-4" controlId="formBasicGuest">
                             <Form.Label>Additional guest (Maximum: 5)</Form.Label>
-                            <Form.Select required aria-label="Default select example" onChange={(e) => setForm({ ...form, guestCount: parseInt(e.target.value) })}>
+                            <Form.Select required aria-label="Default select example" onChange={(e) => setForm({ ...form, additionalGuestCount: parseInt(e.target.value) })}>
                                 <option value="0">No additional guest</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -125,7 +158,7 @@ const RsvpForm = () => {
                         { label: "Name", value: form.name },
                         { label: "Phone number", value: form.phoneNumber },
                         { label: "Will you be attending", value: form.attendance ? "Yes, I'll be there" : "Sorry, I can't make it" },
-                        { label: "Additional guest", value: form.guestCount.toString() },
+                        { label: "Additional guest", value: form.additionalGuestCount.toString() },
                         { label: "Wishes for the couple", value: form.message }
                     ].map((item, index) => (
                         <RsvpSummary key={index} label={item.label} value={item.value} />
@@ -133,8 +166,20 @@ const RsvpForm = () => {
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-primary" onClick={() => setShowModal(false)} >Close and Edit</Button>
-                    <Button onClick={() => setShowModal(false)} >Confirm and Submit</Button>
+                    <Button
+                        variant="outline-primary"
+                        onClick={() => setShowModal(false)}
+                        disabled={isLoading}
+                    >
+                        Close and Edit
+                    </Button>
+                    <Button
+                        onClick={handleConfirmAndSubmit}
+                        disabled={isLoading}
+                    >
+                        {isLoading ? <div>Submitting...</div> : <div>Confirm and Submit</div>}
+
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
