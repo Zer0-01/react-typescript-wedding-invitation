@@ -2,11 +2,6 @@
 import '../styles/TextFontStyle.css';
 import '../styles/HomeScreenStyle.css';
 import { useState, useEffect } from 'react';
-import CardCouple from '../components/CardCouple';
-import Countdown from '../components/Countdown';
-import Place from '../components/Place';
-import GiftComponent from '../components/GiftComponent';
-import FormRsvp from '../components/FormRsvp';
 import { motion } from 'framer-motion';
 import TitleComponent from '../components/TitleComponent';
 import Container from 'react-bootstrap/esm/Container';
@@ -29,7 +24,7 @@ function getTimeRemaining(targetDate: Date) {
 
 function HomeScreen() {
   const targetDate = new Date('2025-05-18T00:00:00');
-  const [timeRemaining, setTimeRemaining] = useState(getTimeRemaining(targetDate));
+  const [, setTimeRemaining] = useState(getTimeRemaining(targetDate));
 
 
   useEffect(() => {
@@ -39,15 +34,7 @@ function HomeScreen() {
     return () => clearInterval(interval);
   }, [targetDate]);
 
-  const place = {
-    name: "The Vow Event Venue",
-    address: "Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim",
-  };
 
-  const openMap = () => {
-    const mapUrl = `https://maps.app.goo.gl/QtFQXGNhuCV1UPRY6`;
-    window.open(mapUrl, "_blank"); // Opens the map in a new tab
-  };
 
 
   return (

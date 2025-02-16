@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import RsvpSummary from "./RsvpSummary";
 
 const RsvpForm = () => {
     const [form, setForm] = useState<{
@@ -85,12 +86,13 @@ const RsvpForm = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div>Please review your RSVP details. Once submitted, you cannot modify this information.</div>
-                    <div>Your RSVP details:</div>
-                    <div>Name: {form.name}</div>
-                    <div>Phone number: {form.phoneNumber}</div>
-                    <div>Will you be attending: {form.attendance ? 'Yes' : 'No'}</div>
-                    <div>Additional guest: {form.guestCount}</div>
-                    <div>Wishes for the couple: {form.message}</div>
+                    <br />
+                    <div className="fw-bold">Your RSVP details:</div>
+                    <RsvpSummary label={"Name"} value={form.name} />
+                    <RsvpSummary label={"Phone number"} value={form.phoneNumber} />
+                    <RsvpSummary label={"Will you be attending"} value={form.attendance ? "Yes, I'll be there" : "Sorry, I can't make it"} />
+                    <RsvpSummary label={"Additional guest"} value={form.guestCount.toString()} />
+                    <RsvpSummary label={"Wishes for the couple"} value={form.message} />
 
                 </Modal.Body>
                 <Modal.Footer>
