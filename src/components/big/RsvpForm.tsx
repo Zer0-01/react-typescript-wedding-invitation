@@ -18,17 +18,22 @@ const RsvpForm = () => {
     });
 
     const [showModal, setShowModal] = useState(false);
+    const [nameError, setNameError] = useState(false);
+    const [phoneNumberError, setPhoneNumberError] = useState(false);
+    const [attendanceError, setAttendanceError] = useState(false);
 
-    const [validated, setValidated] = useState(false);
+    const handleSubmit = () => {
+        const nameValid = !!form.name;
+        const phoneValid = !!form.phoneNumber;
+        const attendanceValid = form.attendance !== null;
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        setNameError(!nameValid);
+        setPhoneNumberError(!phoneValid);
+        setAttendanceError(!attendanceValid);
+
+        if (nameValid && phoneValid && attendanceValid) {
+            setShowModal(true);
         }
-
-        setValidated(true);
     };
 
 
@@ -36,17 +41,17 @@ const RsvpForm = () => {
         <>
             <Card className="shadow-sm py-3 ">
                 <Container>
-                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                    <Form>
                         <Form.Group className="mb-4" controlId="formBasicName">
                             <Form.Label>Your name</Form.Label>
-                            <Form.Control required type="text" onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                            <Form.Control.Feedback type="invalid">Please enter your name.</Form.Control.Feedback>
+                            <Form.Control type="text" onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                            {nameError && <div className="text-danger">Please enter your phone number.</div>}
                         </Form.Group>
 
                         <Form.Group className="mb-4" controlId="formBasicPhoneNumber">
                             <Form.Label>Phone number</Form.Label>
-                            <Form.Control required type="text" placeholder="+60123456789" onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })} />
-                            <Form.Control.Feedback type="invalid">Please enter your phone number.</Form.Control.Feedback>
+                            <Form.Control type="text" placeholder="+60123456789" onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })} />
+                            {phoneNumberError && <div className="text-danger">Please enter your phone number.</div>}
                         </Form.Group>
 
                         <Form.Group className="mb-4">
@@ -69,6 +74,8 @@ const RsvpForm = () => {
                                     onChange={() => setForm({ ...form, attendance: false, guestCount: 0 })}
                                 />
                             </div>
+                            {attendanceError && <div className="text-danger">Please select your attendance.</div>}
+
                         </Form.Group>
 
                         {!!form.attendance && <Form.Group className="mb-4" controlId="formBasicGuest">
@@ -90,7 +97,7 @@ const RsvpForm = () => {
 
                         <Row className="justify-content-center">
                             <Col xs="auto">
-                                <Button className="text-center" variant="primary" type="submit" >
+                                <Button className="text-center" variant="primary" type="button" onClick={handleSubmit} >
                                     Submit
                                 </Button>
                             </Col>
