@@ -1,43 +1,39 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
-import { AiOutlineCalendar, AiOutlineClockCircle, AiOutlineEnvironment } from "react-icons/ai";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 const TitleComponent = () => {
     return (
-        <Card className="shadow-sm py-3 ">
-            <Container>
-                <div className='text-center fs-4  text-maroon '>
-                    The Wedding of
-                </div>
-                <div className='text-center fs-1 text-maroon'>
-                    Izzatul & Anas
-                </div>
-                <Row className="align-items-center">
-                    <Col xs="auto">
-                        <AiOutlineCalendar />
-                    </Col>
-                    <Col className="p-0">
-                        Sunday, 26th April 2025
-                    </Col>
-                </Row>
-                <Row className="align-items-center">
-                    <Col xs="auto">
-                        <AiOutlineEnvironment />
-                    </Col>
-                    <Col className="p-0">
-                        Sunday, 26th April 2025
-                    </Col>
-                </Row>
-                <Row className="align-items-center">
-                    <Col xs="auto">
-                        <AiOutlineClockCircle />
-                    </Col>
-                    <Col className="p-0">
-                        Sunday, 26th April 2025
-                    </Col>
-                </Row>
-            </Container>
-        </Card >
+        <Container
+            className="min-vh-100  d-flex flex-column"
+            style={{
+                backgroundImage: "url('../src/assets/background-title.PNG",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
+            fluid>
+            <Row className="pt-5">
+                <Col className="text-center">
+                    <div className="fs-6">The Wedding Of</div>
+                </Col>
+            </Row>
+            <Row className="py-3">
+                <Col className="text-center">
+                    <div className="fs-1">Zatul & Anas</div>
+                </Col>
+            </Row>
+            <Row className="flex-fill">
+            </Row>
+            <Row>
+                <Col className="text-center">
+                    <div className="fs-2">Saturday, 26th April 2025</div>
+                </Col>
+            </Row>
+            <Row className="py-5">
+                <Col className="text-center">
+                    <div className="fs-1">Z | A</div>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

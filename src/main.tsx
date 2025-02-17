@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router'
 import HomeScreen from './screens/HomeScreen.tsx'
-import LandingScreen from './screens/LandingScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,8 +10,8 @@ const AnimatedRoutes = () => {
   return (
     <AnimatePresence mode='wait'   >
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<LandingScreen />} />
-        <Route path="/home" element={<HomeScreen />} />
+        {/* <Route path="/" element={<LandingScreen />} /> */}
+        <Route path="/" element={<HomeScreen />} />
       </Routes>
     </AnimatePresence>
   )
