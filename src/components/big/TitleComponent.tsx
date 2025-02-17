@@ -33,6 +33,7 @@ const TitleComponent = () => {
                     <div className="fs-1">Z | A</div>
                 </Col>
             </Row>
+            
         </Container>
     );
 }
