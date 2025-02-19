@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import CardCouple from '../components/CardCouple';
 import Countdown from '../components/Countdown';
+import Place from '../components/Place';
 
 function getTimeRemaining(targetDate: Date) {
   const now = new Date();
@@ -53,7 +54,7 @@ function HomeScreen() {
               <TitleComponent />
               <CardCouple />
               <Countdown />
-
+              <Place />
               {/* <RsvpForm /> */}
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />
