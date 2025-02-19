@@ -1,111 +1,76 @@
-import Card from "react-bootstrap/esm/Card";
-import Col from "react-bootstrap/esm/Col";
-import Container from "react-bootstrap/esm/Container";
-import Row from "react-bootstrap/esm/Row";
-import "../styles/CountDownStyle.css";
+import { useState, useEffect } from "react";
+import { Card, Col, Container, Row } from "react-bootstrap";
 
-interface CountdownProps {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-}
+const Countdown = () => {
+    const calculateTimeLeft = (): Record<string, number> => {
+        const targetDate = new Date("2025-04-26T17:00:00");
+        const now = new Date();
+        const difference = targetDate.getTime() - now.getTime();
 
-const Countdown = ({ days, hours, minutes, seconds }: CountdownProps) => {
+        let timeLeft: Record<string, number> = { D: 0, H: 0, M: 0, S: 0 };
+        if (difference > 0) {
+            timeLeft = {
+                D: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                H: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                M: Math.floor((difference / 1000 / 60) % 60),
+                S: Math.floor((difference / 1000) % 60),
+            };
+        }
+        return timeLeft;
+    };
+
+    const [timeLeft, setTimeLeft] = useState<Record<string, number>>(calculateTimeLeft());
+
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(calculateTimeLeft());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
-        <Container className="text-maroon text-center mb-5">
-            <Row className="mb-3">
+        <Container>
+            <Row className="py-5">
                 <Col>
-                    <div className="fs-1 fw-bold">We are getting married</div>
-                </Col>
-            </Row>
-
-            <Row className="mb-3">
-                <Col>
-                    <div className="fs-2">Assalammualaikum Warahmatullah Wabarakatuh</div>
-                </Col>
-            </Row>
-
-            <Row className="mb-3">
-                <Col>
-                    <div className="fs-3">By asking for the grace and blessing of Allah SWT. We intend to hold a wedding celebration for our sons and daughters, which Allah SWT willing will be held on:</div>
-                </Col>
-            </Row>
-            <Row className="mb-3">
-                <Col>
-                    <div className="fs-1 fw-bold">18 May 2025</div>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col>
-                    <Card className="countdown-card countdown-text">
-                        <div className='fs-1 fw-bold'>{days}</div>
-                        <div className='fs-1 fw-bold'>D</div>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="countdown-card countdown-text">
-                        <div className='fs-1 fw-bold'>{hours}</div>
-                        <div className='fs-1 fw-bold'>H</div>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="countdown-card countdown-text">
-                        <div className='fs-1 fw-bold'>{minutes}</div>
-                        <div className='fs-1 fw-bold'>M</div>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="countdown-card countdown-text">
-                        <div className='fs-1 fw-bold'>{seconds}</div>
-                        <div className='fs-1 fw-bold'>S</div>
+                    <Card
+                        style={{
+                            backgroundImage: "url('../src/assets/background-2.jpg')",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                        }}
+                    >
+                        <Card.Body>
+                            <Row className="pb-3">
+                                <Col>
+                                    <Card.Text className="text-center fs-2">Countdown</Card.Text>
+                                </Col>
+                            </Row>
+                            <Row>
+                                {Object.entries(timeLeft).map(([unit, value], index) => (
+                                    <Col key={index}>
+                                        <Card>
+                                            <Card.Body>
+                                                <Row>
+                                                    <Col>
+                                                        <div className="text-center fs-1">{unit}</div>
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
+                                                        <div className="text-center fs-1">{value}</div>
+                                                    </Col>
+                                                </Row>
+                                            </Card.Body>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </Card.Body>
                     </Card>
                 </Col>
             </Row>
-
         </Container>
-
-
-        // <>
-        //     <div className="text-center">
-        //         <div className='fs-1' >We are getting married</div>
-        //         <div className="fs-3 fw-bold">Assalammualaikum Warahmatullah Wabarakatuh</div>
-        //         <div className='fs-1'>By asking for the grace and blessing of Allah SWT. We intend to hold a wedding celebration for our sons and daughters, which Allah SWT willing will be held on:</div>
-        //         <div className='fs-1'>18 May 2025</div>
-        //         <Row className='px-5' >
-        //             <Col>
-        //                 <Card>
-        //                     <div className='fs-1 fw-bold'>{days}</div>
-        //                     <div className='fs-1 fw-bold'>D</div>
-        //                 </Card>
-        //             </Col>
-        //             <Col>
-        //                 <Card>
-        //                     <div className='fs-1 fw-bold'>{hours}</div>
-        //                     <div className='fs-1 fw-bold'>H</div>
-        //                 </Card>
-        //             </Col>
-        //             <Col>
-        //                 <Card>
-        //                     <div className='fs-1 fw-bold'>{minutes}</div>
-        //                     <div className='fs-1 fw-bold'>M</div>
-        //                 </Card>
-        //             </Col>
-        //             <Col>
-        //                 <Card>
-        //                     <div className='fs-1 fw-bold'>{seconds}</div>
-        //                     <div className='fs-1 fw-bold'>S</div>
-        //                 </Card>
-        //             </Col>
-        //         </Row>
-
-
-
-        //     </div>
-
-        // </>
-
     );
 }
 
