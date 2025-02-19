@@ -6,7 +6,11 @@ import Container from "react-bootstrap/esm/Container";
 const CardCouple = () => {
     return (
         <Container
-
+            style={{
+                backgroundImage: "url('../src/assets/background-1.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
             fluid >
             <Row className="py-5">
                 <Col className="text-center">
@@ -51,7 +55,7 @@ const CardCouple = () => {
                     <div>Anas Zulkifli</div>
                 </Col>
             </Row>
-            <Row className="py-2">
+            <Row className="pt-2 pb-5">
                 <Col className="text-center">
                     <div>Putera daripada Encik Mohd Jeffry dan Puan Jamilah</div>
                 </Col>
