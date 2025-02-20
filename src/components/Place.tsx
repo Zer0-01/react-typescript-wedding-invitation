@@ -1,6 +1,10 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
 const Place = () => {
+    const handleClick = () => {
+        window.open("https://maps.app.goo.gl/6rBA7thVaVejn79x6")
+    }
+
     return (
         <Container style={{
             backgroundColor: "#f5f5f5",
@@ -22,7 +26,7 @@ const Place = () => {
                             <Card.Text className="text-center fs-2">1705</Card.Text>
                             <Card.Text className="text-center fs-2">The Vow Event Venue</Card.Text>
                             <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
-                            <Button className="w-100">Location</Button>
+                            <Button className="w-100" onClick={handleClick}>Location</Button>
                         </Card.Body>
 
                     </Card>
@@ -46,7 +50,7 @@ const Place = () => {
                             <Card.Text className="text-center fs-2">2000</Card.Text>
                             <Card.Text className="text-center fs-2">The Vow Event Venue</Card.Text>
                             <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
-                            <Button className="w-100">Location</Button>
+                            <Button className="w-100" onClick={handleClick}>Location</Button>
                         </Card.Body>
 
                     </Card>
