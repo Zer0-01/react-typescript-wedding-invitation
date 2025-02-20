@@ -48,17 +48,17 @@ const Countdown = () => {
                             </Row>
                             <Row>
                                 {Object.entries(timeLeft).map(([unit, value], index) => (
-                                    <Col key={index}>
+                                    <Col xs={3} key={index}>
                                         <Card>
                                             <Card.Body>
                                                 <Row>
                                                     <Col>
-                                                        <div className="text-center fs-1">{unit}</div>
+                                                        <div className="text-center fs-2">{unit}</div>
                                                     </Col>
                                                 </Row>
                                                 <Row>
                                                     <Col>
-                                                        <div className="text-center fs-1">{value}</div>
+                                                        <div className="text-center fs-2">{value}</div>
                                                     </Col>
                                                 </Row>
                                             </Card.Body>
