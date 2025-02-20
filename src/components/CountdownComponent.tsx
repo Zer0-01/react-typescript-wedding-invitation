@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
-const Countdown = () => {
+const CountdownComponent = () => {
     const calculateTimeLeft = (): Record<string, number> => {
         const targetDate = new Date("2025-04-26T17:00:00");
         const now = new Date();
@@ -74,4 +74,4 @@ const Countdown = () => {
     );
 }
 
-export default Countdown;
+export default CountdownComponent;
