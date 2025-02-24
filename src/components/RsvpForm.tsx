@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { db } from "../FirebaseConfig";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
+enum RsvpStatus {
+    INITIAL, LOADING, SUCCESS, FAILURE
+}
+
 
 const RsvpForm = () => {
     const [disabled, setDisabled] = useState<boolean>(true);
@@ -7,6 +13,7 @@ const RsvpForm = () => {
     const [phone, setPhone] = useState<string>("");
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [guest, setGuest] = useState<number>(0);
+    const [status, setStatus] = useState<RsvpStatus>(RsvpStatus.INITIAL);
 
     useEffect(() => {
         if (name && phone && attendance !== null && name && phone !== "") {
@@ -18,13 +25,23 @@ const RsvpForm = () => {
 
     }, [name, phone, attendance, guest]);
 
-    const handleSend = () => {
-        // TODO: Send RSVP data to backend
-        console.log("Sending RSVP data to backend...");
-        console.log(`Name: ${name}`);
-        console.log(`Phone: ${phone}`);
-        console.log(`Attendance: ${attendance ? "Yes" : "No"}`);
-        console.log(`Guest: ${guest}`);
+    const handleSend = async () => {
+        setStatus(RsvpStatus.LOADING);
+        try {
+            await addDoc(collection(db, "rsvp"), {
+                name: name,
+                phone: phone,
+                attendance: attendance,
+                guest: guest,
+                timestamp: serverTimestamp()
+            });
+            setStatus(RsvpStatus.SUCCESS);
+            console.log("RSVP data sent successfully!");
+        } catch (error) {
+            setStatus(RsvpStatus.FAILURE);
+            console.error("Error sending RSVP data:", error);
+        }
+
     }
 
     return (
@@ -66,7 +83,7 @@ const RsvpForm = () => {
                                     <Form.Label>Will you be attending?</Form.Label>
                                     <Form.Check
                                         type="radio"
-                                        id="default-radio"
+                                        id="attending-yes"
                                         label="I will"
                                         name="default-radio"
                                         onChange={() => {
@@ -76,7 +93,7 @@ const RsvpForm = () => {
                                     />
                                     <Form.Check
                                         type="radio"
-                                        id="default-radio"
+                                        id="attending-no"
                                         label="I will not"
                                         name="default-radio"
                                         onChange={() => {
@@ -100,9 +117,11 @@ const RsvpForm = () => {
 
 
                                 <Button
-                                    disabled={disabled}
+                                    disabled={disabled || status === RsvpStatus.LOADING}
                                     onClick={handleSend}
-                                >Send</Button>
+                                >
+                                    {status === RsvpStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
+                                </Button>
                             </Form>
                         </Card.Body>
                     </Card>
