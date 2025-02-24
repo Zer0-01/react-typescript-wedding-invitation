@@ -1,11 +1,23 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
+import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore/lite";
 import { toast, ToastContainer } from "react-toastify";
 import { db } from "../FirebaseConfig";
+import { AiOutlineSync } from "react-icons/ai";
+
 
 enum MessageStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
+}
+
+enum MessagesStatus {
+    INITIAL, LOADING, SUCCESS, FAILURE
+}
+
+interface Message {
+    name: string;
+    message: string;
+    timestamp: Date;
 }
 
 const MessageComponent = () => {
@@ -13,6 +25,8 @@ const MessageComponent = () => {
     const [name, setName] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [status, setStatus] = useState<MessageStatus>(MessageStatus.INITIAL);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [messagesStatus, setMessagesStatus] = useState<MessagesStatus>(MessagesStatus.INITIAL);
 
     useEffect(() => {
         if (name && message && name !== "" && message !== "") {
@@ -21,6 +35,10 @@ const MessageComponent = () => {
             setDisabled(true);
         }
     }, [name, message]);
+
+    useEffect(() => {
+        fetchMessages();
+    }, []);
 
     const handleSend = async () => {
         setStatus(MessageStatus.LOADING);
@@ -31,6 +49,8 @@ const MessageComponent = () => {
                 timestamp: serverTimestamp()
             });
             setStatus(MessageStatus.SUCCESS);
+            setName("");
+            setMessage("");
             showToast("Message data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
@@ -43,6 +63,20 @@ const MessageComponent = () => {
 
     const showToast = (message: string) => toast(message);
 
+    const fetchMessages = async () => {
+        setMessagesStatus(MessagesStatus.LOADING);
+        const messagesQuery = query(collection(db, "message"), orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(messagesQuery);
+        const messagesList: Message[] = [];
+
+        querySnapshot.forEach((doc) => {
+            messagesList.push(doc.data() as Message);
+        });
+
+        setMessages(messagesList);
+        setMessagesStatus(MessagesStatus.SUCCESS);
+    };
+
     return (
         <>
             <Container
@@ -50,7 +84,7 @@ const MessageComponent = () => {
                 style={{
                     backgroundColor: "#FFFAEC",
                 }}>
-                <Row className="py-5">
+                <Row className="pt-5 pb-2">
                     <Col>
                         <Card>
                             <Card.Body>
@@ -63,6 +97,7 @@ const MessageComponent = () => {
                                         controlId="formNameMessage">
                                         <Form.Label>Name</Form.Label>
                                         <Form.Control
+                                            value={name}
                                             type="text"
                                             placeholder="Enter your name"
                                             onChange={(e) => setName(e.target.value)}
@@ -74,6 +109,7 @@ const MessageComponent = () => {
                                         controlId="formMessage">
                                         <Form.Label>Message</Form.Label>
                                         <Form.Control
+                                            value={message}
                                             as="textarea"
                                             type="text"
                                             placeholder="Enter your message"
@@ -93,6 +129,52 @@ const MessageComponent = () => {
                         </Card>
                     </Col>
                 </Row>
+                <Row className="pt-2 pb-5">
+                    <Col>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>
+                                    <Row className="justify-content-between">
+                                        <Col xs="auto" >
+                                            List of Messages
+                                        </Col>
+                                        <Col xs="auto" >
+                                            <AiOutlineSync onClick={fetchMessages} />
+                                        </Col>
+                                    </Row>
+                                </Card.Title>
+                                {messagesStatus === MessagesStatus.LOADING
+                                    ? <Spinner as="span" animation="border" size="sm" />
+                                    : <div style={{
+                                        maxHeight: "50vh",
+                                        overflowY: "auto",
+                                    }}>
+                                        {messages.map((message, index) => (
+
+                                            <Container key={index}>
+                                                <Row>
+                                                    <Col>
+                                                        {message.name}
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
+                                                        {message.message}
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
+                                                        <hr />
+                                                    </Col>
+                                                </Row>
+                                            </Container>
+                                        ))}
+                                    </div>}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+
             </Container>
             <ToastContainer />
         </>
