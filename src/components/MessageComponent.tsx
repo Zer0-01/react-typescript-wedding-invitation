@@ -145,15 +145,23 @@ const MessageComponent = () => {
                                 </Card.Title>
                                 {messagesStatus === MessagesStatus.LOADING
                                     ? <Spinner as="span" animation="border" size="sm" />
-                                    : <div style={{
-                                        maxHeight: "50vh",
-                                        overflowY: "auto",
-                                    }}>
-                                        {messages.map((message, index) => (
+                                    : <Container
+                                        className="overflow-auto p-0"
+                                        style={{ maxHeight: "50vh" }}>
 
-                                            <Container key={index}>
+                                        {messages.map((message, index) => (
+                                            <Container
+                                                key={index}
+                                                style={{
+                                                    backgroundColor: "#A5BFCC",
+                                                    borderRadius: "10px",
+                                                    width: "fit-content",
+                                                    maxWidth: "75%",
+                                                }}
+                                                className="mb-2 mx-0 p-2"
+                                            >
                                                 <Row>
-                                                    <Col>
+                                                    <Col className="fw-bold">
                                                         {message.name}
                                                     </Col>
                                                 </Row>
@@ -162,14 +170,11 @@ const MessageComponent = () => {
                                                         {message.message}
                                                     </Col>
                                                 </Row>
-                                                <Row>
-                                                    <Col>
-                                                        <hr />
-                                                    </Col>
-                                                </Row>
                                             </Container>
+
                                         ))}
-                                    </div>}
+                                    </Container>
+                                }
                             </Card.Body>
                         </Card>
                     </Col>
