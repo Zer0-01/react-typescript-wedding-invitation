@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/esm/Col';
 import CardCoupleComponent from '../components/CardCoupleComponent';
 import CountdownComponent from '../components/CountdownComponent';
 import PlaceComponent from '../components/PlaceComponent';
-import RsvpForm from '../components/RsvpForm';
+import RsvpFormComponent from '../components/RsvpFormComponent';
 import MessageComponent from '../components/MessageComponent';
 
 function HomeScreen() {
@@ -29,7 +29,7 @@ function HomeScreen() {
               <CardCoupleComponent />
               <CountdownComponent />
               <PlaceComponent />
-              <RsvpForm />
+              <RsvpFormComponent />
               <MessageComponent />
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />

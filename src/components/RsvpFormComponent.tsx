@@ -8,7 +8,7 @@ enum RsvpStatus {
 }
 
 
-const RsvpForm = () => {
+const RsvpFormComponent = () => {
     const [disabled, setDisabled] = useState<boolean>(true);
     const [name, setName] = useState<string>("");
     const [phone, setPhone] = useState<string>("");
@@ -139,4 +139,4 @@ const RsvpForm = () => {
     );
 }
 
-export default RsvpForm;
+export default RsvpFormComponent;
