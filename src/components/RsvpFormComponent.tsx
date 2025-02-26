@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { db } from "../FirebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 enum RsvpStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
 }
@@ -47,7 +47,10 @@ const RsvpFormComponent = () => {
 
     }
 
-    const showToast = (message: string) => toast(message);
+    const showToast = (message: string) => {
+        toast.dismiss()
+        toast(message)
+    };
 
     return (
         <>
@@ -134,7 +137,6 @@ const RsvpFormComponent = () => {
                     </Col>
                 </Row>
             </Container>
-            <ToastContainer />
         </>
     );
 }

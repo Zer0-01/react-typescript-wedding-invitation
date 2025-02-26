@@ -9,6 +9,8 @@ import CountdownComponent from '../components/CountdownComponent';
 import PlaceComponent from '../components/PlaceComponent';
 import RsvpFormComponent from '../components/RsvpFormComponent';
 import MessageComponent from '../components/MessageComponent';
+import GiftComponent from '../components/GiftComponent';
+import { ToastContainer } from 'react-toastify';
 
 function HomeScreen() {
   return (
@@ -31,12 +33,15 @@ function HomeScreen() {
               <PlaceComponent />
               <RsvpFormComponent />
               <MessageComponent />
+              <GiftComponent />
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />
           </Row>
 
         </Container>
       </motion.div>
+      <ToastContainer />
+
 
     </>
   );

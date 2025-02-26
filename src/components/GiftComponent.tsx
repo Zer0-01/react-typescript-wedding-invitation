@@ -1,114 +1,70 @@
-import Button from "react-bootstrap/esm/Button"
-import Card from "react-bootstrap/esm/Card"
 import Col from "react-bootstrap/esm/Col"
+import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row"
-import { Clipboard } from "react-bootstrap-icons";
-import { Container, Image } from "react-bootstrap";
-import bankQrAnas from "../assets/bank-qr-anas.jpg";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Card from "react-bootstrap/esm/Card";
+import { AiOutlineCopy } from "react-icons/ai";
+import { toast } from "react-toastify";
 
-import "../styles/GiftStyle.css"
+
+
+
+interface CardDetail {
+    name: string;
+    bankName: string;
+    accountNumber: string;
+
+}
 
 const GiftComponent = () => {
-    const copyToClipboard = (textToCopy: string) => {
-        navigator.clipboard.writeText(textToCopy).then(
-            () => {
-                toast.success('Copied to clipboard!', {
-                    position: "top-right",
-                    autoClose: 1000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: false,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            },
-            () => {
-                alert('Failed to copy to clipboard. Please copy manually.');
-            }
-        );
-    };
+    const cardDetailList: CardDetail[] = [
+        {
+            name: "Anas Zulkifli bin Mohd Jeffry",
+            bankName: "CIMB",
+            accountNumber: "0123456789"
+        },
+        {
+            name: "Nur Izzatul Khairiah binti Mubin",
+            bankName: "Maybank",
+            accountNumber: "0123456789"
+        }
+    ]
+
+    const handleCopy = (accountNumber: string) => {
+        navigator.clipboard.writeText(accountNumber);
+        showToast(`Account number copied to clipboard!: ${accountNumber}`);
+    }
+
+    const showToast = (message: string) => toast(message);
 
     return (
-        <Container className="mb-5 gift-text">
-            <ToastContainer />
-            <Row className="mb-5">
-                <Col className='text-center'>
-                    <div className='fs-1 fw-bold'>Give a gift</div>
-                    <div className='fs-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis reiciendis velit iusto, nulla esse, tempore, voluptates repellat cupiditate possimus voluptatem vel deserunt iure enim eaque excepturi? Laboriosam eius neque mollitia.</div>
-                </Col>
-            </Row>
-
-            <Row>
-                <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3">
-                        <Row className="align-items-center">
-                            <Col>
-                                <div className='fs-4'>Anas Zulkifli</div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                            <Image src={bankQrAnas} className='img-fluid' />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Card className='p-2'>
-                                    <Row className='justify-content-between align-items-center'>
-                                        <Col>
-                                            <div className='fs-5'>1234345346456</div>
-                                        </Col>
-                                        <Col className='text-end'>
-                                            <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
-                                                <Clipboard />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Card>
-                            </Col>
-                        </Row>
-
-                    </Card>
-
-                </Col>
-
-                <Col xs={12} md={6} className="my-3">
-                    <Card className="p-3">
-                        <Row className="align-items-center">
-                            <Col >
-                                <div className='fs-4'>Nur Izzatul Khairiah</div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                            <Image src={bankQrAnas} className='img-fluid' />
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Card className='p-2'>
-                                    <Row className='justify-content-between align-items-center'>
-                                        <Col>
-                                            <div className='fs-5'>1234345346456</div>
-                                        </Col>
-                                        <Col className='text-end'>
-                                            <Button variant='outline-primary' className='border-0' onClick={() => copyToClipboard('1234345346456')}>
-                                                <Clipboard />
-                                            </Button>
-                                        </Col>
-                                    </Row>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-
+        <>
+            <Container
+                style={{
+                    backgroundColor: "#f8f9fa",
+                }}
+                fluid>
+                {cardDetailList.map((cardDetail, index) => (
+                    <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-5"}>
+                        <Col>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>{cardDetail.name}</Card.Title>
+                                    <Card.Subtitle>{cardDetail.bankName}</Card.Subtitle>
+                                    <Card.Text>
+                                        {cardDetail.accountNumber}
+                                        <AiOutlineCopy
+                                            className="ms-2"
+                                            onClick={() => handleCopy(cardDetail.accountNumber)} />
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                ))}
+            </Container>
+        </>
     );
+
 
 };
 
