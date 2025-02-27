@@ -60,6 +60,7 @@ const GiftComponent = () => {
         try {
             const querySnapshot = await getDocs(collection(db, "gift"));
             querySnapshot.forEach((gift) => {
+                console.log(gift.data().isSelected);
                 setGiftList((prevGiftList) => [...prevGiftList, gift.data() as Gift]);
             });
             setStatus(GiftStatus.SUCCESS);
@@ -116,22 +117,23 @@ const GiftComponent = () => {
                         </Col>
                     </Row>}
                 <Row className="pb-5">
-                    <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>List of Gifts</Card.Title>
-                                <Container
-                                    className="overflow-auto p-0"
-                                    style={{ maxHeight: "50vh" }}>
-                                    <Row>
-                                        <Col>
+                    {giftList.map((gift, index) => (
+                        <Col
+                            xs="auto"
+                            key={index}
+                            style={{
+                                backgroundColor: gift.isSelected ? "blue" : "gray",
+                                color: gift.isSelected ? "white" : "white",
 
-                                        </Col>
-                                    </Row>
-                                </Container>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                                padding: "10px",
+                                margin: "5px",
+                                cursor: "pointer",
+                                borderRadius: "5px",
+                            }}
+                        >
+                            {gift.name}
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         </>
