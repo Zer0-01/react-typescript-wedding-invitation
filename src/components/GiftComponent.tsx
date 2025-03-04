@@ -4,7 +4,7 @@ import Row from "react-bootstrap/esm/Row"
 import Card from "react-bootstrap/esm/Card";
 import { AiOutlineCopy } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { Button, Form, Spinner } from "react-bootstrap";
+import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig";
@@ -32,6 +32,7 @@ const GiftComponent = () => {
     const [status, setStatus] = useState<GiftStatus>(GiftStatus.INITIAL);
     const [giftList, setGiftList] = useState<Gift[]>([]);
     const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
+    const [showAddGiftModal, setShowAddGiftModal] = useState<boolean>(false);
     const cardDetailList: CardDetail[] = [
         {
             name: "Anas Zulkifli bin Mohd Jeffry",
@@ -68,6 +69,9 @@ const GiftComponent = () => {
             setStatus(GiftStatus.FAILURE);
         }
     }
+
+    const handleClose = () => setShowAddGiftModal(false);
+    const handleShow = () => setShowAddGiftModal(true);
 
     return (
         <>
@@ -178,11 +182,45 @@ const GiftComponent = () => {
                             margin: "5px",
                             cursor: "pointer",
                             borderRadius: "5px",
-                        }}>
+                        }}
+                        onClick={handleShow}
+                    >
                         +
                     </Col>
                 </Row>
             </Container>
+
+            <Modal
+                show={showAddGiftModal}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Add new gift</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="mb-2">I will not close if you click outside me. Do not even try to press
+                        escape key.</div>
+                    <Form>
+                        <Form.Group className="mb-2" >
+                            <Form.Label>Phone number</Form.Label>
+                            <Form.Control type="text" placeholder="Enter phone number" />
+                        </Form.Group>
+                        <Form.Group >
+                            <Form.Label>Gift</Form.Label>
+                            <Form.Control type="text" placeholder="Enter gift" />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Send</Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 
