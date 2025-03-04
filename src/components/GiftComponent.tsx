@@ -31,6 +31,7 @@ enum GiftStatus {
 const GiftComponent = () => {
     const [status, setStatus] = useState<GiftStatus>(GiftStatus.INITIAL);
     const [giftList, setGiftList] = useState<Gift[]>([]);
+    const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
     const cardDetailList: CardDetail[] = [
         {
             name: "Anas Zulkifli bin Mohd Jeffry",
@@ -60,13 +61,11 @@ const GiftComponent = () => {
         try {
             const querySnapshot = await getDocs(collection(db, "gift"));
             querySnapshot.forEach((gift) => {
-                console.log(gift.data().isSelected);
                 setGiftList((prevGiftList) => [...prevGiftList, gift.data() as Gift]);
             });
             setStatus(GiftStatus.SUCCESS);
         } catch (error) {
             setStatus(GiftStatus.FAILURE);
-            console.error("Error fetching gifts:", error);
         }
     }
 
@@ -106,11 +105,12 @@ const GiftComponent = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Gift</Form.Label>
-                                    <Form.Select>
-                                        {giftList.map((gift, index) => (
-                                            <option key={index} value={gift.name}>{gift.name}</option>
-                                        ))}
-                                    </Form.Select>
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Select gift below"
+                                        readOnly
+                                        value={selectedGift ? selectedGift.name : ""}
+                                    />
                                 </Form.Group>
                                 <Button>Send</Button>
                             </Form>
@@ -122,13 +122,17 @@ const GiftComponent = () => {
                             xs="auto"
                             key={index}
                             style={{
-                                backgroundColor: gift.isSelected ? "blue" : "gray",
+                                backgroundColor: gift.isSelected ? "gray" : "blue",
                                 color: gift.isSelected ? "white" : "white",
-
                                 padding: "10px",
                                 margin: "5px",
                                 cursor: "pointer",
                                 borderRadius: "5px",
+                            }}
+                            onClick={() => {
+                                if (gift.isSelected !== true) {
+                                    setSelectedGift(gift);
+                                }
                             }}
                         >
                             {gift.name}
