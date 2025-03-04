@@ -96,7 +96,7 @@ const GiftComponent = () => {
                 ))}
                 {status === GiftStatus.LOADING
                     ? <Spinner as="span" animation="border" size="sm" />
-                    : <Row className="pb-5">
+                    : <Row className="pb-3">
                         <Col>
                             <Form>
                                 <Form.Group className="mb-3">
@@ -116,6 +116,38 @@ const GiftComponent = () => {
                             </Form>
                         </Col>
                     </Row>}
+                <Row>
+                    <Col xs="auto" style={{ color: "blue" }} className="fw-bold"
+                    >
+                        •
+                    </Col>
+                    <Col
+                        xs="auto"
+                        style={{ color: "blue" }}
+                        className="fw-bold"
+
+                    >
+                        Available
+                    </Col>
+                </Row>
+                <Row className="pb-3">
+                    <Col
+                        xs="auto"
+                        style={{
+                            color: "gray"
+                        }}
+                        className="fw-bold"
+                    >
+                        •
+                    </Col>
+                    <Col xs="auto" style={{
+                        color: "gray"
+                    }}
+                        className="fw-bold"
+                    >
+                        Already selected
+                    </Col>
+                </Row>
                 <Row className="pb-5">
                     {giftList.map((gift, index) => (
                         <Col
@@ -138,6 +170,17 @@ const GiftComponent = () => {
                             {gift.name}
                         </Col>
                     ))}
+                    <Col xs="auto"
+                        style={{
+                            backgroundColor: "green",
+                            color: "white",
+                            padding: "10px 15px",
+                            margin: "5px",
+                            cursor: "pointer",
+                            borderRadius: "5px",
+                        }}>
+                        +
+                    </Col>
                 </Row>
             </Container>
         </>
