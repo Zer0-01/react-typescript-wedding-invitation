@@ -33,7 +33,9 @@ const GiftComponent = () => {
     const [status, setStatus] = useState<GiftStatus>(GiftStatus.INITIAL);
     const [giftList, setGiftList] = useState<Gift[]>([]);
     const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
+    const [unvailableSelectedGift, setUnvailableSelectedGift] = useState<Gift | null>(null);
     const [showAddGiftModal, setShowAddGiftModal] = useState<boolean>(false);
+    const [showGiftDetailModal, setShowGiftDetailModal] = useState<boolean>(false);
     const [isButtonDisabled, setIsButtonDIsabled] = useState<boolean>(true);
     const [phone, setPhone] = useState<string>("");
 
@@ -86,6 +88,9 @@ const GiftComponent = () => {
 
     const handleClose = () => setShowAddGiftModal(false);
     const handleShow = () => setShowAddGiftModal(true);
+
+    const handleCloseGiftDetail = () => setShowGiftDetailModal(false);
+    const handleShowGiftDetail = () => setShowGiftDetailModal(true);
 
     const handleOnClickSend = async () => {
         setStatus(GiftStatus.LOADING);
@@ -212,6 +217,9 @@ const GiftComponent = () => {
                             onClick={() => {
                                 if (gift.isSelected !== true) {
                                     setSelectedGift(gift);
+                                } else {
+                                    setUnvailableSelectedGift(gift);
+                                    handleShowGiftDetail();
                                 }
                             }}
                         >
@@ -263,6 +271,37 @@ const GiftComponent = () => {
                         Close
                     </Button>
                     <Button variant="primary">Send</Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showGiftDetailModal}
+                onHide={handleCloseGiftDetail}
+                backdrop="static"
+                keyboard={false}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Gift Detail</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Col>
+                                Gift name: {unvailableSelectedGift?.name ?? "N/A"}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                Phone number: {unvailableSelectedGift?.phone ?? "N/A"}
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleCloseGiftDetail}>
+                        Close
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
