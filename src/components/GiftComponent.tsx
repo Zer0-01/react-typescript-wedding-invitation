@@ -4,9 +4,9 @@ import Row from "react-bootstrap/esm/Row"
 import Card from "react-bootstrap/esm/Card";
 import { AiOutlineCopy } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { Button, Form, Modal, Spinner } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore/lite";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig";
 
 
@@ -19,6 +19,7 @@ interface CardDetail {
 }
 
 interface Gift {
+    id: string;
     name: string;
     phone: string;
     isSelected: boolean;
@@ -33,6 +34,9 @@ const GiftComponent = () => {
     const [giftList, setGiftList] = useState<Gift[]>([]);
     const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
     const [showAddGiftModal, setShowAddGiftModal] = useState<boolean>(false);
+    const [isButtonDisabled, setIsButtonDIsabled] = useState<boolean>(true);
+    const [phone, setPhone] = useState<string>("");
+
     const cardDetailList: CardDetail[] = [
         {
             name: "Anas Zulkifli bin Mohd Jeffry",
@@ -50,28 +54,59 @@ const GiftComponent = () => {
         fetchGifts();
     }, []);
 
+    useEffect(() => {
+        if (phone && selectedGift) {
+            setIsButtonDIsabled(false);
+        } else {
+            setIsButtonDIsabled(true);
+        }
+
+    }, [phone, selectedGift]);
+
     const handleCopy = (accountNumber: string) => {
         navigator.clipboard.writeText(accountNumber);
         showToast(`Account number copied to clipboard!: ${accountNumber}`);
     }
 
-    const showToast = (message: string) => toast(message);
 
     const fetchGifts = async () => {
         setStatus(GiftStatus.LOADING);
         try {
             const querySnapshot = await getDocs(collection(db, "gift"));
-            querySnapshot.forEach((gift) => {
-                setGiftList((prevGiftList) => [...prevGiftList, gift.data() as Gift]);
+            const gifts: Gift[] = querySnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data() as Omit<Gift, "id">,
+            }));
+            setGiftList(gifts);
+            setStatus(GiftStatus.SUCCESS);
+        } catch (error) {
+            setStatus(GiftStatus.FAILURE);
+        }
+    };
+
+    const handleClose = () => setShowAddGiftModal(false);
+    const handleShow = () => setShowAddGiftModal(true);
+
+    const handleOnClickSend = async () => {
+        setStatus(GiftStatus.LOADING);
+
+        try {
+            const giftRef = doc(db, "gift", selectedGift?.id ?? "")
+            await updateDoc(giftRef, {
+                phone: phone,
+                isSelected: true
             });
+            await fetchGifts();
+            setSelectedGift(null);
+            showToast("Gift update successfully!");
             setStatus(GiftStatus.SUCCESS);
         } catch (error) {
             setStatus(GiftStatus.FAILURE);
         }
     }
 
-    const handleClose = () => setShowAddGiftModal(false);
-    const handleShow = () => setShowAddGiftModal(true);
+    const showToast = (message: string) => toast(message);
+
 
     return (
         <>
@@ -98,28 +133,37 @@ const GiftComponent = () => {
                         </Col>
                     </Row>
                 ))}
-                {status === GiftStatus.LOADING
-                    ? <Spinner as="span" animation="border" size="sm" />
-                    : <Row className="pb-3">
-                        <Col>
-                            <Form>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Phone Number</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter phone number" />
-                                </Form.Group>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Gift</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Select gift below"
-                                        readOnly
-                                        value={selectedGift ? selectedGift.name : ""}
-                                    />
-                                </Form.Group>
-                                <Button>Send</Button>
-                            </Form>
-                        </Col>
-                    </Row>}
+
+
+                <Row className="pb-3">
+                    <Col>
+                        <Form>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter phone number"
+                                    onChange={(e) => {
+                                        setPhone(e.target.value);
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Gift</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Select gift below"
+                                    readOnly
+                                    value={selectedGift ? selectedGift.name : ""}
+                                />
+                            </Form.Group>
+                            <Button
+                                disabled={isButtonDisabled || status === GiftStatus.LOADING}
+                                onClick={handleOnClickSend}
+                            >Send</Button>
+                        </Form>
+                    </Col>
+                </Row>
                 <Row>
                     <Col xs="auto" style={{ color: "blue" }} className="fw-bold"
                     >
