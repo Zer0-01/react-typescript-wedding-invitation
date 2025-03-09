@@ -1,5 +1,5 @@
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
-import {RsvpStatus} from "./RsvpFormSection";
+import { RsvpStatus } from "./RsvpFormSection";
 
 interface RsvpModalProps {
     show: boolean,

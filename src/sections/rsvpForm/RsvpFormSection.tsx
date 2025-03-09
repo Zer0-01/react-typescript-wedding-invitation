@@ -21,7 +21,7 @@ const RsvpFormSection = () => {
 
     useEffect(() => {
         if (name && phone && attendance !== null && name && phone !== "") {
-            (false);
+            setDisabled(false);
         } else {
             setDisabled(true);
         }
