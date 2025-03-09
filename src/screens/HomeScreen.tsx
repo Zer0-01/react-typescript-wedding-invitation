@@ -11,6 +11,7 @@ import RsvpFormComponent from '../components/RsvpFormComponent';
 import MessageComponent from '../components/MessageComponent';
 import GiftComponent from '../components/GiftComponent';
 import { ToastContainer } from 'react-toastify';
+import FooterComponent from '../components/FooterComponent';
 
 function HomeScreen() {
   return (
@@ -34,6 +35,7 @@ function HomeScreen() {
               <RsvpFormComponent />
               <MessageComponent />
               <GiftComponent />
+              <FooterComponent />
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />
           </Row>
