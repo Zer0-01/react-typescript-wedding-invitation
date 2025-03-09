@@ -1,24 +1,27 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
-import { db } from "../FirebaseConfig";
+import { db } from "../../FirebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
-enum RsvpStatus {
+import RsvpModal from "./RsvpModal";
+
+export enum RsvpStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
 }
 
 
-const RsvpFormComponent = () => {
+const RsvpFormSection = () => {
     const [disabled, setDisabled] = useState<boolean>(true);
     const [name, setName] = useState<string>("");
     const [phone, setPhone] = useState<string>("");
     const [attendance, setAttendance] = useState<boolean | null>(null);
     const [guest, setGuest] = useState<number>(0);
     const [status, setStatus] = useState<RsvpStatus>(RsvpStatus.INITIAL);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     useEffect(() => {
         if (name && phone && attendance !== null && name && phone !== "") {
-            setDisabled(false);
+            (false);
         } else {
             setDisabled(true);
         }
@@ -37,6 +40,7 @@ const RsvpFormComponent = () => {
                 timestamp: serverTimestamp()
             });
             setStatus(RsvpStatus.SUCCESS);
+            setShowModal(false);
             showToast("RSVP data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
@@ -55,7 +59,7 @@ const RsvpFormComponent = () => {
     return (
         <>
             <Container
-                fluid
+
                 style={
                     {
                         backgroundColor: "#F5ECD5",
@@ -126,8 +130,8 @@ const RsvpFormComponent = () => {
 
 
                                     <Button
-                                        disabled={disabled || status === RsvpStatus.LOADING}
-                                        onClick={handleSend}
+                                        disabled={disabled}
+                                        onClick={() => setShowModal(true)}
                                     >
                                         {status === RsvpStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
                                     </Button>
@@ -137,8 +141,18 @@ const RsvpFormComponent = () => {
                     </Col>
                 </Row>
             </Container>
+            <RsvpModal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                name={name}
+                phone={phone}
+                attendance={attendance}
+                guest={guest || 0}
+                onClick={handleSend}
+                status={status}
+            />
         </>
     );
 }
 
-export default RsvpFormComponent;
+export default RsvpFormSection;

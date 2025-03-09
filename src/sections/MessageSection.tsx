@@ -20,7 +20,7 @@ interface Message {
     timestamp: Date;
 }
 
-const MessageComponent = () => {
+const MessageSection = () => {
     const [disabled, setDisabled] = useState<boolean>(true);
     const [name, setName] = useState<string>("");
     const [message, setMessage] = useState<string>("");
@@ -185,4 +185,4 @@ const MessageComponent = () => {
     );
 };
 
-export default MessageComponent;
+export default MessageSection;

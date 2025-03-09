@@ -3,7 +3,7 @@ import Col from "react-bootstrap/esm/Col";
 import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
 
-const OurStory = () => {
+const OurStorySection = () => {
     return (
         <Row>
             <Col xs={12} md={6}>
@@ -56,4 +56,4 @@ const OurStory = () => {
     );
 };
 
-export default OurStory;
+export default OurStorySection;

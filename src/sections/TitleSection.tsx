@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 
 
-const TitleComponent = () => {
+const TitleSection = () => {
     return (
         <Container
             className="min-vh-100  d-flex flex-column"
@@ -38,4 +38,4 @@ const TitleComponent = () => {
     );
 }
 
-export default TitleComponent;
+export default TitleSection;

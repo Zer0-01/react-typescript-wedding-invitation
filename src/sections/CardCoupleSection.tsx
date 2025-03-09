@@ -3,7 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
 import Container from "react-bootstrap/esm/Container";
 
-const CardCoupleComponent = () => {
+const CardCoupleSection = () => {
     return (
         <Container
             style={{
@@ -67,4 +67,4 @@ const CardCoupleComponent = () => {
     );
 }
 
-export default CardCoupleComponent;
+export default CardCoupleSection;

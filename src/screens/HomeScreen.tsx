@@ -1,17 +1,17 @@
 
 import { motion } from 'framer-motion';
-import TitleComponent from '../components/TitleComponent';
+import TitleSection from '../sections/TitleSection';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import CardCoupleComponent from '../components/CardCoupleComponent';
-import CountdownComponent from '../components/CountdownComponent';
-import PlaceComponent from '../components/PlaceComponent';
-import RsvpFormComponent from '../components/RsvpFormComponent';
-import MessageComponent from '../components/MessageComponent';
-import GiftComponent from '../components/GiftComponent';
+import CardCoupleSection from '../sections/CardCoupleSection';
+import CountdownSection from '../sections/CountdownSection';
+import PlaceSection from '../sections/PlaceSection';
+import RsvpFormSection from '../sections/rsvpForm/RsvpFormSection';
+import MessageSection from '../sections/MessageSection';
+import GiftSection from '../sections/GiftSection';
 import { ToastContainer } from 'react-toastify';
-import FooterComponent from '../components/FooterComponent';
+import FooterSection from '../sections/FooterSection';
 
 function HomeScreen() {
   return (
@@ -28,14 +28,14 @@ function HomeScreen() {
           <Row className='g-0'>
             <Col sm={0} md={2} lg={3} xl={4} className='d-none d-sm-block bg-light-subtle' />
             <Col sm={12} md={8} lg={6} xl={4} className='bg-light-subtle'>
-              <TitleComponent />
-              <CardCoupleComponent />
-              <CountdownComponent />
-              <PlaceComponent />
-              <RsvpFormComponent />
-              <MessageComponent />
-              <GiftComponent />
-              <FooterComponent />
+              <TitleSection />
+              <CardCoupleSection />
+              <CountdownSection />
+              <PlaceSection />
+              <RsvpFormSection />
+              <MessageSection />
+              <GiftSection />
+              <FooterSection />
             </Col>
             <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />
           </Row>

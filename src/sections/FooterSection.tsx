@@ -4,7 +4,7 @@ import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FaReact } from "react-icons/fa";
 import { SiTypescript } from "react-icons/si";
 
-const FooterComponent = () => {
+const FooterSection = () => {
     return (
         <Container style={{
             background: "#FFFAEC"
@@ -38,4 +38,4 @@ const FooterComponent = () => {
     )
 }
 
-export default FooterComponent;
+export default FooterSection;

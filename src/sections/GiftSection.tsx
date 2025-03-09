@@ -29,7 +29,7 @@ enum GiftStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
 }
 
-const GiftComponent = () => {
+const GiftSection = () => {
     const [status, setStatus] = useState<GiftStatus>(GiftStatus.INITIAL);
     const [giftList, setGiftList] = useState<Gift[]>([]);
     const [selectedGift, setSelectedGift] = useState<Gift | null>(null);
@@ -310,4 +310,4 @@ const GiftComponent = () => {
 
 };
 
-export default GiftComponent;
+export default GiftSection;

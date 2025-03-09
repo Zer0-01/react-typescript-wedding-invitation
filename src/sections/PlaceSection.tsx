@@ -1,6 +1,6 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 
-const PlaceComponent = () => {
+const PlaceSection = () => {
     const handleClick = () => {
         window.open("https://maps.app.goo.gl/6rBA7thVaVejn79x6")
     }
@@ -61,4 +61,4 @@ const PlaceComponent = () => {
     );
 };
 
-export default PlaceComponent;
+export default PlaceSection;
