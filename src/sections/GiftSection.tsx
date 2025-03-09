@@ -6,7 +6,7 @@ import { AiOutlineCopy } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { collection, doc, getDocs, updateDoc } from "firebase/firestore/lite";
+import { addDoc, collection, doc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig";
 
 
@@ -23,9 +23,14 @@ interface Gift {
     name: string;
     phone: string;
     isSelected: boolean;
+    timestamp: Timestamp | null;
 }
 
 enum GiftStatus {
+    INITIAL, LOADING, SUCCESS, FAILURE
+}
+
+enum NewGiftStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
 }
 
@@ -38,6 +43,10 @@ const GiftSection = () => {
     const [showGiftDetailModal, setShowGiftDetailModal] = useState<boolean>(false);
     const [isButtonDisabled, setIsButtonDIsabled] = useState<boolean>(true);
     const [phone, setPhone] = useState<string>("");
+    const [newGiftName, setNewGiftName] = useState<string>("");
+    const [newGiftPhone, setNewGiftPhone] = useState<string>("");
+    const [newGiftStatus, setNewGiftStatus] = useState<NewGiftStatus>(NewGiftStatus.INITIAL);
+    const [showConfirmationModal, setShowConfirmationModal] = useState<boolean>(false);
 
     const cardDetailList: CardDetail[] = [
         {
@@ -69,8 +78,6 @@ const GiftSection = () => {
         navigator.clipboard.writeText(accountNumber);
         showToast(`Account number copied to clipboard!: ${accountNumber}`);
     }
-
-
     const fetchGifts = async () => {
         setStatus(GiftStatus.LOADING);
         try {
@@ -85,32 +92,51 @@ const GiftSection = () => {
             setStatus(GiftStatus.FAILURE);
         }
     };
-
     const handleClose = () => setShowAddGiftModal(false);
     const handleShow = () => setShowAddGiftModal(true);
-
     const handleCloseGiftDetail = () => setShowGiftDetailModal(false);
     const handleShowGiftDetail = () => setShowGiftDetailModal(true);
-
     const handleOnClickSend = async () => {
         setStatus(GiftStatus.LOADING);
-
         try {
             const giftRef = doc(db, "gift", selectedGift?.id ?? "")
             await updateDoc(giftRef, {
                 phone: phone,
-                isSelected: true
+                isSelected: true,
+                timestamp: serverTimestamp()
             });
-            await fetchGifts();
-            setSelectedGift(null);
-            showToast("Gift update successfully!");
             setStatus(GiftStatus.SUCCESS);
+            setShowConfirmationModal(false);
+            showToast("Gift update successfully!");
+            await fetchGifts();
         } catch (error) {
             setStatus(GiftStatus.FAILURE);
+            showToast("Failed to update gift! Please try again later.");
         }
     }
-
     const showToast = (message: string) => toast(message);
+    const handleSend = async () => {
+        setNewGiftStatus(NewGiftStatus.LOADING);
+        try {
+            await addDoc(collection(db, "gift"), {
+                name: newGiftName,
+                phone: newGiftPhone,
+                isSelected: true,
+                timestamp: serverTimestamp()
+
+            });
+            setNewGiftStatus(NewGiftStatus.SUCCESS);
+            setNewGiftName("");
+            setNewGiftPhone("");
+            handleClose();
+            showToast("Gift added successfully!");
+            await fetchGifts();
+
+        } catch (error) {
+            setNewGiftStatus(NewGiftStatus.FAILURE);
+            showToast("Failed to add gift! Please try again later.");
+        }
+    }
 
 
     return (
@@ -164,7 +190,7 @@ const GiftSection = () => {
                             </Form.Group>
                             <Button
                                 disabled={isButtonDisabled || status === GiftStatus.LOADING}
-                                onClick={handleOnClickSend}
+                                onClick={() => setShowConfirmationModal(true)}
                             >Send</Button>
                         </Form>
                     </Col>
@@ -253,24 +279,37 @@ const GiftSection = () => {
                     <Modal.Title>Add new gift</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="mb-2">I will not close if you click outside me. Do not even try to press
-                        escape key.</div>
                     <Form>
                         <Form.Group className="mb-2" >
                             <Form.Label>Phone number</Form.Label>
-                            <Form.Control type="text" placeholder="Enter phone number" />
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter phone number"
+                                onChange={(e) => {
+                                    setNewGiftPhone(e.target.value);
+                                }}
+                            />
                         </Form.Group>
                         <Form.Group >
                             <Form.Label>Gift</Form.Label>
-                            <Form.Control type="text" placeholder="Enter gift" />
+                            <Form.Control
+                                type="text"
+                                placeholder="Enter gift"
+                                onChange={(e) => {
+                                    setNewGiftName(e.target.value);
+                                }}
+                            />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
+                    <Button
+                        variant="primary"
+                        onClick={handleSend}
+                        disabled={!newGiftName || !newGiftPhone || newGiftStatus === NewGiftStatus.LOADING}
+                    >
+                        Send
                     </Button>
-                    <Button variant="primary">Send</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -296,12 +335,59 @@ const GiftSection = () => {
                                 Phone number: {unvailableSelectedGift?.phone ?? "N/A"}
                             </Col>
                         </Row>
+                        <Row>
+                            <Col>
+                                Date: {unvailableSelectedGift?.timestamp
+                                    ? new Date(unvailableSelectedGift.timestamp.toDate()).toLocaleString('en-GB', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: '2-digit'
+                                    })
+                                    : "N/A"}
+                            </Col>
+                        </Row>
+
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleCloseGiftDetail}>
                         Close
                     </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal
+                show={showConfirmationModal}
+                onHide={() => setShowConfirmationModal(false)}
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Please confirm your gift.</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Container>
+                        <Row>
+                            <Col xs="auto">
+                                Phone Number:
+                            </Col>
+                            <Col className="fw-bold">
+                                {phone}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs="auto">
+                                Gift:
+                            </Col>
+                            <Col className="fw-bold">
+                                {selectedGift?.name ?? "N/A"}
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={handleOnClickSend}>Send</Button>
                 </Modal.Footer>
             </Modal>
         </>
