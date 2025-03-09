@@ -12,11 +12,22 @@ const FooterSection = () => {
 
             <Row className="pt-5 pb-2 justify-content-center" >
                 <Col xs="auto">
-                    <AiFillGithub className="fs-1" />
+                    <AiFillGithub
+                        className="fs-1"
+                        onClick={() => {
+                            window.open("https://github.com/Zer0-01")
+                        }}
+
+                    />
 
                 </Col>
                 <Col xs="auto">
-                    <AiOutlineWhatsApp className="fs-1" />
+                    <AiOutlineWhatsApp 
+                    className="fs-1" 
+                    onClick={() => {
+                        window.open("https://wa.me/601154066082")
+                    }}
+                    />
 
                 </Col>
             </Row>
