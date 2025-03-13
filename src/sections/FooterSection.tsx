@@ -68,7 +68,7 @@ const FooterSection = () => {
                                 color: colorPrimary[0]
                             }
                         }
-                    >Copyright by Anas</div>
+                    >Copyright © Anas</div>
                 </Col>
             </Row>
             <Row className="pb-5 justify-content-center">

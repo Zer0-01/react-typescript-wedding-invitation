@@ -25,7 +25,10 @@ const CardCoupleSection = () => {
             <Row className="py-2">
                 <Col className="text-center">
                     <Image
-                        className="bg-dark w-75"
+                        style={{
+                            backgroundColor: "#e6e6e6"
+                        }}
+                        className="w-50"
                         src="../src/assets/atul-cartoon.png"
                         roundedCircle
                         fluid />
@@ -44,7 +47,10 @@ const CardCoupleSection = () => {
             <Row className="py-2">
                 <Col className="text-center">
                     <Image
-                        className="bg-dark w-75"
+                        style={{
+                            backgroundColor: "#e6e6e6"
+                        }}
+                        className="w-50"
                         src="../src/assets/anas-cartoon.png"
                         roundedCircle
                         fluid />
