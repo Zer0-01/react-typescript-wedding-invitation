@@ -47,13 +47,10 @@
 }
 
 body {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: "Outfit", Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
 }
 
 
 .text-black {
   color: #000000;
 }
-
-
-

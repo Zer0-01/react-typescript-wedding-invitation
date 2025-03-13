@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router'
 import HomeScreen from './screens/HomeScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
+import "./App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AnimatedRoutes = () => {
