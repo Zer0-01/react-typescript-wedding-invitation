@@ -8,8 +8,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { addDoc, collection, doc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig";
-
-
+import { colorPrimary } from "../constants/ColorsConstant";
 
 
 interface CardDetail {
@@ -143,17 +142,21 @@ const GiftSection = () => {
         <>
             <Container
                 style={{
-                    backgroundColor: "#f8f9fa",
+                    backgroundColor: colorPrimary[200],
                 }}
                 fluid>
                 {cardDetailList.map((cardDetail, index) => (
                     <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-5"}>
                         <Col>
-                            <Card>
+                            <Card
+                                style={{
+                                    backgroundColor: colorPrimary[500],
+                                }}
+                            >
                                 <Card.Body>
-                                    <Card.Title>{cardDetail.name}</Card.Title>
-                                    <Card.Subtitle>{cardDetail.bankName}</Card.Subtitle>
-                                    <Card.Text>
+                                    <Card.Title style={{ color: colorPrimary[0] }}>{cardDetail.name}</Card.Title>
+                                    <Card.Subtitle style={{ color: colorPrimary[0] }}>{cardDetail.bankName}</Card.Subtitle>
+                                    <Card.Text style={{ color: colorPrimary[0] }}>
                                         {cardDetail.accountNumber}
                                         <AiOutlineCopy
                                             className="ms-2"
@@ -191,18 +194,26 @@ const GiftSection = () => {
                             <Button
                                 disabled={isButtonDisabled || status === GiftStatus.LOADING}
                                 onClick={() => setShowConfirmationModal(true)}
-                            >Send</Button>
+                                style={
+                                    {
+                                        backgroundColor: colorPrimary[500],
+                                        borderColor: colorPrimary[500],
+                                    }
+                                }
+                            >
+                                Send
+                            </Button>
                         </Form>
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs="auto" style={{ color: "blue" }} className="fw-bold"
+                    <Col xs="auto" style={{ color: colorPrimary[500] }} className="fw-bold"
                     >
                         •
                     </Col>
                     <Col
                         xs="auto"
-                        style={{ color: "blue" }}
+                        style={{ color: colorPrimary[500] }}
                         className="fw-bold"
 
                     >
@@ -213,14 +224,14 @@ const GiftSection = () => {
                     <Col
                         xs="auto"
                         style={{
-                            color: "gray"
+                            color: colorPrimary[100]
                         }}
                         className="fw-bold"
                     >
                         •
                     </Col>
                     <Col xs="auto" style={{
-                        color: "gray"
+                        color: colorPrimary[100]
                     }}
                         className="fw-bold"
                     >
@@ -233,7 +244,7 @@ const GiftSection = () => {
                             xs="auto"
                             key={index}
                             style={{
-                                backgroundColor: gift.isSelected ? "gray" : "blue",
+                                backgroundColor: gift.isSelected ? colorPrimary[100] : colorPrimary[500],
                                 color: gift.isSelected ? "white" : "white",
                                 padding: "10px",
                                 margin: "5px",
@@ -254,8 +265,11 @@ const GiftSection = () => {
                     ))}
                     <Col xs="auto"
                         style={{
-                            backgroundColor: "green",
-                            color: "white",
+                            backgroundColor: colorPrimary[0],
+                            borderColor: colorPrimary[500],
+                            borderWidth: "1px",
+                            borderStyle: "solid",
+                            color: colorPrimary[500],
                             padding: "10px 15px",
                             margin: "5px",
                             cursor: "pointer",

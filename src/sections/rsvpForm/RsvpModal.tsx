@@ -18,6 +18,7 @@ const RsvpModal = ({ show, onHide, name, phone, attendance, guest, onClick, stat
             show={show}
             onHide={onHide}
             centered
+            backdrop="static"
         >
             <Modal.Header closeButton>
                 <Modal.Title>Please confirm your RSVP</Modal.Title>

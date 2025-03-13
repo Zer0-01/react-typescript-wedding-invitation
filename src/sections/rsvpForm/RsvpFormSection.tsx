@@ -4,6 +4,7 @@ import { db } from "../../FirebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
 import RsvpModal from "./RsvpModal";
+import { colorPrimary } from "../../constants/ColorsConstant";
 
 export enum RsvpStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
@@ -62,7 +63,7 @@ const RsvpFormSection = () => {
 
                 style={
                     {
-                        backgroundColor: "#F5ECD5",
+                        backgroundColor: colorPrimary[250],
                     }
                 }>
                 <Row className="py-5">
@@ -132,6 +133,9 @@ const RsvpFormSection = () => {
                                     <Button
                                         disabled={disabled}
                                         onClick={() => setShowModal(true)}
+                                        style={{
+                                            backgroundColor: colorPrimary[500],
+                                        }}
                                     >
                                         {status === RsvpStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
                                     </Button>

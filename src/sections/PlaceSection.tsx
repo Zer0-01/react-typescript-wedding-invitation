@@ -1,4 +1,5 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { colorPrimary } from "../constants/ColorsConstant";
 
 const PlaceSection = () => {
     const handleClick = () => {
@@ -7,7 +8,7 @@ const PlaceSection = () => {
 
     return (
         <Container style={{
-            backgroundColor: "#f5f5f5",
+            backgroundColor: colorPrimary[500],
         }}>
             <Row className="pt-5 pb-3">
                 <Col>
@@ -26,7 +27,18 @@ const PlaceSection = () => {
                             <Card.Text className="text-center fs-2">1705</Card.Text>
                             <Card.Text className="text-center fs-2">The Vow Event Venue</Card.Text>
                             <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
-                            <Button className="w-100" onClick={handleClick}>Location</Button>
+                            <Button
+                                style={
+                                    {
+                                        backgroundColor: colorPrimary[500],
+                                        borderColor: colorPrimary[500],
+                                    }
+                                }
+                                className="w-100"
+                                onClick={handleClick}
+                            >
+                                Location
+                            </Button>
                         </Card.Body>
 
                     </Card>
@@ -50,7 +62,16 @@ const PlaceSection = () => {
                             <Card.Text className="text-center fs-2">2000</Card.Text>
                             <Card.Text className="text-center fs-2">The Vow Event Venue</Card.Text>
                             <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
-                            <Button className="w-100" onClick={handleClick}>Location</Button>
+                            <Button
+                                className="w-100"
+                                onClick={handleClick}
+                                style={
+                                    {
+                                        backgroundColor: colorPrimary[500],
+                                        borderColor: colorPrimary[500],
+                                    }
+                                }
+                            >Location</Button>
                         </Card.Body>
 
                     </Card>
