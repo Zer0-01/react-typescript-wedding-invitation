@@ -318,7 +318,10 @@ const GiftSection = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        variant="primary"
+                        style={{
+                            backgroundColor: colorPrimary[500],
+                            borderColor: colorPrimary[500]
+                        }}
                         onClick={handleSend}
                         disabled={!newGiftName || !newGiftPhone || newGiftStatus === NewGiftStatus.LOADING}
                     >
@@ -366,7 +369,12 @@ const GiftSection = () => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleCloseGiftDetail}>
+                    <Button
+                        style={{
+                            backgroundColor: colorPrimary[500],
+                            borderColor: colorPrimary[500]
+                        }}
+                        onClick={handleCloseGiftDetail}>
                         Close
                     </Button>
                 </Modal.Footer>
@@ -401,7 +409,12 @@ const GiftSection = () => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleOnClickSend}>Send</Button>
+                    <Button
+                        style={{
+                            backgroundColor: colorPrimary[500],
+                            borderColor: colorPrimary[500]
+                        }}
+                        onClick={handleOnClickSend}>Send</Button>
                 </Modal.Footer>
             </Modal>
         </>

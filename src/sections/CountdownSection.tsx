@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 
@@ -49,20 +50,28 @@ const CountdownSection = () => {
                             <Row>
                                 {Object.entries(timeLeft).map(([unit, value], index) => (
                                     <Col xs={3} key={index}>
-                                        <Card>
-                                            <Card.Body>
-                                                <Row>
-                                                    <Col>
-                                                        <div className="text-center fs-2">{unit}</div>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>
-                                                        <div className="text-center fs-2">{value}</div>
-                                                    </Col>
-                                                </Row>
-                                            </Card.Body>
-                                        </Card>
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 100 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 2, delay: index * 0.5 }}
+                                            viewport={{ once: true }}
+                                        >
+                                            <Card>
+                                                <Card.Body>
+                                                    <Row>
+                                                        <Col>
+                                                            <div className="text-center fs-2">{unit}</div>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col>
+                                                            <div className="text-center fs-2">{value}</div>
+                                                        </Col>
+                                                    </Row>
+                                                </Card.Body>
+                                            </Card>
+                                        </motion.div>
+
                                     </Col>
                                 ))}
                             </Row>
