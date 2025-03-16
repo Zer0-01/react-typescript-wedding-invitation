@@ -1,5 +1,6 @@
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
 import { RsvpStatus } from "./RsvpFormSection";
+import { colorPrimary } from "../../constants/ColorsConstant";
 
 interface RsvpModalProps {
     show: boolean,
@@ -34,7 +35,10 @@ const RsvpModal = ({ show, onHide, name, phone, attendance, guest, onClick, stat
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    variant="primary"
+                    style={{
+                        backgroundColor: colorPrimary[500],
+                        borderColor: colorPrimary[500],
+                    }}
                     onClick={onClick}
                     disabled={status === RsvpStatus.LOADING}
                 >

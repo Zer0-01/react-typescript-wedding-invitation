@@ -4,6 +4,7 @@ import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "fi
 import { toast } from "react-toastify";
 import { db } from "../FirebaseConfig";
 import { AiOutlineSync } from "react-icons/ai";
+import { colorPrimary } from "../constants/ColorsConstant";
 
 
 enum MessageStatus {
@@ -119,6 +120,10 @@ const MessageSection = () => {
                                     </Form.Group>
 
                                     <Button
+                                        style={{
+                                            backgroundColor: colorPrimary[500],
+                                            borderColor: colorPrimary[500],
+                                        }}
                                         disabled={disabled || status === MessageStatus.LOADING}
                                         onClick={handleSend}
                                     >

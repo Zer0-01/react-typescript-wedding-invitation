@@ -135,6 +135,7 @@ const RsvpFormSection = () => {
                                         onClick={() => setShowModal(true)}
                                         style={{
                                             backgroundColor: colorPrimary[500],
+                                            borderColor: colorPrimary[500],
                                         }}
                                     >
                                         {status === RsvpStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
