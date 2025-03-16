@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
@@ -28,6 +28,8 @@ const MessageSection = () => {
     const [status, setStatus] = useState<MessageStatus>(MessageStatus.INITIAL);
     const [messages, setMessages] = useState<Message[]>([]);
     const [messagesStatus, setMessagesStatus] = useState<MessagesStatus>(MessagesStatus.INITIAL);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
 
     useEffect(() => {
         if (name && message && name !== "" && message !== "") {
@@ -41,6 +43,12 @@ const MessageSection = () => {
         fetchMessages();
     }, []);
 
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+        }
+    }, [messages]);
+
     const handleSend = async () => {
         setStatus(MessageStatus.LOADING);
         try {
@@ -52,6 +60,7 @@ const MessageSection = () => {
             setStatus(MessageStatus.SUCCESS);
             setName("");
             setMessage("");
+            fetchMessages();
             showToast("Message data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
@@ -66,7 +75,7 @@ const MessageSection = () => {
 
     const fetchMessages = async () => {
         setMessagesStatus(MessagesStatus.LOADING);
-        const messagesQuery = query(collection(db, "message"), orderBy("timestamp", "desc"));
+        const messagesQuery = query(collection(db, "message"), orderBy("timestamp", "asc"));
         const querySnapshot = await getDocs(messagesQuery);
         const messagesList: Message[] = [];
 
@@ -149,10 +158,24 @@ const MessageSection = () => {
                                     </Row>
                                 </Card.Title>
                                 {messagesStatus === MessagesStatus.LOADING
-                                    ? <Spinner as="span" animation="border" size="sm" />
+                                    ?
+                                    <Container style={{
+                                        minHeight: "20vh",
+                                        maxHeight: "50vh"
+                                    }}>
+                                        <Spinner
+                                            className="align-middle"
+                                            as="span" animation="border" size="sm" />
+
+                                    </Container>
                                     : <Container
                                         className="overflow-auto p-0"
-                                        style={{ maxHeight: "50vh" }}>
+                                        style={{
+                                            minHeight: "20vh",
+                                            maxHeight: "50vh"
+                                        }}
+                                        ref={messagesEndRef}
+                                    >
 
                                         {messages.map((message, index) => (
                                             <Container
