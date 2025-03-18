@@ -1,15 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore/lite';
+import { FIREBASE_CONFIG } from "./config";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBD6fqs-h3e7nCnxi8RfeiIB7SxMLaB-AU",
-    authDomain: "react-wedding-802af.firebaseapp.com",
-    projectId: "react-wedding-802af",
-    storageBucket: "react-wedding-802af.firebasestorage.app",
-    messagingSenderId: "923009925670",
-    appId: "1:923009925670:web:275431a10db18850c59ce7"
-  };
+  apiKey: FIREBASE_CONFIG.apiKey,
+  authDomain: FIREBASE_CONFIG.authDomain,
+  projectId: FIREBASE_CONFIG.projectId,
+  storageBucket: FIREBASE_CONFIG.storageBucket,
+  messagingSenderId: FIREBASE_CONFIG.messagingSenderId,
+  appId: FIREBASE_CONFIG.appId
+};
 
 const app = initializeApp(firebaseConfig);
 
