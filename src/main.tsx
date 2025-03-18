@@ -4,8 +4,9 @@ import HomeScreen from './screens/HomeScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
 import "./App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ENV_NAME } from './config.ts'
 
-const AnimatedRoutes = () => {
+const AnimatedRoutesAnas = () => {
   const location = useLocation();
 
   return (
@@ -16,6 +17,34 @@ const AnimatedRoutes = () => {
       </Routes>
     </AnimatePresence>
   )
+}
+
+const AnimatedRoutesZatul = () => {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode='wait'   >
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<HomeScreen />} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
+
+const AnimatedRoutesDefault = () => {
+  return (
+    <h1>Please choose env</h1>
+  )
+}
+
+const AnimatedRoutes = () => {
+  switch (ENV_NAME) {
+    case 'anas':
+      return <AnimatedRoutesAnas />
+    case 'zatul':
+      return <AnimatedRoutesZatul />
+    default:
+      return <AnimatedRoutesDefault />
+  }
 }
 
 createRoot(document.getElementById('root')!).render(

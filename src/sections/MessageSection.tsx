@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { db } from "../FirebaseConfig";
 import { AiOutlineSync } from "react-icons/ai";
 import { colorPrimary } from "../constants/ColorsConstant";
+import { motion } from "framer-motion";
 
 
 enum MessageStatus {
@@ -96,115 +97,132 @@ const MessageSection = () => {
                 }}>
                 <Row className="pt-5 pb-2">
                     <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>
-                                    Send a Message
-                                </Card.Title>
-                                <Form>
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="formNameMessage">
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control
-                                            value={name}
-                                            type="text"
-                                            placeholder="Enter your name"
-                                            onChange={(e) => setName(e.target.value)}
-                                        />
-                                    </Form.Group>
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            viewport={{ once: true }}
+                        >
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>
+                                        Send a Message
+                                    </Card.Title>
+                                    <Form>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="formNameMessage">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control
+                                                value={name}
+                                                type="text"
+                                                placeholder="Enter your name"
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </Form.Group>
 
-                                    <Form.Group
-                                        className="mb-3"
-                                        controlId="formMessage">
-                                        <Form.Label>Message</Form.Label>
-                                        <Form.Control
-                                            value={message}
-                                            as="textarea"
-                                            type="text"
-                                            placeholder="Enter your message"
-                                            rows={5}
-                                            onChange={(e) => setMessage(e.target.value)}
-                                        />
-                                    </Form.Group>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="formMessage">
+                                            <Form.Label>Message</Form.Label>
+                                            <Form.Control
+                                                value={message}
+                                                as="textarea"
+                                                type="text"
+                                                placeholder="Enter your message"
+                                                rows={5}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                            />
+                                        </Form.Group>
 
-                                    <Button
-                                        style={{
-                                            backgroundColor: colorPrimary[500],
-                                            borderColor: colorPrimary[500],
-                                        }}
-                                        disabled={disabled || status === MessageStatus.LOADING}
-                                        onClick={handleSend}
-                                    >
-                                        {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
-                                    </Button>
-                                </Form>
-                            </Card.Body>
-                        </Card>
+                                        <Button
+                                            style={{
+                                                backgroundColor: colorPrimary[500],
+                                                borderColor: colorPrimary[500],
+                                            }}
+                                            disabled={disabled || status === MessageStatus.LOADING}
+                                            onClick={handleSend}
+                                        >
+                                            {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
+                                        </Button>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </motion.div>
+
                     </Col>
                 </Row>
                 <Row className="pt-2 pb-5">
                     <Col>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title>
-                                    <Row className="justify-content-between">
-                                        <Col xs="auto" >
-                                            List of Messages
-                                        </Col>
-                                        <Col xs="auto" >
-                                            <AiOutlineSync onClick={fetchMessages} />
-                                        </Col>
-                                    </Row>
-                                </Card.Title>
-                                {messagesStatus === MessagesStatus.LOADING
-                                    ?
-                                    <Container style={{
-                                        minHeight: "20vh",
-                                        maxHeight: "50vh"
-                                    }}>
-                                        <Spinner
-                                            className="align-middle"
-                                            as="span" animation="border" size="sm" />
-
-                                    </Container>
-                                    : <Container
-                                        className="overflow-auto p-0"
-                                        style={{
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            viewport={{ once: true }}
+                        >
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <Row className="justify-content-between">
+                                            <Col xs="auto" >
+                                                List of Messages
+                                            </Col>
+                                            <Col xs="auto" >
+                                                <AiOutlineSync onClick={fetchMessages} />
+                                            </Col>
+                                        </Row>
+                                    </Card.Title>
+                                    {messagesStatus === MessagesStatus.LOADING
+                                        ?
+                                        <Container style={{
                                             minHeight: "20vh",
                                             maxHeight: "50vh"
-                                        }}
-                                        ref={messagesEndRef}
-                                    >
+                                        }}>
+                                            <Spinner
+                                                className="align-middle"
+                                                as="span" animation="border" size="sm" />
 
-                                        {messages.map((message, index) => (
-                                            <Container
-                                                key={index}
-                                                style={{
-                                                    backgroundColor: "#A5BFCC",
-                                                    borderRadius: "10px",
-                                                    width: "fit-content",
-                                                    maxWidth: "75%",
-                                                }}
-                                                className="mb-2 mx-0 p-2"
-                                            >
-                                                <Row>
-                                                    <Col className="fw-bold">
-                                                        {message.name}
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>
-                                                        {message.message}
-                                                    </Col>
-                                                </Row>
-                                            </Container>
+                                        </Container>
+                                        : <Container
+                                            className="overflow-auto p-0"
+                                            style={{
+                                                minHeight: "20vh",
+                                                maxHeight: "50vh"
+                                            }}
+                                            ref={messagesEndRef}
+                                        >
 
-                                        ))}
-                                    </Container>
-                                }
-                            </Card.Body>
-                        </Card>
+                                            {messages.map((message, index) => (
+                                                <Container
+                                                    key={index}
+                                                    style={{
+                                                        backgroundColor: "#A5BFCC",
+                                                        borderRadius: "10px",
+                                                        width: "fit-content",
+                                                        maxWidth: "75%",
+                                                    }}
+                                                    className="mb-2 mx-0 p-2"
+                                                >
+                                                    <Row>
+                                                        <Col className="fw-bold">
+                                                            {message.name}
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col>
+                                                            {message.message}
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+
+                                            ))}
+                                        </Container>
+                                    }
+                                </Card.Body>
+                            </Card>
+
+                        </motion.div>
+
                     </Col>
                 </Row>
             </Container>
