@@ -23,11 +23,10 @@ const LandingScreen = () => {
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" style={{ backgroundColor: "#f3efe4" }} />
             </Row>
             <Button
-                className="position-absolute start-50 bottom-0 translate-middle-x rounded-circle"
+                className="position-absolute start-50  translate-middle-x rounded-circle"
                 style={{
                     bottom: "10%",
                     backgroundColor: "#d38f5c",
-                    
                     border: "none",
 
                 }}
