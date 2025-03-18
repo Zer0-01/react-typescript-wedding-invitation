@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import "./App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ENV_NAME } from './config.ts'
+import LandingScreen from './screens/LandingScreen.tsx'
 
 const AnimatedRoutesAnas = () => {
   const location = useLocation();
@@ -12,8 +13,8 @@ const AnimatedRoutesAnas = () => {
   return (
     <AnimatePresence mode='wait'   >
       <Routes location={location} key={location.pathname}>
-        {/* <Route path="/" element={<LandingScreen />} /> */}
-        <Route path="/" element={<HomeScreen />} />
+        <Route path="/" element={<LandingScreen />} />
+        <Route path="/home" element={<HomeScreen />} />
       </Routes>
     </AnimatePresence>
   )

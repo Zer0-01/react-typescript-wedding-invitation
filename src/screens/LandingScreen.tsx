@@ -1,73 +1,43 @@
-import { motion } from "framer-motion";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Image, Button } from "react-bootstrap";
+import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 const LandingScreen = () => {
-    let navigate = useNavigate();
-
-    const routeVariants = {
-        initial: {
-            opacity: 0,
-            y: -50,
-        },
-        animate: {
-            opacity: 1,
-            y: 0,
-        },
-        exit: {
-            opacity: 0,
-            y: 50,
-        },
-        transition: {
-            duration: 0.5,
-        }
-    }
-
+    const navigate = useNavigate();
 
     return (
-        <>
-            <motion.div
-                variants={routeVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={routeVariants.transition}
+        <Container
+            fluid
+            className="vh-100 p-0"
+            style={{ backgroundColor: "#f3efe4" }}
+        >
+            <Row className="g-0 h-100">
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" style={{ backgroundColor: "#f3efe4" }} />
+                <Col sm={12} md={8} lg={6} xl={4} >
+                    <Image
+                        src="../src/assets/cover.jpg"
+                        className="h-100 object-fit-contain"
+                        fluid
+                    />
+                </Col>
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" style={{ backgroundColor: "#f3efe4" }} />
+            </Row>
+            <Button
+                className="position-absolute start-50 bottom-0 translate-middle-x rounded-circle"
+                style={{
+                    bottom: "10%",
+                    backgroundColor: "#d38f5c",
+                    
+                    border: "none",
+
+                }}
+                onClick={() => navigate("/home")}
             >
-                <Container className="d-flex flex-column align-items-center justify-content-center text-maroon dancing-script-500 min-vh-100" >
-                    <Row className="mb-5">
-                        <Col>
-                            <div className="text-center fs-1 fw-bold dancing-script-400" >Raikan Cinta</div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">Izzatul</div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">&</div>
-                        </Col>
-                    </Row>
-                    <Row className="mb-5">
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">Anas</div>
-                        </Col>
-                    </Row>
-                    <Row className="mb-5">
-                        <Col>
-                            <div className="text-center fs-1 fw-bold">18 May 2025</div>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Button className="btn-maroon" onClick={() => { navigate("/home") }} >Lets go</Button>
-                        </Col>
-                    </Row>
-                </Container>
-            </motion.div>
-        </>
+                <FaChevronDown />
+
+            </Button>
+        </Container>
     );
-};
+}
 
 export default LandingScreen;
