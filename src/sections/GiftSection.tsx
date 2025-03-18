@@ -142,144 +142,155 @@ const GiftSection = () => {
         <>
             <Container
                 style={{
-                    backgroundColor: colorPrimary[200],
+                    backgroundColor: "#f3efe4"
                 }}
-                fluid>
-                {cardDetailList.map((cardDetail, index) => (
-                    <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-5"}>
-                        <Col>
-                            <Card
+                fluid
+            >
+                <Row className="g-0">
+                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                    <Col sm={12} md={8} lg={6} xl={4} >
+                        {cardDetailList.map((cardDetail, index) => (
+                            <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-5"}>
+                                <Col>
+                                    <Card
+                                        style={{
+                                            backgroundColor: colorPrimary[500],
+                                        }}
+                                    >
+                                        <Card.Body>
+                                            <Card.Title style={{ color: colorPrimary[0] }}>{cardDetail.name}</Card.Title>
+                                            <Card.Subtitle style={{ color: colorPrimary[0] }}>{cardDetail.bankName}</Card.Subtitle>
+                                            <Card.Text style={{ color: colorPrimary[0] }}>
+                                                {cardDetail.accountNumber}
+                                                <AiOutlineCopy
+                                                    className="ms-2"
+                                                    onClick={() => handleCopy(cardDetail.accountNumber)} />
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
+                        ))}
+
+
+                        <Row className="pb-3">
+                            <Col>
+                                <Form>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter phone number"
+                                            onChange={(e) => {
+                                                setPhone(e.target.value);
+                                            }}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Gift</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Select gift below"
+                                            readOnly
+                                            value={selectedGift ? selectedGift.name : ""}
+                                        />
+                                    </Form.Group>
+                                    <Button
+                                        disabled={isButtonDisabled || status === GiftStatus.LOADING}
+                                        onClick={() => setShowConfirmationModal(true)}
+                                        style={
+                                            {
+                                                backgroundColor: colorPrimary[500],
+                                                borderColor: colorPrimary[500],
+                                            }
+                                        }
+                                    >
+                                        Send
+                                    </Button>
+                                </Form>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs="auto" style={{ color: colorPrimary[500] }} className="fw-bold"
+                            >
+                                •
+                            </Col>
+                            <Col
+                                xs="auto"
+                                style={{ color: colorPrimary[500] }}
+                                className="fw-bold"
+
+                            >
+                                Available
+                            </Col>
+                        </Row>
+                        <Row className="pb-3">
+                            <Col
+                                xs="auto"
                                 style={{
-                                    backgroundColor: colorPrimary[500],
+                                    color: colorPrimary[100]
                                 }}
+                                className="fw-bold"
                             >
-                                <Card.Body>
-                                    <Card.Title style={{ color: colorPrimary[0] }}>{cardDetail.name}</Card.Title>
-                                    <Card.Subtitle style={{ color: colorPrimary[0] }}>{cardDetail.bankName}</Card.Subtitle>
-                                    <Card.Text style={{ color: colorPrimary[0] }}>
-                                        {cardDetail.accountNumber}
-                                        <AiOutlineCopy
-                                            className="ms-2"
-                                            onClick={() => handleCopy(cardDetail.accountNumber)} />
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                ))}
-
-
-                <Row className="pb-3">
-                    <Col>
-                        <Form>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Phone Number</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter phone number"
-                                    onChange={(e) => {
-                                        setPhone(e.target.value);
+                                •
+                            </Col>
+                            <Col xs="auto" style={{
+                                color: colorPrimary[100]
+                            }}
+                                className="fw-bold"
+                            >
+                                Already selected
+                            </Col>
+                        </Row>
+                        <Row className="pb-5">
+                            {giftList.map((gift, index) => (
+                                <Col
+                                    xs="auto"
+                                    key={index}
+                                    style={{
+                                        backgroundColor: gift.isSelected ? colorPrimary[100] : colorPrimary[500],
+                                        color: gift.isSelected ? "white" : "white",
+                                        padding: "10px",
+                                        margin: "5px",
+                                        cursor: "pointer",
+                                        borderRadius: "5px",
                                     }}
-                                />
-                            </Form.Group>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Gift</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Select gift below"
-                                    readOnly
-                                    value={selectedGift ? selectedGift.name : ""}
-                                />
-                            </Form.Group>
-                            <Button
-                                disabled={isButtonDisabled || status === GiftStatus.LOADING}
-                                onClick={() => setShowConfirmationModal(true)}
-                                style={
-                                    {
-                                        backgroundColor: colorPrimary[500],
-                                        borderColor: colorPrimary[500],
-                                    }
-                                }
+                                    onClick={() => {
+                                        if (gift.isSelected !== true) {
+                                            setSelectedGift(gift);
+                                        } else {
+                                            setUnvailableSelectedGift(gift);
+                                            handleShowGiftDetail();
+                                        }
+                                    }}
+                                >
+                                    {gift.name}
+                                </Col>
+                            ))}
+                            <Col xs="auto"
+                                style={{
+                                    backgroundColor: colorPrimary[0],
+                                    borderColor: colorPrimary[500],
+                                    borderWidth: "1px",
+                                    borderStyle: "solid",
+                                    color: colorPrimary[500],
+                                    padding: "10px 15px",
+                                    margin: "5px",
+                                    cursor: "pointer",
+                                    borderRadius: "5px",
+                                }}
+                                onClick={handleShow}
                             >
-                                Send
-                            </Button>
-                        </Form>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs="auto" style={{ color: colorPrimary[500] }} className="fw-bold"
-                    >
-                        •
-                    </Col>
-                    <Col
-                        xs="auto"
-                        style={{ color: colorPrimary[500] }}
-                        className="fw-bold"
+                                +
+                            </Col>
+                        </Row>
 
-                    >
-                        Available
+
                     </Col>
+                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-                <Row className="pb-3">
-                    <Col
-                        xs="auto"
-                        style={{
-                            color: colorPrimary[100]
-                        }}
-                        className="fw-bold"
-                    >
-                        •
-                    </Col>
-                    <Col xs="auto" style={{
-                        color: colorPrimary[100]
-                    }}
-                        className="fw-bold"
-                    >
-                        Already selected
-                    </Col>
-                </Row>
-                <Row className="pb-5">
-                    {giftList.map((gift, index) => (
-                        <Col
-                            xs="auto"
-                            key={index}
-                            style={{
-                                backgroundColor: gift.isSelected ? colorPrimary[100] : colorPrimary[500],
-                                color: gift.isSelected ? "white" : "white",
-                                padding: "10px",
-                                margin: "5px",
-                                cursor: "pointer",
-                                borderRadius: "5px",
-                            }}
-                            onClick={() => {
-                                if (gift.isSelected !== true) {
-                                    setSelectedGift(gift);
-                                } else {
-                                    setUnvailableSelectedGift(gift);
-                                    handleShowGiftDetail();
-                                }
-                            }}
-                        >
-                            {gift.name}
-                        </Col>
-                    ))}
-                    <Col xs="auto"
-                        style={{
-                            backgroundColor: colorPrimary[0],
-                            borderColor: colorPrimary[500],
-                            borderWidth: "1px",
-                            borderStyle: "solid",
-                            color: colorPrimary[500],
-                            padding: "10px 15px",
-                            margin: "5px",
-                            cursor: "pointer",
-                            borderRadius: "5px",
-                        }}
-                        onClick={handleShow}
-                    >
-                        +
-                    </Col>
-                </Row>
+
+
             </Container>
 
             <Modal

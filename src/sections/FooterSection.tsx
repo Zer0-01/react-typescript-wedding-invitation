@@ -12,7 +12,9 @@ const FooterSection = () => {
     return (
         <Container style={{
             background: colorPrimary[850]
-        }}  >
+        }}
+        fluid
+        >
 
             <Row className="pt-5 pb-2 justify-content-center" >
                 <Col xs="auto">

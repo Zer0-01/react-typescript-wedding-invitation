@@ -12,30 +12,15 @@ import FooterSection from '../sections/FooterSection';
 function HomeScreen() {
   return (
     <>
-
-      {/* <Container
-        className='p-0'
-        fluid > */}
-        {/* <Row className='g-0'>
-          <Col sm={0} md={2} lg={3} xl={4} className='d-none d-sm-block bg-light-subtle' />
-          <Col sm={12} md={8} lg={6} xl={4} className='bg-light-subtle'> */}
-        <TitleSection />
-        <CardCoupleSection />
-        <CountdownSection />
-        <PlaceSection />
-        <RsvpFormSection />
-        <MessageSection />
-        <GiftSection />
-        <FooterSection />
-        {/* </Col>
-          <Col sm={0} md={2} lg={3} xl={4} className=' d-none d-sm-block bg-light-subtle' />
-        </Row> */}
-{/* 
-      </Container> */}
-
+      <TitleSection />
+      <CardCoupleSection />
+      <CountdownSection />
+      <PlaceSection />
+      <RsvpFormSection />
+      <MessageSection />
+      <GiftSection />
+      <FooterSection />
       <ToastContainer />
-
-
     </>
   );
 }

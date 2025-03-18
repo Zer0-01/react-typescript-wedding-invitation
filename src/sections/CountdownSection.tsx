@@ -31,54 +31,65 @@ const CountdownSection = () => {
     }, []);
 
     return (
-        <Container>
-            <Row className="py-5">
-                <Col>
-                    <Card
-                        style={{
-                            backgroundImage: "url('../src/assets/background-2.jpg')",
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                        }}
-                    >
-                        <Card.Body>
-                            <Row className="pb-3">
-                                <Col>
-                                    <Card.Text className="text-center fs-2">Countdown</Card.Text>
-                                </Col>
-                            </Row>
-                            <Row>
-                                {Object.entries(timeLeft).map(([unit, value], index) => (
-                                    <Col xs={3} key={index}>
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 100 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 2, delay: index * 0.5 }}
-                                            viewport={{ once: true }}
-                                        >
-                                            <Card>
-                                                <Card.Body>
-                                                    <Row>
-                                                        <Col>
-                                                            <div className="text-center fs-2">{unit}</div>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row>
-                                                        <Col>
-                                                            <div className="text-center fs-2">{value}</div>
-                                                        </Col>
-                                                    </Row>
-                                                </Card.Body>
-                                            </Card>
-                                        </motion.div>
+        <Container fluid
+            className=" p-0"
+            style={{ backgroundColor: "#f3efe4" }}
+        >
+            <Row className="g-0 h-100">
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Col sm={12} md={8} lg={6} xl={4} >
+                    <Row className="py-5 px-2 g-0">
+                        <Col>
+                            <Card
+                                style={{
+                                    backgroundImage: "url('../src/assets/background-2.jpg')",
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                }}
+                            >
+                                <Card.Body>
+                                    <Row className="pb-3">
+                                        <Col>
+                                            <Card.Text className="text-center fs-2">Countdown</Card.Text>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        {Object.entries(timeLeft).map(([unit, value], index) => (
+                                            <Col xs={3} key={index}>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: 100 }}
+                                                    whileInView={{ opacity: 1, y: 0 }}
+                                                    transition={{ duration: 2, delay: index * 0.5 }}
+                                                    viewport={{ once: true }}
+                                                >
+                                                    <Card>
+                                                        <Card.Body>
+                                                            <Row>
+                                                                <Col>
+                                                                    <div className="text-center fs-2">{unit}</div>
+                                                                </Col>
+                                                            </Row>
+                                                            <Row>
+                                                                <Col>
+                                                                    <div className="text-center fs-2">{value}</div>
+                                                                </Col>
+                                                            </Row>
+                                                        </Card.Body>
+                                                    </Card>
+                                                </motion.div>
 
-                                    </Col>
-                                ))}
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                                            </Col>
+                                        ))}
+                                    </Row>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Col>
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
+
+
         </Container>
     );
 }

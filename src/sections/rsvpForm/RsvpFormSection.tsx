@@ -61,14 +61,17 @@ const RsvpFormSection = () => {
     return (
         <>
             <Container
-
-                style={
-                    {
-                        backgroundColor: colorPrimary[250],
-                    }
-                }>
-                <Row className="py-5">
-                    <Col>
+                className="py-5"
+                style={{
+                    backgroundImage: "url('../src/assets/background-rsvp.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
+                fluid
+            >
+                <Row className="g-0">
+                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                    <Col sm={12} md={8} lg={6} xl={4} >
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
@@ -153,8 +156,11 @@ const RsvpFormSection = () => {
 
                         </motion.div>
 
+
                     </Col>
+                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
+
             </Container>
             <RsvpModal
                 show={showModal}
