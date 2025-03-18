@@ -1,43 +1,43 @@
 import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
-import { colorAtul } from "../constants/ColorsConstant";
+import { FaChevronDown } from "react-icons/fa";
 
 const LandingScreenAtul = () => {
     const navigate = useNavigate();
-
 
     return (
         <Container
             fluid
             className="vh-100 p-0"
-            style={{ backgroundImage: "url('../src/assets/background-landing-page-atul-blur.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+            style={{ backgroundColor: "white" }}
         >
             <Row className="g-0 h-100">
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block"  />
                 <Col sm={12} md={8} lg={6} xl={4} >
                     <Image
                         src="../src/assets/background-landing-page-atul.png"
-                        className="h-100 object-fit-cover"
+                        className="h-100 object-fit-fill"
                         fluid
                     />
                 </Col>
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block"  />
             </Row>
             <Button
-                className="position-absolute start-50  translate-middle-x rounded-pill"
+                className="position-absolute start-50  translate-middle-x rounded-circle"
                 style={{
+                    boxShadow: "0 0 25px rgba(83, 248, 18, 0.5)",
                     bottom: "10%",
-                    backgroundColor: colorAtul.button,
+                    backgroundColor: "#d38f5c",
                     border: "none",
 
                 }}
                 onClick={() => navigate("/home")}
             >
-                Open
+                <FaChevronDown />
 
             </Button>
         </Container>
-    )
-}
+    );
+};
 
 export default LandingScreenAtul;
