@@ -22,3 +22,7 @@ export const colorPrimary = {
     1000: "#000000"
 }
 
+export const colorAtul = {
+    button: "#5a6052"
+}
+

@@ -6,6 +6,7 @@ import "./App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ENV_NAME } from './config.ts'
 import LandingScreen from './screens/LandingScreen.tsx'
+import LandingScreenAtul from './screens/LandingScreenAtul.tsx'
 
 const AnimatedRoutesAnas = () => {
   const location = useLocation();
@@ -25,7 +26,8 @@ const AnimatedRoutesZatul = () => {
   return (
     <AnimatePresence mode='wait'   >
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<HomeScreen />} />
+        <Route path='/' element={<LandingScreenAtul />} />
+        <Route path="/home" element={<HomeScreen />} />
       </Routes>
     </AnimatePresence>
   )
