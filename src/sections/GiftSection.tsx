@@ -8,7 +8,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { addDoc, collection, doc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig";
-import { colorPrimary } from "../constants/ColorsConstant";
+import { colorBrown, colorPrimary } from "../constants/ColorsConstant";
 
 
 interface CardDetail {
@@ -177,20 +177,20 @@ const GiftSection = () => {
                             <Col>
                                 <Form>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Phone Number</Form.Label>
+                                        <Form.Label>Nombor Telefon</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="Enter phone number"
+                                            placeholder="Nombor telefon anda"
                                             onChange={(e) => {
                                                 setPhone(e.target.value);
                                             }}
                                         />
                                     </Form.Group>
                                     <Form.Group className="mb-3">
-                                        <Form.Label>Gift</Form.Label>
+                                        <Form.Label>Hadiah</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder="Select gift below"
+                                            placeholder="Pilih di bawah"
                                             readOnly
                                             value={selectedGift ? selectedGift.name : ""}
                                         />
@@ -200,46 +200,46 @@ const GiftSection = () => {
                                         onClick={() => setShowConfirmationModal(true)}
                                         style={
                                             {
-                                                backgroundColor: colorPrimary[500],
-                                                borderColor: colorPrimary[500],
+                                                backgroundColor: colorBrown[500],
+                                                borderColor: colorBrown[500],
                                             }
                                         }
                                     >
-                                        Send
+                                        Hantar
                                     </Button>
                                 </Form>
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs="auto" style={{ color: colorPrimary[500] }} className="fw-bold"
+                            <Col xs="auto" style={{ color: colorBrown[500] }} className="fw-bold"
                             >
                                 •
                             </Col>
                             <Col
                                 xs="auto"
-                                style={{ color: colorPrimary[500] }}
+                                style={{ color: colorBrown[500] }}
                                 className="fw-bold"
 
                             >
-                                Available
+                                Masih ada
                             </Col>
                         </Row>
                         <Row className="pb-3">
                             <Col
                                 xs="auto"
                                 style={{
-                                    color: colorPrimary[100]
+                                    color: colorBrown[100]
                                 }}
                                 className="fw-bold"
                             >
                                 •
                             </Col>
                             <Col xs="auto" style={{
-                                color: colorPrimary[100]
+                                color: colorBrown[100]
                             }}
                                 className="fw-bold"
                             >
-                                Already selected
+                               Sudah dipilih (Klik untuk lihat butiran)
                             </Col>
                         </Row>
                         <Row className="pb-5">
@@ -248,7 +248,7 @@ const GiftSection = () => {
                                     xs="auto"
                                     key={index}
                                     style={{
-                                        backgroundColor: gift.isSelected ? colorPrimary[100] : colorPrimary[500],
+                                        backgroundColor: gift.isSelected ? colorBrown[100] : colorBrown[500],
                                         color: gift.isSelected ? "white" : "white",
                                         padding: "10px",
                                         margin: "5px",
@@ -301,25 +301,25 @@ const GiftSection = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new gift</Modal.Title>
+                    <Modal.Title>Tambah Hadiah</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-2" >
-                            <Form.Label>Phone number</Form.Label>
+                            <Form.Label>Nombor Telefon</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter phone number"
+                                placeholder="Nombor telefon anda"
                                 onChange={(e) => {
                                     setNewGiftPhone(e.target.value);
                                 }}
                             />
                         </Form.Group>
                         <Form.Group >
-                            <Form.Label>Gift</Form.Label>
+                            <Form.Label>Hadiah</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Enter gift"
+                                placeholder="Hadiah yang anda ingin berikan"
                                 onChange={(e) => {
                                     setNewGiftName(e.target.value);
                                 }}
@@ -330,13 +330,13 @@ const GiftSection = () => {
                 <Modal.Footer>
                     <Button
                         style={{
-                            backgroundColor: colorPrimary[500],
-                            borderColor: colorPrimary[500]
+                            backgroundColor: colorBrown[500],
+                            borderColor: colorBrown[500]
                         }}
                         onClick={handleSend}
                         disabled={!newGiftName || !newGiftPhone || newGiftStatus === NewGiftStatus.LOADING}
                     >
-                        Send
+                        Simpan
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -349,23 +349,23 @@ const GiftSection = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Gift Detail</Modal.Title>
+                    <Modal.Title>Butiran Hadiah</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
                             <Col>
-                                Gift name: {unvailableSelectedGift?.name ?? "N/A"}
+                               Hadiah: {unvailableSelectedGift?.name ?? "N/A"}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                Phone number: {unvailableSelectedGift?.phone ?? "N/A"}
+                               Nombor Telefon Pemberi: {unvailableSelectedGift?.phone ?? "N/A"}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                                Date: {unvailableSelectedGift?.timestamp
+                                Tarikh: {unvailableSelectedGift?.timestamp
                                     ? new Date(unvailableSelectedGift.timestamp.toDate()).toLocaleString('en-GB', {
                                         hour: '2-digit',
                                         minute: '2-digit',
@@ -382,11 +382,11 @@ const GiftSection = () => {
                 <Modal.Footer>
                     <Button
                         style={{
-                            backgroundColor: colorPrimary[500],
-                            borderColor: colorPrimary[500]
+                            backgroundColor: colorBrown[500],
+                            borderColor: colorBrown[500]
                         }}
                         onClick={handleCloseGiftDetail}>
-                        Close
+                        Tutup
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -397,23 +397,23 @@ const GiftSection = () => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Please confirm your gift.</Modal.Title>
+                    <Modal.Title>Sila Sahkan Hadiah Anda</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row>
                             <Col xs="auto">
-                                Phone Number:
+                                Nombor Telefon Pemberi:
                             </Col>
-                            <Col className="fw-bold">
+                            <Col className="fw-bold p-0">
                                 {phone}
                             </Col>
                         </Row>
                         <Row>
                             <Col xs="auto">
-                                Gift:
+                                Hadiah:
                             </Col>
-                            <Col className="fw-bold">
+                            <Col className="fw-bold p-0">
                                 {selectedGift?.name ?? "N/A"}
                             </Col>
                         </Row>
@@ -422,10 +422,10 @@ const GiftSection = () => {
                 <Modal.Footer>
                     <Button
                         style={{
-                            backgroundColor: colorPrimary[500],
-                            borderColor: colorPrimary[500]
+                            backgroundColor: colorBrown[500],
+                            borderColor: colorBrown[500]
                         }}
-                        onClick={handleOnClickSend}>Send</Button>
+                        onClick={handleOnClickSend}>Simpan</Button>
                 </Modal.Footer>
             </Modal>
         </>

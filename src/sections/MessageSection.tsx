@@ -4,7 +4,7 @@ import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "fi
 import { toast } from "react-toastify";
 import { db } from "../FirebaseConfig";
 import { AiOutlineSync } from "react-icons/ai";
-import { colorPrimary } from "../constants/ColorsConstant";
+import { colorBackground, colorBrown } from "../constants/ColorsConstant";
 import { motion } from "framer-motion";
 
 
@@ -91,15 +91,12 @@ const MessageSection = () => {
     return (
         <>
             <Container
-                className="py-5"
                 style={{
-                    backgroundImage: "url('../src/assets/background-message.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundColor: colorBackground
                 }}
                 fluid
             >
-                <Row className="g-0">
+                <Row className="g-0 py-5">
                     <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                     <Col sm={12} md={8} lg={6} xl={4} >
                         <Row>
@@ -113,17 +110,17 @@ const MessageSection = () => {
                                     <Card className="mb-2">
                                         <Card.Body>
                                             <Card.Title>
-                                                Send a Message
+                                                Hantar Pesanan
                                             </Card.Title>
                                             <Form>
                                                 <Form.Group
                                                     className="mb-3"
                                                     controlId="formNameMessage">
-                                                    <Form.Label>Name</Form.Label>
+                                                    <Form.Label>Nama</Form.Label>
                                                     <Form.Control
                                                         value={name}
                                                         type="text"
-                                                        placeholder="Enter your name"
+                                                        placeholder="Nama anda"
                                                         onChange={(e) => setName(e.target.value)}
                                                     />
                                                 </Form.Group>
@@ -131,12 +128,12 @@ const MessageSection = () => {
                                                 <Form.Group
                                                     className="mb-3"
                                                     controlId="formMessage">
-                                                    <Form.Label>Message</Form.Label>
+                                                    <Form.Label>Pesanan</Form.Label>
                                                     <Form.Control
                                                         value={message}
                                                         as="textarea"
                                                         type="text"
-                                                        placeholder="Enter your message"
+                                                        placeholder="Pesanan anda"
                                                         rows={5}
                                                         onChange={(e) => setMessage(e.target.value)}
                                                     />
@@ -144,13 +141,13 @@ const MessageSection = () => {
 
                                                 <Button
                                                     style={{
-                                                        backgroundColor: colorPrimary[500],
-                                                        borderColor: colorPrimary[500],
+                                                        backgroundColor: colorBrown[500],
+                                                        borderColor: colorBrown[500],
                                                     }}
                                                     disabled={disabled || status === MessageStatus.LOADING}
                                                     onClick={handleSend}
                                                 >
-                                                    {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
+                                                    {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Hantar"}
                                                 </Button>
                                             </Form>
                                         </Card.Body>
@@ -171,7 +168,7 @@ const MessageSection = () => {
                                             <Card.Title>
                                                 <Row className="justify-content-between">
                                                     <Col xs="auto" >
-                                                        List of Messages
+                                                        Senarai Pesanan
                                                     </Col>
                                                     <Col xs="auto" >
                                                         <AiOutlineSync onClick={fetchMessages} />
@@ -202,7 +199,7 @@ const MessageSection = () => {
                                                         <Container
                                                             key={index}
                                                             style={{
-                                                                backgroundColor: "#A5BFCC",
+                                                                backgroundColor: colorBrown[100],
                                                                 borderRadius: "10px",
                                                                 width: "fit-content",
                                                                 maxWidth: "75%",
@@ -226,20 +223,15 @@ const MessageSection = () => {
                                             }
                                         </Card.Body>
                                     </Card>
-
                                 </motion.div>
-
                             </Col>
                         </Row>
-
-
                     </Col>
                     <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-
+                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
             </Container>
         </>
-
     );
 };
 

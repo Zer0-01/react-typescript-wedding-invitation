@@ -1,6 +1,6 @@
 import { Button, Col, Container, Modal, Row } from "react-bootstrap"
 import { RsvpStatus } from "./RsvpFormSection";
-import { colorPrimary } from "../../constants/ColorsConstant";
+import { colorBrown } from "../../constants/ColorsConstant";
 
 interface RsvpModalProps {
     show: boolean,
@@ -22,27 +22,27 @@ const RsvpModal = ({ show, onHide, name, phone, attendance, guest, onClick, stat
             backdrop="static"
         >
             <Modal.Header closeButton>
-                <Modal.Title>Please confirm your RSVP</Modal.Title>
+                <Modal.Title>Sila sahkan RSVP anda</Modal.Title>
 
             </Modal.Header>
             <Modal.Body>
                 <Container>
-                    <ValueComponent title="Name" value={name} />
-                    <ValueComponent title="Phone" value={phone} />
-                    <ValueComponent title="Attendance" value={attendance ? "Yes" : "No"} />
-                    <ValueComponent title="Guest" value={guest.toString()} />
+                    <ValueComponent title="Nama" value={name} />
+                    <ValueComponent title="Nombor telefon" value={phone} />
+                    <ValueComponent title="Adakah anda akan hadir" value={attendance ? "Ya" : "Tidak"} />
+                    <ValueComponent title="Bilangan tetamu" value={guest.toString()} />
                 </Container>
             </Modal.Body>
             <Modal.Footer>
                 <Button
                     style={{
-                        backgroundColor: colorPrimary[500],
-                        borderColor: colorPrimary[500],
+                        backgroundColor: colorBrown[500],
+                        borderColor: colorBrown[500],
                     }}
                     onClick={onClick}
                     disabled={status === RsvpStatus.LOADING}
                 >
-                    Submit</Button>
+                    Simpan</Button>
             </Modal.Footer>
         </Modal>
     )

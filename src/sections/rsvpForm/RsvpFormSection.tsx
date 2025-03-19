@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { db } from "../../FirebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
 import RsvpModal from "./RsvpModal";
-import { colorPrimary } from "../../constants/ColorsConstant";
+import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
 import { motion } from "framer-motion";
 
 export enum RsvpStatus {
@@ -61,15 +61,12 @@ const RsvpFormSection = () => {
     return (
         <>
             <Container
-                className="py-5"
                 style={{
-                    backgroundImage: "url('../src/assets/background-rsvp.jpg')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
+                    backgroundColor: colorBackground
                 }}
                 fluid
             >
-                <Row className="g-0">
+                <Row className="g-0 py-5">
                     <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                     <Col sm={12} md={8} lg={6} xl={4} >
                         <motion.div
@@ -80,35 +77,35 @@ const RsvpFormSection = () => {
                         >
                             <Card>
                                 <Card.Body>
-                                    <Card.Title>RSVP Form</Card.Title>
+                                    <Card.Title>RSVP</Card.Title>
                                     <Form>
                                         <Form.Group
                                             className="mb-3"
                                             controlId="formName">
-                                            <Form.Label>Name</Form.Label>
+                                            <Form.Label>Nama</Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                placeholder="Enter your name"
+                                                placeholder="Nama anda"
                                                 onChange={(e) => setName(e.target.value)} />
                                         </Form.Group>
 
                                         <Form.Group
                                             className="mb-3"
                                             controlId="formPhoneNumber">
-                                            <Form.Label>Phone Number</Form.Label>
+                                            <Form.Label>Nombor Telefon</Form.Label>
                                             <Form.Control
                                                 type="text"
-                                                placeholder="Enter your phone number"
+                                                placeholder="Nombor telefon anda"
                                                 onChange={(e) => setPhone(e.target.value)}
                                             />
                                         </Form.Group>
 
                                         <Form.Group className="mb-3" controlId="formAttendance">
-                                            <Form.Label>Will you be attending?</Form.Label>
+                                            <Form.Label>Adakah anda akan hadir?</Form.Label>
                                             <Form.Check
                                                 type="radio"
                                                 id="attending-yes"
-                                                label="I will"
+                                                label="Ya"
                                                 name="default-radio"
                                                 onChange={() => {
                                                     setAttendance(true);
@@ -118,7 +115,7 @@ const RsvpFormSection = () => {
                                             <Form.Check
                                                 type="radio"
                                                 id="attending-no"
-                                                label="I will not"
+                                                label="Tidak"
                                                 name="default-radio"
                                                 onChange={() => {
                                                     setAttendance(false);
@@ -128,7 +125,7 @@ const RsvpFormSection = () => {
                                         </Form.Group>
                                         {attendance &&
                                             <Form.Group className="mb-3" controlId="formGuest">
-                                                <Form.Label>Number of guest(s)</Form.Label>
+                                                <Form.Label>Bilangan tetamu</Form.Label>
                                                 <Form.Select onChange={(e) => setGuest(parseInt(e.target.value))}>
                                                     <option value={1}>1</option>
                                                     <option value={2}>2</option>
@@ -144,23 +141,21 @@ const RsvpFormSection = () => {
                                             disabled={disabled}
                                             onClick={() => setShowModal(true)}
                                             style={{
-                                                backgroundColor: colorPrimary[500],
-                                                borderColor: colorPrimary[500],
+                                                backgroundColor: colorBrown[500],
+                                                borderColor: colorBrown[500],
                                             }}
                                         >
-                                            {status === RsvpStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Send"}
+                                           Hantar
                                         </Button>
                                     </Form>
                                 </Card.Body>
                             </Card>
 
                         </motion.div>
-
-
                     </Col>
                     <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-
+                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
             </Container>
             <RsvpModal
                 show={showModal}

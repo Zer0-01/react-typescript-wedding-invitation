@@ -1,5 +1,5 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { colorPrimary } from "../constants/ColorsConstant";
+import { colorBrown } from "../constants/ColorsConstant";
 import { motion } from "framer-motion";
 
 const PlaceSection = () => {
@@ -8,11 +8,11 @@ const PlaceSection = () => {
     }
 
     return (
-        <Container className="py-5"
+        <Container
             style={{ backgroundColor: "#f3efe4" }}
             fluid
         >
-            <Row className="g-0">
+            <Row className="g-0 pb-5">
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 <Col sm={12} md={8} lg={6} xl={4} >
                     <motion.div
@@ -40,8 +40,8 @@ const PlaceSection = () => {
                                 <Button
                                     style={
                                         {
-                                            backgroundColor: colorPrimary[500],
-                                            borderColor: colorPrimary[500],
+                                            backgroundColor: colorBrown[500],
+                                            borderColor: colorBrown[500],
                                         }
                                     }
                                     className="w-100"
@@ -56,6 +56,7 @@ const PlaceSection = () => {
                 </Col>
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
+            <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
 
         </Container>
 

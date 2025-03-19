@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
+import { colorBrown } from "../constants/ColorsConstant";
 
 const CountdownSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {
@@ -42,9 +43,7 @@ const CountdownSection = () => {
                         <Col>
                             <Card
                                 style={{
-                                    backgroundImage: "url('../src/assets/background-2.jpg')",
-                                    backgroundSize: "cover",
-                                    backgroundPosition: "center",
+                                  backgroundColor: "white",
                                 }}
                             >
                                 <Card.Body>
@@ -62,7 +61,9 @@ const CountdownSection = () => {
                                                     transition={{ duration: 2, delay: index * 0.5 }}
                                                     viewport={{ once: true }}
                                                 >
-                                                    <Card>
+                                                    <Card style={{
+                                                        backgroundColor: colorBrown[100]
+                                                    }}>
                                                         <Card.Body>
                                                             <Row>
                                                                 <Col>
@@ -88,8 +89,6 @@ const CountdownSection = () => {
                 </Col>
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
-
-
         </Container>
     );
 }
