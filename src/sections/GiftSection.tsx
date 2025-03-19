@@ -150,17 +150,17 @@ const GiftSection = () => {
                     <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                     <Col sm={12} md={8} lg={6} xl={4} >
                         {cardDetailList.map((cardDetail, index) => (
-                            <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-5"}>
+                            <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-3"}>
                                 <Col>
                                     <Card
                                         style={{
-                                            backgroundColor: colorPrimary[500],
+                                            backgroundColor: colorBrown[0],
                                         }}
                                     >
                                         <Card.Body>
-                                            <Card.Title style={{ color: colorPrimary[0] }}>{cardDetail.name}</Card.Title>
-                                            <Card.Subtitle style={{ color: colorPrimary[0] }}>{cardDetail.bankName}</Card.Subtitle>
-                                            <Card.Text style={{ color: colorPrimary[0] }}>
+                                            <Card.Title >{cardDetail.name}</Card.Title>
+                                            <Card.Subtitle>{cardDetail.bankName}</Card.Subtitle>
+                                            <Card.Text>
                                                 {cardDetail.accountNumber}
                                                 <AiOutlineCopy
                                                     className="ms-2"

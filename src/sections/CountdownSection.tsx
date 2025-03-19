@@ -5,7 +5,7 @@ import { colorBrown } from "../constants/ColorsConstant";
 
 const CountdownSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {
-        const targetDate = new Date("2025-04-26T17:00:00");
+        const targetDate = new Date("2025-05-18T11:00:00");
         const now = new Date();
         const difference = targetDate.getTime() - now.getTime();
 
