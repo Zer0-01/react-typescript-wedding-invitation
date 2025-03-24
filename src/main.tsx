@@ -1,13 +1,13 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router'
-import HomeScreen from './screens/HomeScreen.tsx'
+import HomeScreen from './anas/screens/HomeScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
 import "./App.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ENV_NAME, FONT_FAMILY } from './config.ts'
-import LandingScreen from './screens/LandingScreen.tsx'
-import LandingScreenAtul from './screens/LandingScreenAtul.tsx'
-import HomeScreenAtul from './screens/HomeScreenAtul.tsx'
+import LandingScreen from './anas/screens/LandingScreen.tsx'
+import LandingScreenAtul from './atul/screens/LandingScreenAtul.tsx'
+import HomeScreenAtul from './atul/screens/HomeScreenAtul.tsx'
 
 const AnimatedRoutesAnas = () => {
   const location = useLocation();

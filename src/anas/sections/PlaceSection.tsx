@@ -1,5 +1,5 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { colorBrown } from "../constants/ColorsConstant";
+import { colorBrown } from "../../constants/ColorsConstant";
 import { motion } from "framer-motion";
 
 const PlaceSection = () => {

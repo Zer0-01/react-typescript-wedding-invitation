@@ -3,7 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
 import Container from "react-bootstrap/esm/Container";
 import { motion } from "framer-motion";
-import { colorBackground, colorBrown } from "../constants/ColorsConstant";
+import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
 
 const CardCoupleSection = () => {
 

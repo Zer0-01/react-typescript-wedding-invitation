@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Card, Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import { addDoc, collection, getDocs, orderBy, query, serverTimestamp } from "firebase/firestore/lite";
 import { toast } from "react-toastify";
-import { db } from "../FirebaseConfig";
+import { db } from "../../FirebaseConfig";
 import { AiOutlineSync } from "react-icons/ai";
-import { colorBackground, colorBrown } from "../constants/ColorsConstant";
+import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
 import { motion } from "framer-motion";
 
 

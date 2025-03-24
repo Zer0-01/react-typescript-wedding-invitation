@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Col, Container, Row, Image } from "react-bootstrap"
-import { colorBackground, colorBrown } from "../constants/ColorsConstant"
+import { colorBrown } from "../../constants/ColorsConstant"
 
 const CardCouple = () => (
     <motion.div

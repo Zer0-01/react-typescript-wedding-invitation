@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { colorBrown } from "../constants/ColorsConstant";
+import { colorBrown } from "../../constants/ColorsConstant";
 
 const CountdownSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {

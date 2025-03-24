@@ -1,5 +1,5 @@
 import { Col, Container, Row, Image } from "react-bootstrap";
-import { colorBackground } from "../constants/ColorsConstant";
+import { colorBackground } from "../../constants/ColorsConstant";
 
 
 const TitleSection = () => {

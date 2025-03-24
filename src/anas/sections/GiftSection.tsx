@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { addDoc, collection, doc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
-import { db } from "../FirebaseConfig";
-import { colorBrown, colorPrimary } from "../constants/ColorsConstant";
+import { db } from "../../FirebaseConfig";
+import { colorBrown, colorPrimary } from "../../constants/ColorsConstant";
 
 
 interface CardDetail {

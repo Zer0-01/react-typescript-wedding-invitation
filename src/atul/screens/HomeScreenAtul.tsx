@@ -1,4 +1,3 @@
-import { Container } from "react-bootstrap"
 import CardCouple from "../sections/CardCoupleAtulSection";
 
 const HomeScreenAtul = () => {

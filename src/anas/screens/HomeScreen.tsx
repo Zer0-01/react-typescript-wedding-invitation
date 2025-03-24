@@ -3,7 +3,7 @@ import TitleSection from '../sections/TitleSection';
 import CardCoupleSection from '../sections/CardCoupleSection';
 import CountdownSection from '../sections/CountdownSection';
 import PlaceSection from '../sections/PlaceSection';
-import RsvpFormSection from '../sections/rsvpForm/RsvpFormSection';
+import RsvpFormSection from '../sections/RsvpFormSection';
 import MessageSection from '../sections/MessageSection';
 import GiftSection from '../sections/GiftSection';
 import { ToastContainer } from 'react-toastify';
