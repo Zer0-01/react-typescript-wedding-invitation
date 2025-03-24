@@ -3,7 +3,7 @@ import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/esm/Image";
 import Container from "react-bootstrap/esm/Container";
 import { motion } from "framer-motion";
-import { colorBackground } from "../constants/ColorsConstant";
+import { colorBackground, colorBrown } from "../constants/ColorsConstant";
 
 const CardCoupleSection = () => {
 
@@ -26,7 +26,7 @@ const CardCoupleSection = () => {
                 backgroundColor: colorBackground
             }}
             fluid >
-            <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+            <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
             <Row className="g-0 h-100">
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 <Col sm={12} md={8} lg={6} xl={4} >
@@ -103,7 +103,7 @@ const CardCoupleSection = () => {
                 </Col>
                 <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
-            <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+            <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
         </Container>
     );
 }

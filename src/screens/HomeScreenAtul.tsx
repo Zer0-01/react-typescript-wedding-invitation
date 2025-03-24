@@ -1,18 +1,11 @@
 import { Container } from "react-bootstrap"
+import CardCouple from "../sections/CardCoupleAtulSection";
 
 const HomeScreenAtul = () => {
     return (
-        <Container
-            className="position-static vh-100"
-            fluid
-            style={{
-                backgroundImage: "url('../src/assets/background-home-page-atul-blur.jpg')",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-            }}
-        >
-
-        </Container>
+        <>
+            <CardCouple />
+        </>
     )
 }
 

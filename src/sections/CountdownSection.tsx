@@ -42,8 +42,9 @@ const CountdownSection = () => {
                     <Row className="py-5 px-2 g-0">
                         <Col>
                             <Card
+                                className="border-0"
                                 style={{
-                                  backgroundColor: "white",
+                                    backgroundColor: "white",
                                 }}
                             >
                                 <Card.Body>
@@ -61,9 +62,11 @@ const CountdownSection = () => {
                                                     transition={{ duration: 2, delay: index * 0.5 }}
                                                     viewport={{ once: true }}
                                                 >
-                                                    <Card style={{
-                                                        backgroundColor: colorBrown[100]
-                                                    }}>
+                                                    <Card
+                                                        className="border-0"
+                                                        style={{
+                                                            backgroundColor: colorBrown[100]
+                                                        }}>
                                                         <Card.Body>
                                                             <Row>
                                                                 <Col>

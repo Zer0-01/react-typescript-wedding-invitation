@@ -9,7 +9,7 @@ const TitleSection = () => {
             style={{ backgroundColor: colorBackground }}
             fluid>
             <Row className="g-0 h-100">
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" style={{ backgroundColor: colorBackground }} />
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 <Col sm={12} md={8} lg={6} xl={4} >
                     <Image
                         src="../src/assets/cover.jpg"
@@ -17,7 +17,7 @@ const TitleSection = () => {
                         fluid
                     />
                 </Col>
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" style={{ backgroundColor: colorBackground }} />
+                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
         </Container>
     );
