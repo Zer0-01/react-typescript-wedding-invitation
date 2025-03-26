@@ -6,7 +6,7 @@ import { AiOutlineCopy } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { addDoc, collection, doc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
+import { addDoc, collection, doc, getDoc, getDocs, serverTimestamp, Timestamp, updateDoc } from "firebase/firestore/lite";
 import { db } from "../../FirebaseConfig";
 import { colorBrown, colorPrimary } from "../../constants/ColorsConstant";
 
@@ -99,6 +99,16 @@ const GiftSection = () => {
         setStatus(GiftStatus.LOADING);
         try {
             const giftRef = doc(db, "gift", selectedGift?.id ?? "")
+            const giftSnapshot = await getDoc(giftRef);
+
+            if (giftSnapshot.exists()) {
+                const giftData = giftSnapshot.data();
+                if (giftData.isSelected === true) {
+                    setStatus(GiftStatus.FAILURE);
+                    showToast("Maaf, hadiah ini telah dipilih oleh orang lain. Silakan refresh dan pilih hadiah lain.");
+                    return;
+                }
+            }
             await updateDoc(giftRef, {
                 phone: phone,
                 isSelected: true,
@@ -106,11 +116,11 @@ const GiftSection = () => {
             });
             setStatus(GiftStatus.SUCCESS);
             setShowConfirmationModal(false);
-            showToast("Gift update successfully!");
+            showToast("Terima kasih, hadiah telah berhasil dipilih!");
             await fetchGifts();
         } catch (error) {
             setStatus(GiftStatus.FAILURE);
-            showToast("Failed to update gift! Please try again later.");
+            showToast("Kesulitan berlaku ketika memilih  hadiah. Sila cuba lagi.");;
         }
     }
     const showToast = (message: string) => toast(message);
@@ -128,12 +138,12 @@ const GiftSection = () => {
             setNewGiftName("");
             setNewGiftPhone("");
             handleClose();
-            showToast("Gift added successfully!");
+            showToast("Terima kasih, hadiah telah berhasil dipilih!");
             await fetchGifts();
 
         } catch (error) {
             setNewGiftStatus(NewGiftStatus.FAILURE);
-            showToast("Failed to add gift! Please try again later.");
+            showToast("Kesulitan berlaku, Sila cuba lagi.");
         }
     }
 
@@ -239,7 +249,7 @@ const GiftSection = () => {
                             }}
                                 className="fw-bold"
                             >
-                               Sudah dipilih (Klik untuk lihat butiran)
+                                Sudah dipilih (Klik untuk lihat butiran)
                             </Col>
                         </Row>
                         <Row className="pb-5">
@@ -355,12 +365,12 @@ const GiftSection = () => {
                     <Container>
                         <Row>
                             <Col>
-                               Hadiah: {unvailableSelectedGift?.name ?? "N/A"}
+                                Hadiah: {unvailableSelectedGift?.name ?? "N/A"}
                             </Col>
                         </Row>
                         <Row>
                             <Col>
-                               Nombor Telefon Pemberi: {unvailableSelectedGift?.phone ?? "N/A"}
+                                Nombor Telefon Pemberi: {unvailableSelectedGift?.phone ?? "N/A"}
                             </Col>
                         </Row>
                         <Row>

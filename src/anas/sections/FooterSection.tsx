@@ -3,7 +3,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { AiOutlineWhatsApp } from "react-icons/ai";
 import { FaReact } from "react-icons/fa";
 import { SiTypescript } from "react-icons/si";
-import { colorPrimary } from "../constants/ColorsConstant";
+import { colorPrimary } from "../../constants/ColorsConstant";
 import { AiOutlineLinkedin } from "react-icons/ai";
 
 
