@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Col, Container, Row, Image } from "react-bootstrap"
 import { colorBrown } from "../../constants/ColorsConstant"
 
-const CardCouple = () => (
+const CardCoupleAtulSection = () => (
     <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
@@ -90,4 +90,4 @@ const CardCouple = () => (
 
 )
 
-export default CardCouple;
+export default CardCoupleAtulSection;
