@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Col, Container, Row, Image, Button } from "react-bootstrap";
 import { FaChevronDown } from "react-icons/fa";
 import { useNavigate } from "react-router";
@@ -11,28 +12,44 @@ const LandingScreen = () => {
             className="vh-100 p-0"
             style={{ backgroundColor: "#f3efe4" }}
         >
-            <Row className="g-0 h-100 justify-content-center">
-                <Col sm={12} md={8} lg={6} xl={4} >
-                    <Image
-                        src="../src/assets/cover.jpg"
-                        className="h-100 object-fit-contain"
-                        fluid
-                    />
-                </Col>
-            </Row>
-            <Button
-                className="position-absolute start-50  translate-middle-x rounded-circle"
-                style={{
-                    bottom: "10%",
-                    backgroundColor: "#d38f5c",
-                    border: "none",
-
-                }}
-                onClick={() => navigate("/home")}
+            <motion.div
+                className="h-100"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
             >
-                <FaChevronDown />
+                <Row className="g-0 h-100 justify-content-center">
+                    <Col sm={12} md={8} lg={6} xl={4} >
+                        <Image
+                            src="../src/assets/cover.jpg"
+                            className="h-100 object-fit-contain"
+                            fluid
+                        />
+                    </Col>
+                </Row>
+            </motion.div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <Button
+                    className="position-absolute start-50  translate-middle-x rounded-circle"
+                    style={{
+                        bottom: "10%",
+                        backgroundColor: "#d38f5c",
+                        border: "none",
 
-            </Button>
+                    }}
+                    onClick={() => navigate("/home")}
+                >
+                    <FaChevronDown />
+
+                </Button>
+            </motion.div>
+
         </Container>
     );
 }
