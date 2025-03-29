@@ -11,8 +11,7 @@ const LandingScreen = () => {
             className="vh-100 p-0"
             style={{ backgroundColor: "#f3efe4" }}
         >
-            <Row className="g-0 h-100">
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block"  />
+            <Row className="g-0 h-100 justify-content-center">
                 <Col sm={12} md={8} lg={6} xl={4} >
                     <Image
                         src="../src/assets/cover.jpg"
@@ -20,7 +19,6 @@ const LandingScreen = () => {
                         fluid
                     />
                 </Col>
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block"  />
             </Row>
             <Button
                 className="position-absolute start-50  translate-middle-x rounded-circle"
