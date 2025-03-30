@@ -50,7 +50,7 @@ const RsvpFormSection = () => {
 
     return (
         <>
-            <Container fluid className="p-0" style={{ backgroundColor: colorBackground }}>
+            <Container fluid style={{ backgroundColor: colorBackground }}>
                 <Row className="g-0 py-5 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4}>
                         <motion.div
@@ -139,7 +139,7 @@ const RsvpFormSection = () => {
                         </motion.div>
                     </Col>
                 </Row>
-                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+                <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
             </Container>
 
             <RsvpModal

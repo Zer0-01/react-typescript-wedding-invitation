@@ -12,7 +12,7 @@ const PlaceSection = () => {
             <Row className="g-0 pb-5 pt-2  justify-content-center">
                 <Col sm={12} md={8} lg={6} xl={4}>
                     <motion.div
-                        initial={{ opacity: 0, y: -100 }}
+                        initial={{ opacity: 0, y: 100 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 2 }}

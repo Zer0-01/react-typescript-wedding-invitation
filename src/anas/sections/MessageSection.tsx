@@ -96,140 +96,135 @@ const MessageSection = () => {
                 }}
                 fluid
             >
-                <Row className="g-0 py-5">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Row className="g-0 py-5 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
-                        <Row>
-                            <Col>
-                                <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    whileInView={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
-                                    viewport={{ once: true }}
-                                >
-                                    <Card className="mb-2">
-                                        <Card.Body>
-                                            <Card.Title>
-                                                Hantar Pesanan
-                                            </Card.Title>
-                                            <Form>
-                                                <Form.Group
-                                                    className="mb-3"
-                                                    controlId="formNameMessage">
-                                                    <Form.Label>Nama</Form.Label>
-                                                    <Form.Control
-                                                        value={name}
-                                                        type="text"
-                                                        placeholder="Nama anda"
-                                                        onChange={(e) => setName(e.target.value)}
-                                                    />
-                                                </Form.Group>
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            viewport={{ once: true }}
+                        >
+                            <Card className="mb-2">
+                                <Card.Body>
+                                    <Card.Title className="text-center">
+                                        Hantar Pesanan
+                                    </Card.Title>
+                                    <Form>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="formNameMessage">
+                                            <Form.Label>Nama</Form.Label>
+                                            <Form.Control
+                                                value={name}
+                                                type="text"
+                                                placeholder="Nama anda"
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </Form.Group>
 
-                                                <Form.Group
-                                                    className="mb-3"
-                                                    controlId="formMessage">
-                                                    <Form.Label>Pesanan</Form.Label>
-                                                    <Form.Control
-                                                        value={message}
-                                                        as="textarea"
-                                                        type="text"
-                                                        placeholder="Pesanan anda"
-                                                        rows={5}
-                                                        onChange={(e) => setMessage(e.target.value)}
-                                                    />
-                                                </Form.Group>
+                                        <Form.Group
+                                            className="mb-3"
+                                            controlId="formMessage">
+                                            <Form.Label>Pesanan</Form.Label>
+                                            <Form.Control
+                                                value={message}
+                                                as="textarea"
+                                                type="text"
+                                                placeholder="Pesanan anda"
+                                                rows={5}
+                                                onChange={(e) => setMessage(e.target.value)}
+                                            />
+                                        </Form.Group>
 
-                                                <Button
+                                        <Button
+                                            className="w-100"
+                                            style={{
+                                                backgroundColor: colorBrown[500],
+                                                borderColor: colorBrown[500],
+                                            }}
+                                            disabled={disabled || status === MessageStatus.LOADING}
+                                            onClick={handleSend}
+                                        >
+                                            {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Hantar"}
+                                        </Button>
+                                    </Form>
+                                </Card.Body>
+                            </Card>
+                        </motion.div>
+
+
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            whileInView={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            viewport={{ once: true }}
+                        >
+                            <Card className="mt-2">
+                                <Card.Body>
+                                    <Card.Title>
+                                        <Row className="justify-content-between">
+                                            <Col className="flex-grow-1" />
+                                            <Col className="text-center" style={{ flexGrow: "2" }}  >
+                                                Senarai Pesanan
+                                            </Col>
+                                            <Col className="text-end"  >
+                                                <AiOutlineSync onClick={fetchMessages} />
+                                            </Col>
+                                        </Row>
+                                    </Card.Title>
+                                    {messagesStatus === MessagesStatus.LOADING
+                                        ?
+                                        <Container style={{
+                                            minHeight: "20vh",
+                                            maxHeight: "50vh"
+                                        }}>
+                                            <Spinner
+                                                className="align-middle"
+                                                as="span" animation="border" size="sm" />
+
+                                        </Container>
+                                        : <Container
+                                            className="overflow-auto p-0"
+                                            style={{
+                                                minHeight: "20vh",
+                                                maxHeight: "50vh"
+                                            }}
+                                            ref={messagesEndRef}
+                                        >
+
+                                            {messages.map((message, index) => (
+                                                <Container
+                                                    key={index}
                                                     style={{
-                                                        backgroundColor: colorBrown[500],
-                                                        borderColor: colorBrown[500],
+                                                        backgroundColor: colorBrown[100],
+                                                        borderRadius: "10px",
+                                                        width: "fit-content",
+                                                        maxWidth: "75%",
                                                     }}
-                                                    disabled={disabled || status === MessageStatus.LOADING}
-                                                    onClick={handleSend}
+                                                    className="mb-2 mx-0 p-2"
                                                 >
-                                                    {status === MessageStatus.LOADING ? <Spinner as="span" animation="border" size="sm" /> : "Hantar"}
-                                                </Button>
-                                            </Form>
-                                        </Card.Body>
-                                    </Card>
-                                </motion.div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <motion.div
-                                    initial={{ scale: 0.8, opacity: 0 }}
-                                    whileInView={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
-                                    viewport={{ once: true }}
-                                >
-                                    <Card className="mt-2">
-                                        <Card.Body>
-                                            <Card.Title>
-                                                <Row className="justify-content-between">
-                                                    <Col xs="auto" >
-                                                        Senarai Pesanan
-                                                    </Col>
-                                                    <Col xs="auto" >
-                                                        <AiOutlineSync onClick={fetchMessages} />
-                                                    </Col>
-                                                </Row>
-                                            </Card.Title>
-                                            {messagesStatus === MessagesStatus.LOADING
-                                                ?
-                                                <Container style={{
-                                                    minHeight: "20vh",
-                                                    maxHeight: "50vh"
-                                                }}>
-                                                    <Spinner
-                                                        className="align-middle"
-                                                        as="span" animation="border" size="sm" />
-
+                                                    <Row>
+                                                        <Col className="fw-bold">
+                                                            {message.name}
+                                                        </Col>
+                                                    </Row>
+                                                    <Row>
+                                                        <Col>
+                                                            {message.message}
+                                                        </Col>
+                                                    </Row>
                                                 </Container>
-                                                : <Container
-                                                    className="overflow-auto p-0"
-                                                    style={{
-                                                        minHeight: "20vh",
-                                                        maxHeight: "50vh"
-                                                    }}
-                                                    ref={messagesEndRef}
-                                                >
 
-                                                    {messages.map((message, index) => (
-                                                        <Container
-                                                            key={index}
-                                                            style={{
-                                                                backgroundColor: colorBrown[100],
-                                                                borderRadius: "10px",
-                                                                width: "fit-content",
-                                                                maxWidth: "75%",
-                                                            }}
-                                                            className="mb-2 mx-0 p-2"
-                                                        >
-                                                            <Row>
-                                                                <Col className="fw-bold">
-                                                                    {message.name}
-                                                                </Col>
-                                                            </Row>
-                                                            <Row>
-                                                                <Col>
-                                                                    {message.message}
-                                                                </Col>
-                                                            </Row>
-                                                        </Container>
+                                            ))}
+                                        </Container>
+                                    }
+                                </Card.Body>
+                            </Card>
+                        </motion.div>
 
-                                                    ))}
-                                                </Container>
-                                            }
-                                        </Card.Body>
-                                    </Card>
-                                </motion.div>
-                            </Col>
-                        </Row>
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
+                <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
             </Container>
         </>
     );
