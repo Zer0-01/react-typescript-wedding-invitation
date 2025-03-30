@@ -13,7 +13,7 @@ const FooterSection = () => {
         <Container style={{
             background: colorPrimary[850]
         }}
-        fluid
+            fluid
         >
 
             <Row className="pt-5 pb-2 justify-content-center" >
@@ -61,18 +61,15 @@ const FooterSection = () => {
 
                 </Col>
             </Row>
-            <Row className="pb-2">
-                <Col>
-                    <div
-                        className="fs-6 text-center"
-                        style={
-                            {
-                                color: colorPrimary[0]
-                            }
-                        }
-                    >Copyright © Anas</div>
-                </Col>
-            </Row>
+
+            <div
+                className="fs-6 text-center"
+                style={
+                    {
+                        color: colorPrimary[0]
+                    }
+                }
+            >Copyright © Anas</div>
             <Row className="pb-5 justify-content-center">
                 <Col xs="auto">
                     <FaReact

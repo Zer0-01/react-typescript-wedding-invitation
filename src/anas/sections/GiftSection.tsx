@@ -75,7 +75,7 @@ const GiftSection = () => {
 
     const handleCopy = (accountNumber: string) => {
         navigator.clipboard.writeText(accountNumber);
-        showToast(`Account number copied to clipboard!: ${accountNumber}`);
+        toast.success(`Account number copied to clipboard: ${accountNumber}`)
     }
     const fetchGifts = async () => {
         setStatus(GiftStatus.LOADING);
@@ -156,103 +156,70 @@ const GiftSection = () => {
                 }}
                 fluid
             >
-                <Row className="g-0">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Row className="g-0 py-5 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
                         {cardDetailList.map((cardDetail, index) => (
-                            <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-3"}>
-                                <Col>
-                                    <Card
-                                        style={{
-                                            backgroundColor: colorBrown[0],
-                                        }}
-                                    >
-                                        <Card.Body>
-                                            <Card.Title >{cardDetail.name}</Card.Title>
-                                            <Card.Subtitle>{cardDetail.bankName}</Card.Subtitle>
-                                            <Card.Text>
-                                                {cardDetail.accountNumber}
-                                                <AiOutlineCopy
-                                                    className="ms-2"
-                                                    onClick={() => handleCopy(cardDetail.accountNumber)} />
-                                            </Card.Text>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                            </Row>
-                        ))}
-
-
-                        <Row className="pb-3">
-                            <Col>
-                                <Form>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Nombor Telefon</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Nombor telefon anda"
-                                            onChange={(e) => {
-                                                setPhone(e.target.value);
-                                            }}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Hadiah</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Pilih di bawah"
-                                            readOnly
-                                            value={selectedGift ? selectedGift.name : ""}
-                                        />
-                                    </Form.Group>
-                                    <Button
-                                        disabled={isButtonDisabled || status === GiftStatus.LOADING}
-                                        onClick={() => setShowConfirmationModal(true)}
-                                        style={
-                                            {
-                                                backgroundColor: colorBrown[500],
-                                                borderColor: colorBrown[500],
-                                            }
-                                        }
-                                    >
-                                        Hantar
-                                    </Button>
-                                </Form>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs="auto" style={{ color: colorBrown[500] }} className="fw-bold"
-                            >
-                                •
-                            </Col>
-                            <Col
-                                xs="auto"
-                                style={{ color: colorBrown[500] }}
-                                className="fw-bold"
-
-                            >
-                                Masih ada
-                            </Col>
-                        </Row>
-                        <Row className="pb-3">
-                            <Col
-                                xs="auto"
+                            <Card key={index}
                                 style={{
-                                    color: colorBrown[100]
+                                    backgroundColor: colorBrown[0],
                                 }}
-                                className="fw-bold"
                             >
-                                •
-                            </Col>
-                            <Col xs="auto" style={{
-                                color: colorBrown[100]
-                            }}
-                                className="fw-bold"
+                                <Card.Body>
+                                    <Card.Title >{cardDetail.name}</Card.Title>
+                                    <Card.Subtitle>{cardDetail.bankName}</Card.Subtitle>
+                                    <Card.Text>
+                                        {cardDetail.accountNumber}
+                                        <AiOutlineCopy
+                                            className="ms-2"
+                                            onClick={() => handleCopy(cardDetail.accountNumber)} />
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+
+                        ))}
+                        <Form>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Nombor Telefon</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Nombor telefon anda"
+                                    onChange={(e) => {
+                                        setPhone(e.target.value);
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Hadiah</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Pilih di bawah"
+                                    readOnly
+                                    value={selectedGift ? selectedGift.name : ""}
+                                />
+                            </Form.Group>
+                            <Button
+                                disabled={isButtonDisabled || status === GiftStatus.LOADING}
+                                onClick={() => setShowConfirmationModal(true)}
+                                style={
+                                    {
+                                        backgroundColor: colorBrown[500],
+                                        borderColor: colorBrown[500],
+                                    }
+                                }
                             >
-                                Sudah dipilih (Klik untuk lihat butiran)
-                            </Col>
-                        </Row>
-                        <Row className="pb-5">
+                                Hantar
+                            </Button>
+                        </Form>
+                        <div className="fw-bold" style={{
+                            color: colorBrown[500]
+                        }}>• Masih Ada</div>
+
+                        <div className="fw-bold" style={{
+                            color: colorBrown[100]
+                        }}>•  Sudah dipilih (Klik untuk lihat butiran)</div>
+
+
+                        <Row>
                             {giftList.map((gift, index) => (
                                 <Col
                                     xs="auto"
@@ -297,7 +264,6 @@ const GiftSection = () => {
 
 
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
 
 
