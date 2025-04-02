@@ -11,15 +11,14 @@ const CardCoupleAtulSection = () => (
         <Container
             style={{
                 backgroundImage: "url('../src/assets/background-atul.png')",
-                backgroundSize: "cover",
+                backgroundSize: "100% 100%",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 minHeight: "100vh", // Ensure full viewport height
             }}
             fluid>
-            <Row className="g-0 h-100">
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
-                <Col sm={12} md={8} lg={6} xl={4} className="d-flex flex-column">
+            <Row className="g-0 h-100 justify-content-center">
+                <Col sm={12} md={8} lg={6} xl={4} >
                     <div className="fs-2 pt-5 text-center">Assalamualaikum wbt</div>
                     <div className="fs-2 pb-3 text-center">& Salam Sejahtera</div>
                     <div className="fs-6 text-center">Dengan penuh kesyukuran, kami menjemput</div>
@@ -55,7 +54,6 @@ const CardCoupleAtulSection = () => (
 
 
                 </Col>
-                <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
             </Row>
             <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
         </Container>
