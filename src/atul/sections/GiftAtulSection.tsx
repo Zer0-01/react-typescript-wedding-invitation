@@ -147,13 +147,10 @@ const GiftAtulSection = () => {
     return (
         <>
             <Container
-                style={{
-                    backgroundColor: "#f3efe4"
-                }}
+
                 fluid
             >
-                <Row className="g-0">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Row className="g-0 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
                         {cardDetailList.map((cardDetail, index) => (
                             <Row key={index} className={index === 0 ? "pt-5 pb-2" : "pt-2 pb-3"}>
@@ -293,7 +290,6 @@ const GiftAtulSection = () => {
 
 
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
 
 

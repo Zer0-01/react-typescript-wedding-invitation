@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Container, Row, Col, Card, Button, Spinner, Form } from "react-bootstrap";
 import { AiOutlineSync } from "react-icons/ai";
 import { toast } from "react-toastify";
-import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
+import { colorBrown } from "../../constants/ColorsConstant";
 import { db } from "../../FirebaseConfig";
 
 enum MessageStatus {
@@ -90,13 +90,10 @@ const MessageAtulSection = () => {
     return (
         <>
             <Container
-                style={{
-                    backgroundColor: colorBackground
-                }}
+
                 fluid
             >
-                <Row className="g-0 py-5">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Row className="g-0 py-5 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
                         <Row>
                             <Col>
@@ -226,9 +223,7 @@ const MessageAtulSection = () => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
             </Container>
         </>
     )
