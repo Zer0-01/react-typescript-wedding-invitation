@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
+import { colorBrown } from "../../constants/ColorsConstant";
 import { useEffect, useState } from "react";
 import { RsvpStatus } from "../../anas/sections/RsvpFormSection";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
@@ -57,13 +57,10 @@ const RsvpAtulSection = () => {
     return (
         <>
             <Container
-                style={{
-                    backgroundColor: colorBackground
-                }}
+
                 fluid
             >
-                <Row className="g-0 py-5">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
+                <Row className="g-0 py-5 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
@@ -149,9 +146,7 @@ const RsvpAtulSection = () => {
 
                         </motion.div>
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
-                <div style={{ height: "1px", backgroundColor: "black", width: "100%" }} />
             </Container>
             <RsvpModalAtul
                 show={showModal}

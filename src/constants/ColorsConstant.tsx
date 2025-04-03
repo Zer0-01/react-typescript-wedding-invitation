@@ -54,3 +54,6 @@ export const colorAtul = {
     button: "#5a6052"
 }
 
+export const colorAtulLandingContainer = "#e8e8d7"
+export const colorAtulLandingText = "#969c54"
+

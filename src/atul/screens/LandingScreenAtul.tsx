@@ -1,7 +1,8 @@
-import { Col, Container, Row, Image, Button } from "react-bootstrap";
+import { Col, Container, Row, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { FaChevronDown } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { colorAtulLandingContainer, colorAtulLandingText } from "../../constants/ColorsConstant";
 
 const LandingScreenAtul = () => {
     const navigate = useNavigate();
@@ -16,18 +17,44 @@ const LandingScreenAtul = () => {
             <Container
                 fluid
                 className="vh-100 p-0"
-                style={{ backgroundColor: "white" }}
+                style={{
+                    backgroundColor: colorAtulLandingContainer,
+                    backgroundImage: `url(../src/assets/zatul/zatul-landing-page-bg.png)`,
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    backgroundAttachment: "fixed",
+                }}
             >
-                <Row className="g-0 h-100">
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
-                    <Col sm={12} md={8} lg={6} xl={4} >
-                        <Image
-                            src="../src/assets/background-landing-page-atul.png"
-                            className="h-100 object-fit-fill"
-                            fluid
-                        />
+                <Row className="g-0 h-100 justify-content-center align-items-center">
+                    <Col xs={8} sm={8} md={8} lg={8} xl={8} >
+                        <Container
+                            className="text-center rounded-pill p-5"
+                            style={
+                                {
+                                    backgroundColor: colorAtulLandingContainer
+                                }
+                            }
+                        >
+                            <div className="py-5">THE AKAD OF</div>
+                            <div 
+                            className="fs-1 fw-bold"
+                            style={{
+                                color: colorAtulLandingText
+                            }}
+                            >ZATUL</div>
+                            <div>AND</div>
+                            <div 
+                            className="fs-1 fw-bold"
+                            style={{
+                                color: colorAtulLandingText
+                            }}
+                            >ANAS</div>
+                            <div className="py-5">26 APRIL 2025 | Saturday</div>
+                            <div>The Vow, Muar</div>
+                        </Container>
+
                     </Col>
-                    <Col sm={0} md={2} lg={3} xl={4} className="d-none d-md-block" />
                 </Row>
                 <Button
                     className="position-absolute start-50  translate-middle-x rounded-circle"

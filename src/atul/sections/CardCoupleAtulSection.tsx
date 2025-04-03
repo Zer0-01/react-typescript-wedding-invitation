@@ -1,6 +1,5 @@
 import { motion } from "framer-motion"
 import { Col, Container, Row, Image } from "react-bootstrap"
-import { colorBrown } from "../../constants/ColorsConstant"
 
 const CardCoupleAtulSection = () => (
     <motion.div
@@ -14,7 +13,7 @@ const CardCoupleAtulSection = () => (
                 backgroundSize: "100% 100%",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
-                minHeight: "100vh", // Ensure full viewport height
+                minHeight: "100vh",
             }}
             fluid>
             <Row className="g-0 h-100 justify-content-center">
@@ -55,7 +54,6 @@ const CardCoupleAtulSection = () => (
 
                 </Col>
             </Row>
-            <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
         </Container>
 
     </motion.div>
