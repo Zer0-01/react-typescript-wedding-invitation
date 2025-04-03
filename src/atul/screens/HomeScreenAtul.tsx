@@ -6,6 +6,7 @@ import MessageAtulSection from "../sections/MessageAtulSection";
 import RsvpAtulSection from "../sections/RsvpAtulSection";
 import { useEffect, useState } from "react";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
+import FooterAtulSection from "../sections/FooterAtulSection";
 
 const HomeScreenAtul = () => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const HomeScreenAtul = () => {
             <RsvpAtulSection />
             <MessageAtulSection />
             <GiftAtulSection />
+            <FooterAtulSection />
             <ToastContainer />
             <div
                 className='position-fixed bottom-0 end-0 m-2 p-2 rounded-circle shadow '

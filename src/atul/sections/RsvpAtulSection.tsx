@@ -57,7 +57,12 @@ const RsvpAtulSection = () => {
     return (
         <>
             <Container
-
+                style={{
+                    backgroundImage: "url('../src/assets/zatul/zatul-bg-4.jpg')",
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
                 fluid
             >
                 <Row className="g-0 py-5 justify-content-center">

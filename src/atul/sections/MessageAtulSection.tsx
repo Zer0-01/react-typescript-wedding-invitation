@@ -90,7 +90,12 @@ const MessageAtulSection = () => {
     return (
         <>
             <Container
-
+                style={{
+                    backgroundImage: "url('../src/assets/zatul/zatul-bg-1.png')",
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
                 fluid
             >
                 <Row className="g-0 py-5 justify-content-center">

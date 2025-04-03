@@ -29,7 +29,7 @@ const LandingScreenAtul = () => {
                 <Row className="g-0 h-100 justify-content-center align-items-center">
                     <Col xs={8} sm={8} md={8} lg={8} xl={8} >
                         <Container
-                            className="text-center rounded-pill p-5"
+                            className="text-center rounded-pill py-5"
                             style={
                                 {
                                     backgroundColor: colorAtulLandingContainer
@@ -37,18 +37,20 @@ const LandingScreenAtul = () => {
                             }
                         >
                             <div className="py-5">THE AKAD OF</div>
-                            <div 
-                            className="fs-1 fw-bold"
-                            style={{
-                                color: colorAtulLandingText
-                            }}
+                            <div
+                                className="fw-bold"
+                                style={{
+                                    color: colorAtulLandingText,
+                                    fontSize: "calc(3.0rem + 1.5vw)",
+                                }}
                             >ZATUL</div>
                             <div>AND</div>
-                            <div 
-                            className="fs-1 fw-bold"
-                            style={{
-                                color: colorAtulLandingText
-                            }}
+                            <div
+                                className="fw-bold"
+                                style={{
+                                    color: colorAtulLandingText,
+                                    fontSize: "calc(3.0rem + 1.5vw)",
+                                }}
                             >ANAS</div>
                             <div className="py-5">26 APRIL 2025 | Saturday</div>
                             <div>The Vow, Muar</div>

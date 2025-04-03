@@ -147,8 +147,14 @@ const GiftAtulSection = () => {
     return (
         <>
             <Container
-
+                style={{
+                    backgroundImage: "url('../src/assets/zatul/zatul-bg-1.png')",
+                    backgroundSize: "100% 100%",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                }}
                 fluid
+
             >
                 <Row className="g-0 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
