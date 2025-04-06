@@ -169,6 +169,7 @@ const GiftAtulSection = () => {
                                 initial={{ opacity: 0, y: 100 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 2, eaase: "easeInOut" }}
+                                viewport={{ once: true }}
                             >
                                 <Card
                                     key={index} className="mb-2"
@@ -197,8 +198,9 @@ const GiftAtulSection = () => {
                             initial={{ opacity: 0, y: 100 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 2, eaase: "easeInOut" }}
+                            viewport={{ once: true }}
                         >
-                            <Card>
+                            <Card className="mb-3">
 
                                 <Card.Body>
                                     <Card.Title className="fs-3 fw-bold">Hadiah</Card.Title>
@@ -226,38 +228,10 @@ const GiftAtulSection = () => {
 
                                     </Form>
 
-                                    <Row>
-                                        <Col xs="auto" style={{ color: colorBrown[500] }} className="fw-bold"
-                                        >
-                                            •
-                                        </Col>
-                                        <Col
-                                            xs="auto"
-                                            style={{ color: colorBrown[500] }}
-                                            className="fw-bold"
+                                    <div className="fw-bold" style={{ color: colorBrown[500] }}>• Masih Ada</div>
+                                    <div className="fw-bold pb-2" style={{ color: colorBrown[100] }}>• Sudah dipilih (Klik untuk lihat butiran)</div>
 
-                                        >
-                                            Masih ada
-                                        </Col>
-                                    </Row>
-                                    <Row className="pb-3">
-                                        <Col
-                                            xs="auto"
-                                            style={{
-                                                color: colorBrown[100]
-                                            }}
-                                            className="fw-bold"
-                                        >
-                                            •
-                                        </Col>
-                                        <Col xs="auto" style={{
-                                            color: colorBrown[100]
-                                        }}
-                                            className="fw-bold"
-                                        >
-                                            Sudah dipilih (Klik untuk lihat butiran)
-                                        </Col>
-                                    </Row>
+
                                     <Row className="pb-2">
                                         {giftList.map((gift, index) => (
                                             <Col
