@@ -56,15 +56,15 @@ const CountdownAtulSection = () => {
                     <Row >
                         <Col>
                             <Card>
-                                <Card.Title className="text-center">Detik</Card.Title>
+                                <Card.Title className="text-center pt-3 m-0 fs-3 fw-bold">Detik</Card.Title>
                                 <Card.Body>
                                     <Row>
                                         {Object.entries(timeLeft).map(([unit, value], index) => (
                                             <Col key={index}>
                                                 <Card>
                                                     <Card.Body className="text-center">
-                                                        <Card.Text >{unit}</Card.Text>
-                                                        <Card.Text>{value}</Card.Text>
+                                                        <Card.Text className="fs-3" >{unit}</Card.Text>
+                                                        <Card.Text className="fs-3 fw-bold">{value}</Card.Text>
                                                     </Card.Body>
                                                 </Card>
                                             </Col>
@@ -102,11 +102,11 @@ const CountdownAtulSection = () => {
                                 borderTopLeftRadius: "8rem",
                                 borderTopRightRadius: "8rem",
                             }}>
-                            <Card.Body className="text-center p-5">
-                                <Card.Title className="text-center fs-1">Resepsi</Card.Title>
+                            <Card.Body className="text-center py-5 px-3">
+                                <Card.Title className="text-center fs-1 fw-bold">Resepsi</Card.Title>
                                 <Card.Text className="text-center fs-5">Ahad, 26 April 2025</Card.Text>
-                                <Card.Text className="text-center fs-5">08.00 - 10.00 PM: Sanding</Card.Text>
-                                <Card.Text className="text-center fs-2">The Vow Event Evenue</Card.Text>
+                                <Card.Text className="text-center fs-5">07.30 PM - 10.30 PM</Card.Text>
+                                <Card.Text className="text-center fs-2 fw-bold">The Vow Event Venue</Card.Text>
                                 <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
                                 <Button
                                     style={

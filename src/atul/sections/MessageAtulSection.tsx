@@ -62,17 +62,17 @@ const MessageAtulSection = () => {
             setName("");
             setMessage("");
             fetchMessages();
-            showToast("Message data sent successfully!");
+            toast.dismiss()
+            toast.success("Message data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
             setStatus(MessageStatus.FAILURE);
-            showToast("Error sending message data");
+            toast.dismiss()
+            toast.error("Error sending message data");
             console.error("Error sending RSVP data:", error);
         }
 
     }
-
-    const showToast = (message: string) => toast(message);
 
     const fetchMessages = async () => {
         setMessagesStatus(MessagesStatus.LOADING);
@@ -106,12 +106,12 @@ const MessageAtulSection = () => {
                                 <motion.div
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     whileInView={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    transition={{ duration: 2, ease: "easeOut" }}
                                     viewport={{ once: true }}
                                 >
                                     <Card className="mb-2">
                                         <Card.Body>
-                                            <Card.Title>
+                                            <Card.Title className="fs-3 fw-bold">
                                                 Hantar Pesanan
                                             </Card.Title>
                                             <Form>
@@ -162,14 +162,16 @@ const MessageAtulSection = () => {
                                 <motion.div
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     whileInView={{ scale: 1, opacity: 1 }}
-                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    transition={{ duration: 2, ease: "easeOut" }}
                                     viewport={{ once: true }}
                                 >
                                     <Card className="mt-2">
                                         <Card.Body>
                                             <Card.Title>
                                                 <Row className="justify-content-between">
-                                                    <Col xs="auto" >
+                                                    <Col
+                                                        className="fs-3 fw-bold"
+                                                        xs="auto" >
                                                         Senarai Pesanan
                                                     </Col>
                                                     <Col xs="auto" >
@@ -214,7 +216,7 @@ const MessageAtulSection = () => {
                                                                 </Col>
                                                             </Row>
                                                             <Row>
-                                                                <Col>
+                                                                <Col style={{ whiteSpace: "pre-wrap" }}>
                                                                     {message.message}
                                                                 </Col>
                                                             </Row>

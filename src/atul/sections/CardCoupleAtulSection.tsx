@@ -6,9 +6,9 @@ import anas from "../../assets/anas-cartoon.png"
 
 const CardCoupleAtulSection = () => (
     <motion.div
-        initial={{ opacity: 0, y: 100 }}
+        initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 3, ease: "easeInOut" }}
     >
         <Container
             style={{
@@ -19,7 +19,7 @@ const CardCoupleAtulSection = () => (
                 minHeight: "100vh",
             }}
             fluid>
-            <Row className="g-0 h-100 justify-content-center">
+            <Row className="h-100 justify-content-center">
                 <Col sm={12} md={8} lg={6} xl={4} >
                     <div className="fs-2 pt-5 text-center">Assalamualaikum wbt</div>
                     <div className="fs-2 pb-3 text-center">& Salam Sejahtera</div>
@@ -29,6 +29,7 @@ const CardCoupleAtulSection = () => (
 
                     <div className="text-center">
                         <Image
+                        className="pb-2"
                             style={{
                                 backgroundColor: "#e6e6e6",
                                 width: "40%"
@@ -37,11 +38,12 @@ const CardCoupleAtulSection = () => (
                             src={atul}
                             roundedCircle
                             fluid /></div>
-                    <div className="pt-2 text-center">Nur Izzatul Khairiah</div>
+                    <div className="fs-3 fw-bold text-center">Nur Izzatul Khairiah</div>
                     <div className="text-center">Puteri kepada Encik Mubin dan Puan Zoliana</div>
                     <div className="text-center py-5 fst-italic">dengan pasangannya</div>
                     <div className="text-center">
                         <Image
+                        className="pb-2"
                             style={{
                                 backgroundColor: "#e6e6e6",
                                 width: "40%"
@@ -51,7 +53,7 @@ const CardCoupleAtulSection = () => (
                             roundedCircle
                             fluid />
                     </div>
-                    <div className="pt-2 text-center">Anas Zulkifli</div>
+                    <div className="fs-3 fw-bold text-center">Anas Zulkifli</div>
                     <div className="pb-5 text-center">Putera kepada Encik Mohd Jeffry dan Puan Jamilah</div>
 
 

@@ -40,20 +40,17 @@ const RsvpAtulSection = () => {
             });
             setStatus(RsvpStatus.SUCCESS);
             setShowModal(false);
-            showToast("RSVP data sent successfully!");
+            toast.dismiss()
+            toast.success("RSVP data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
             setStatus(RsvpStatus.FAILURE);
-            showToast("Error sending RSVP data");
+            toast.dismiss()
+            toast.error("Error sending RSVP data");
             console.error("Error sending RSVP data:", error);
         }
 
     }
-
-    const showToast = (message: string) => {
-        toast.dismiss()
-        toast(message)
-    };
 
     return (
         <>
@@ -71,12 +68,12 @@ const RsvpAtulSection = () => {
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            transition={{ duration: 2, ease: "easeOut" }}
                             viewport={{ once: true }}
                         >
                             <Card>
                                 <Card.Body>
-                                    <Card.Title>RSVP</Card.Title>
+                                    <Card.Title className="fw-bold fs-3">RSVP</Card.Title>
                                     <Form>
                                         <Form.Group
                                             className="mb-3"

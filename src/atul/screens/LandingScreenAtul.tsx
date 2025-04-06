@@ -13,11 +13,11 @@ const LandingScreenAtul = () => {
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            exit={{ opacity: 0, y: -100 }}
+            exit={{ opacity: 0, y: 100 }}
         >
             <Container
                 fluid
-                className="vh-100 p-0"
+                className="vh-100"
                 style={{
                     backgroundColor: colorAtulLandingContainer,
                     backgroundImage: `url("${zatulLandingPageBg}")`,
@@ -27,51 +27,49 @@ const LandingScreenAtul = () => {
                     backgroundAttachment: "fixed",
                 }}
             >
-                <Row className="g-0 h-100 justify-content-center align-items-center">
+                <Row className="h-100 justify-content-center align-items-center">
                     <Col xs={8} sm={8} md={8} lg={8} xl={8} >
                         <Container
-                            className="text-center rounded-pill py-5"
+                            className="py-5 px-3  text-center rounded-pill"
                             style={
                                 {
                                     backgroundColor: colorAtulLandingContainer
                                 }
                             }
                         >
-                            <div className="py-5">THE AKAD OF</div>
+                            <div className="fs-6 pb-3">THE AKAD OF</div>
                             <div
-                                className="fw-bold"
+                                className="fw-bold fs-1 pb-2"
                                 style={{
                                     color: colorAtulLandingText,
-                                    fontSize: "calc(3.0rem + 1.5vw)",
                                 }}
                             >ZATUL</div>
-                            <div>AND</div>
+                            <div className="fs-6 pb-2">AND</div>
                             <div
-                                className="fw-bold"
+                                className="fw-bold fs-1 pb-3"
                                 style={{
                                     color: colorAtulLandingText,
-                                    fontSize: "calc(3.0rem + 1.5vw)",
                                 }}
                             >ANAS</div>
-                            <div className="py-5">26 APRIL 2025 | Saturday</div>
-                            <div>The Vow, Muar</div>
+                            <div className="pb-2">26 APRIL 2025 | Saturday</div>
+                            <div className="pb-3">The Vow, Muar</div>
+                            <Button
+                                className="rounded-circle"
+                                style={{
+                                    boxShadow: "0 0 25px rgba(83, 248, 18, 0.5)",
+
+                                    backgroundColor: "#d38f5c",
+                                    border: "none",
+                                }}
+                                onClick={() => navigate("/home")}
+                            >
+                                <FaChevronDown />
+                            </Button>
                         </Container>
 
                     </Col>
                 </Row>
-                <Button
-                    className="position-absolute start-50  translate-middle-x rounded-circle"
-                    style={{
-                        boxShadow: "0 0 25px rgba(83, 248, 18, 0.5)",
-                        bottom: "10%",
-                        backgroundColor: "#d38f5c",
-                        border: "none",
 
-                    }}
-                    onClick={() => navigate("/home")}
-                >
-                    <FaChevronDown />
-                </Button>
             </Container>
 
         </motion.div>
