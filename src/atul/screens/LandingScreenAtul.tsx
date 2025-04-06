@@ -51,8 +51,9 @@ const LandingScreenAtul = () => {
                                     color: colorAtulLandingText,
                                 }}
                             >ANAS</div>
-                            <div className="pb-2">26 APRIL 2025 | Saturday</div>
-                            <div className="pb-3">The Vow, Muar</div>
+                            <div className="pb-2 fs-6">26 APRIL 2025 | Saturday</div>
+                            <div className="pb-4 fs-6">The Vow, Muar</div>
+                            <div className="pb-3 fst-italic " style={{fontSize: "0.8rem"}}>#ZATULFoundHerANSwer</div>
                             <Button
                                 className="rounded-circle"
                                 style={{

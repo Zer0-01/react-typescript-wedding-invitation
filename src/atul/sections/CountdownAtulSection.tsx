@@ -7,7 +7,7 @@ import backgroundVow from "../../assets/background-vow-2.jpg"
 
 const CountdownAtulSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {
-        const targetDate = new Date("2025-04-26T17:00:00");
+        const targetDate = new Date("2025-04-26T19:30:00");
         const now = new Date();
         const difference = targetDate.getTime() - now.getTime();
 
