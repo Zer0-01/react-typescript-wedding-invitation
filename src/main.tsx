@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router'
+import { Route, Routes, useLocation, HashRouter } from 'react-router'
 import HomeScreen from './anas/screens/HomeScreen.tsx'
 import { AnimatePresence } from 'framer-motion'
 import "./App.css"
@@ -54,7 +54,7 @@ const AnimatedRoutes = () => {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
+  <HashRouter>
     <AnimatedRoutes />
-  </BrowserRouter>,
+  </HashRouter>,
 )
