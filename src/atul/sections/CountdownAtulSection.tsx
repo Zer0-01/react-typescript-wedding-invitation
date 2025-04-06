@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap"
 import { colorBrown } from "../../constants/ColorsConstant";
 import { motion } from "framer-motion";
+import background from "../../assets/zatul/zatul-bg-2.png"
+import backgroundVow from "../../assets/background-vow-2.jpg"
 
 const CountdownAtulSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {
@@ -39,7 +41,7 @@ const CountdownAtulSection = () => {
         <Container fluid
             style={
                 {
-                    backgroundImage: "url('../src/assets/zatul/zatul-bg-2.png')",
+                    backgroundImage: `url("${background}")`,
                     backgroundSize: "100% 100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",
@@ -79,7 +81,7 @@ const CountdownAtulSection = () => {
 
             <Row className="g-0 pb-5 justify-content-center">
                 <Col sm={12} md={8} lg={6} xl={4} >
-                    
+
                 </Col>
             </Row>
 
@@ -94,7 +96,7 @@ const CountdownAtulSection = () => {
                     >
                         <Card
                             style={{
-                                backgroundImage: "url('../src/assets/background-vow-2.jpg')",
+                                backgroundImage: `url("${backgroundVow}")`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 borderTopLeftRadius: "8rem",

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { FaChevronDown } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { colorAtulLandingContainer, colorAtulLandingText } from "../../constants/ColorsConstant";
+import zatulLandingPageBg from "../../assets/zatul/zatul-landing-page-bg.png";
 
 const LandingScreenAtul = () => {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ const LandingScreenAtul = () => {
                 className="vh-100 p-0"
                 style={{
                     backgroundColor: colorAtulLandingContainer,
-                    backgroundImage: `url(../src/assets/zatul/zatul-landing-page-bg.png)`,
+                    backgroundImage: `url("${zatulLandingPageBg}")`,
                     backgroundSize: "100% 100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

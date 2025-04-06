@@ -1,5 +1,8 @@
 import { motion } from "framer-motion"
 import { Col, Container, Row, Image } from "react-bootstrap"
+import background from "../../assets/background-atul.png"
+import atul from "../../assets/atul-cartoon.png"
+import anas from "../../assets/anas-cartoon.png"
 
 const CardCoupleAtulSection = () => (
     <motion.div
@@ -9,7 +12,7 @@ const CardCoupleAtulSection = () => (
     >
         <Container
             style={{
-                backgroundImage: "url('../src/assets/background-atul.png')",
+                backgroundImage: `url("${background}")`,
                 backgroundSize: "100% 100%",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -31,7 +34,7 @@ const CardCoupleAtulSection = () => (
                                 width: "40%"
                             }}
 
-                            src="../src/assets/atul-cartoon.png"
+                            src={atul}
                             roundedCircle
                             fluid /></div>
                     <div className="pt-2 text-center">Nur Izzatul Khairiah</div>
@@ -44,7 +47,7 @@ const CardCoupleAtulSection = () => (
                                 width: "40%"
                             }}
 
-                            src="../src/assets/anas-cartoon.png"
+                            src={anas}
                             roundedCircle
                             fluid />
                     </div>

@@ -7,10 +7,11 @@ import RsvpAtulSection from "../sections/RsvpAtulSection";
 import { useEffect, useState } from "react";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import FooterAtulSection from "../sections/FooterAtulSection";
+import atulSong from "../../assets/zatul/zatul-song.mp3";
 
 const HomeScreenAtul = () => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
-    const [audio] = useState(new Audio('../src/assets/zatul/zatul-song.mp3'));
+    const [audio] = useState(new Audio(atulSong));
 
     useEffect(() => {
         audio.loop = true;

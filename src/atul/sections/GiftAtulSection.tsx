@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { colorBrown, colorPrimary } from "../../constants/ColorsConstant";
 import { AiOutlineCopy } from "react-icons/ai";
+import background from "../../assets/zatul/zatul-bg-1.png";
 
 interface CardDetail {
     name: string;
@@ -148,7 +149,7 @@ const GiftAtulSection = () => {
         <>
             <Container
                 style={{
-                    backgroundImage: "url('../src/assets/zatul/zatul-bg-1.png')",
+                    backgroundImage: `url("${background}")`,
                     backgroundSize: "100% 100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

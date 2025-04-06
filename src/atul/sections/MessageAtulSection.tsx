@@ -6,6 +6,7 @@ import { AiOutlineSync } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { colorBrown } from "../../constants/ColorsConstant";
 import { db } from "../../FirebaseConfig";
+import background from "../../assets/zatul/zatul-bg-1.png";
 
 enum MessageStatus {
     INITIAL, LOADING, SUCCESS, FAILURE
@@ -91,7 +92,7 @@ const MessageAtulSection = () => {
         <>
             <Container
                 style={{
-                    backgroundImage: "url('../src/assets/zatul/zatul-bg-1.png')",
+                    backgroundImage: `url("${background}")`,
                     backgroundSize: "100% 100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

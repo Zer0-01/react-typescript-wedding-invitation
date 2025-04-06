@@ -7,6 +7,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore/lite";
 import { db } from "../../FirebaseConfig";
 import { toast } from "react-toastify";
 import RsvpModalAtul from "./RsvpModalAtul";
+import background from "../../assets/zatul/zatul-bg-4.jpg";
 
 const RsvpAtulSection = () => {
     const [disabled, setDisabled] = useState<boolean>(true);
@@ -58,7 +59,7 @@ const RsvpAtulSection = () => {
         <>
             <Container
                 style={{
-                    backgroundImage: "url('../src/assets/zatul/zatul-bg-4.jpg')",
+                    backgroundImage: `url("${background}")`,
                     backgroundSize: "100% 100%",
                     backgroundPosition: "center",
                     backgroundRepeat: "no-repeat",

@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "dev:anas": "vite --mode anas",
-    "dev:zatul": "vite --mode zatul"
+    "dev:zatul": "vite --mode zatul",
+    "build:anas": "vite build --mode anas",
+    "build:zatul": "vite build --mode zatul"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.12.3",
