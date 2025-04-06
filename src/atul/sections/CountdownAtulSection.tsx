@@ -104,7 +104,7 @@ const CountdownAtulSection = () => {
                             }}>
                             <Card.Body className="text-center py-5 px-3">
                                 <Card.Title className="text-center fs-1 fw-bold">Resepsi</Card.Title>
-                                <Card.Text className="text-center fs-5">Ahad, 26 April 2025</Card.Text>
+                                <Card.Text className="text-center fs-5">Sabtu, 26 April 2025</Card.Text>
                                 <Card.Text className="text-center fs-5">07.30 PM - 10.30 PM</Card.Text>
                                 <Card.Text className="text-center fs-2 fw-bold">The Vow Event Venue</Card.Text>
                                 <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>

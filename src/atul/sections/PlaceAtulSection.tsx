@@ -73,7 +73,7 @@ const PlaceAtulSection = () => {
                             }}>
                             <Card.Body className="text-center p-5">
                                 <Card.Title className="text-center fs-1">Resepti</Card.Title>
-                                <Card.Text className="text-center fs-5">Ahad, 26 April 2025</Card.Text>
+                                <Card.Text className="text-center fs-5">Sabtu, 26 April 2025</Card.Text>
                                 <Card.Text className="text-center fs-5">08.00 - 10.00 PM: Sanding</Card.Text>
                                 <Card.Text className="text-center fs-2">The Vow Event Evenue</Card.Text>
                                 <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
