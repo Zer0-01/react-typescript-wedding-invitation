@@ -209,7 +209,7 @@ const MessageSection = () => {
                                                         </Col>
                                                     </Row>
                                                     <Row>
-                                                        <Col>
+                                                        <Col  style={{ whiteSpace: "pre-wrap" }}>
                                                             {message.message}
                                                         </Col>
                                                     </Row>
