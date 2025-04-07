@@ -160,6 +160,7 @@ const GiftSection = () => {
                     <Col sm={12} md={8} lg={6} xl={4} >
                         {cardDetailList.map((cardDetail, index) => (
                             <Card key={index}
+                            className="mb-2"
                                 style={{
                                     backgroundColor: colorBrown[0],
                                 }}

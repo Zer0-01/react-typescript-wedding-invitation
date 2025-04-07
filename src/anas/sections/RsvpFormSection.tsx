@@ -59,9 +59,9 @@ const RsvpFormSection = () => {
                             transition={{ duration: 0.6, ease: "easeOut" }}
                             viewport={{ once: true }}
                         >
-                            <Card className="p-4">
+                            <Card >
                                 <Card.Body>
-                                    <Card.Title className="text-center">RSVP</Card.Title>
+                                    <Card.Title className="fs-3 fw-bold text-center">RSVP</Card.Title>
                                     <Form>
                                         <Form.Group className="mb-3" controlId="formName">
                                             <Form.Label>Nama</Form.Label>

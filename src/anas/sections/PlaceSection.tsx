@@ -4,7 +4,7 @@ import { colorBrown } from "../../constants/ColorsConstant";
 
 const PlaceSection = () => {
     const handleClick = () => {
-        window.open("https://maps.app.goo.gl/6rBA7thVaVejn79x6", "_blank");
+        window.open("https://maps.app.goo.gl/CEb6mU1PkN5ggHfs8", "_blank");
     };
 
     return (
@@ -18,7 +18,7 @@ const PlaceSection = () => {
                         transition={{ duration: 2 }}
                     >
                         <Card
-                            className="text-center p-5 border-0"
+                            className="text-center px-2 py-5 border-0"
                             style={{
                                 backgroundImage: "url('../src/assets/background-card-place.jpg')",
                                 backgroundSize: "cover",
@@ -30,8 +30,8 @@ const PlaceSection = () => {
                             <Card.Body>
                                 <Card.Title className="fs-1">Resepsi</Card.Title>
                                 <Card.Text className="fs-5">Ahad, 18 Mei 2025</Card.Text>
-                                <Card.Text className="fs-5">11.00 - 04.00 PM: Jamuan Makan</Card.Text>
-                                <Card.Text className="fs-5">12.00 - 12.30 PM: Sanding</Card.Text>
+                                <Card.Text className="fs-5">11.00 AM - 04.00 PM: Jamuan Makan</Card.Text>
+                                <Card.Text className="fs-5">12.00 PM - 12.30 PM: Sanding</Card.Text>
                                 <Card.Text className="fs-2 fw-bold">Marissa Grand Event Space</Card.Text>
                                 <Card.Text>
                                     107-1, Jalan Khalidi, Taman Khalidi Bharu, 84000 Muar, Johor Darul Ta'zim

@@ -44,24 +44,27 @@ const CardCoupleSection = () => {
 
             <Row className="g-0 h-100 justify-content-center py-5">
                 <Col sm={12} md={8} lg={6} xl={4} className="text-center">
-                    <h2 className="fs-1">Assalammualaikum</h2>
+                    <h2 className="fs-1 fw-bold">‏اَلسَلامُ عَلَيْكُم وَرَحْمَةُ اَللهِ وَبَرَكاتُهُ‎</h2>
                     <p className="fs-5">
-                        Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala,
-                        Kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Resepsi Pernikahan kami.
+                        Dengan penuh kesyukuran ke hadrat Allah SWT, serta limpah dan rahmat-Nya, kami ingin memaklumkan dan menjemput Dato’/Datin/Tuan/Puan/Encik/Cik ke Majlis Resepsi Perkahwinan anakanda kami
                     </p>
 
-                    <CoupleCard
-                        image="../src/assets/atul-cartoon.png"
-                        name="Nur Izzatul Khairiah"
-                        description="Puteri kepada Encik Mubin dan Puan Zoliana"
-                        variants={fadeFromLeft}
-                    />
+
 
                     <CoupleCard
                         image="../src/assets/anas-cartoon.png"
                         name="Anas Zulkifli"
                         description="Putera kepada Encik Mohd Jeffry dan Puan Jamilah"
                         variants={fadeFromRight}
+                    />
+
+                    <div className="fs-1 fst-italic">&</div>
+
+                    <CoupleCard
+                        image="../src/assets/atul-cartoon.png"
+                        name="Nur Izzatul Khairiah"
+                        description="Puteri kepada Encik Mubin dan Puan Zoliana"
+                        variants={fadeFromLeft}
                     />
                 </Col>
             </Row>

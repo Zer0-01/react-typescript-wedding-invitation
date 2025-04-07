@@ -106,7 +106,7 @@ const MessageSection = () => {
                         >
                             <Card className="mb-2">
                                 <Card.Body>
-                                    <Card.Title className="text-center">
+                                    <Card.Title className="fs-3 fw-bold text-center">
                                         Hantar Pesanan
                                     </Card.Title>
                                     <Form>
@@ -163,11 +163,11 @@ const MessageSection = () => {
                                 <Card.Body>
                                     <Card.Title>
                                         <Row className="justify-content-between">
-                                            <Col className="flex-grow-1" />
-                                            <Col className="text-center" style={{ flexGrow: "2" }}  >
+                                            <Col xs={2} />
+                                            <Col xs={8} className="fs-3 fw-bold text-center"   >
                                                 Senarai Pesanan
                                             </Col>
-                                            <Col className="text-end"  >
+                                            <Col xs={2} className="text-end"  >
                                                 <AiOutlineSync onClick={fetchMessages} />
                                             </Col>
                                         </Row>

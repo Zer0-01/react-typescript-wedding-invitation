@@ -33,7 +33,7 @@ const CountdownSection = () => {
                 <Col sm={12} md={8} lg={6} xl={4}>
                     <Card className="border-0 bg-white">
                         <Card.Body>
-                            <Card.Text className="text-center fs-2">Countdown</Card.Text>
+                            <Card.Text className="text-center fs-2">Detik</Card.Text>
                             <Row>
                                 {Object.entries(timeLeft).map(([unit, value], index) => (
                                     <Col xs={3} key={unit}>
