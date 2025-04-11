@@ -109,7 +109,7 @@ const RsvpFormSection = () => {
                                             />
                                         </Form.Group>
 
-                                        {attendance && (
+                                        {/* {attendance && (
                                             <Form.Group className="mb-3" controlId="formGuest">
                                                 <Form.Label>Bilangan tetamu</Form.Label>
                                                 <Form.Select
@@ -123,7 +123,7 @@ const RsvpFormSection = () => {
                                                     ))}
                                                 </Form.Select>
                                             </Form.Group>
-                                        )}
+                                        )} */}
 
                                         <Button
                                             disabled={isDisabled}
@@ -148,7 +148,6 @@ const RsvpFormSection = () => {
                 name={name}
                 phone={phone}
                 attendance={attendance}
-                guest={guest}
                 onClick={handleSend}
                 status={status}
             />

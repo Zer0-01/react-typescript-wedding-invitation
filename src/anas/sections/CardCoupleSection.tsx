@@ -40,26 +40,21 @@ const CoupleCard = ({ image, name, description, variants }: {
 const CardCoupleSection = () => {
     return (
         <Container fluid style={{ backgroundColor: colorBackground }}>
-            <div style={{ height: "5px", backgroundColor: colorBrown[500], width: "100%" }} />
+            <div style={{ height: "5px", backgroundColor: colorBrown[500] }} />
 
-            <Row className="g-0 h-100 justify-content-center py-5">
+            <Row className="g-0  justify-content-center py-5">
                 <Col sm={12} md={8} lg={6} xl={4} className="text-center">
                     <h2 className="fs-1 fw-bold">‏اَلسَلامُ عَلَيْكُم وَرَحْمَةُ اَللهِ وَبَرَكاتُهُ‎</h2>
                     <p className="fs-5">
                         Dengan penuh kesyukuran ke hadrat Allah SWT, serta limpah dan rahmat-Nya, kami ingin memaklumkan dan menjemput Dato’/Datin/Tuan/Puan/Encik/Cik ke Majlis Resepsi Perkahwinan anakanda kami
                     </p>
-
-
-
                     <CoupleCard
                         image="../src/assets/anas-cartoon.png"
                         name="Anas Zulkifli"
                         description="Putera kepada Encik Mohd Jeffry dan Puan Jamilah"
                         variants={fadeFromRight}
                     />
-
                     <div className="fs-1 fst-italic">&</div>
-
                     <CoupleCard
                         image="../src/assets/atul-cartoon.png"
                         name="Nur Izzatul Khairiah"

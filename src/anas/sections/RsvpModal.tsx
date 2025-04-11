@@ -8,12 +8,11 @@ interface RsvpModalProps {
     name: string;
     phone: string;
     attendance: boolean | null;
-    guest: number;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     status: RsvpStatus;
 }
 
-const RsvpModal = ({ show, onHide, name, phone, attendance, guest, onClick, status }: RsvpModalProps) => (
+const RsvpModal = ({ show, onHide, name, phone, attendance, onClick, status }: RsvpModalProps) => (
     <Modal show={show} onHide={onHide} centered backdrop="static">
         <Modal.Header closeButton>
             <Modal.Title>Sila sahkan RSVP anda</Modal.Title>
@@ -23,7 +22,7 @@ const RsvpModal = ({ show, onHide, name, phone, attendance, guest, onClick, stat
                 <InfoRow title="Nama" value={name} />
                 <InfoRow title="Nombor Telefon" value={phone} />
                 <InfoRow title="Adakah Anda Akan Hadir" value={attendance ? "Ya" : "Tidak"} />
-                <InfoRow title="Bilangan Tetamu" value={guest.toString()} />
+                {/* <InfoRow title="Bilangan Tetamu" value={guest.toString()} /> */}
             </Container>
         </Modal.Body>
         <Modal.Footer>

@@ -62,17 +62,17 @@ const MessageSection = () => {
             setName("");
             setMessage("");
             fetchMessages();
-            showToast("Message data sent successfully!");
+            toast.dismiss();
+            toast.success("Message data sent successfully!");
             console.log("RSVP data sent successfully!");
         } catch (error) {
             setStatus(MessageStatus.FAILURE);
-            showToast("Error sending message data");
+            toast.dismiss();
+            toast.error("Error sending message data");
             console.error("Error sending RSVP data:", error);
         }
 
     }
-
-    const showToast = (message: string) => toast(message);
 
     const fetchMessages = async () => {
         setMessagesStatus(MessagesStatus.LOADING);
@@ -209,7 +209,7 @@ const MessageSection = () => {
                                                         </Col>
                                                     </Row>
                                                     <Row>
-                                                        <Col  style={{ whiteSpace: "pre-wrap" }}>
+                                                        <Col style={{ whiteSpace: "pre-wrap" }}>
                                                             {message.message}
                                                         </Col>
                                                     </Row>

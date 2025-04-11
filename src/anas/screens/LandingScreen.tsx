@@ -19,7 +19,7 @@ const LandingScreen = () => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                <Row className="g-0 h-100 justify-content-center">
+                <Row className="g-0 justify-content-center">
                     <Col sm={12} md={8} lg={6} xl={4} >
                         <Image
                             src="../src/assets/cover.jpg"
@@ -28,28 +28,23 @@ const LandingScreen = () => {
                         />
                     </Col>
                 </Row>
+                <div className="text-center">
+                    <Button
+                        className="rounded-circle"
+                        style={{
+                            bottom: "10%",
+                            backgroundColor: "#d38f5c",
+                            border: "none",
+
+                        }}
+                        onClick={() => navigate("/home")}
+                    >
+                        <FaChevronDown />
+
+                    </Button>
+                </div>
+
             </motion.div>
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                <Button
-                    className="position-absolute start-50  translate-middle-x rounded-circle"
-                    style={{
-                        bottom: "10%",
-                        backgroundColor: "#d38f5c",
-                        border: "none",
-
-                    }}
-                    onClick={() => navigate("/home")}
-                >
-                    <FaChevronDown />
-
-                </Button>
-            </motion.div>
-
         </Container>
     );
 }

@@ -115,12 +115,16 @@ const GiftSection = () => {
                 timestamp: serverTimestamp()
             });
             setStatus(GiftStatus.SUCCESS);
+            setPhone("");
+            setSelectedGift(null);
             setShowConfirmationModal(false);
-            showToast("Terima kasih, hadiah telah berhasil dipilih!");
+            toast.dismiss();
+            toast.success("Terima kasih, hadiah telah berhasil dipilih!");
             await fetchGifts();
         } catch (error) {
             setStatus(GiftStatus.FAILURE);
-            showToast("Kesulitan berlaku ketika memilih  hadiah. Sila cuba lagi.");;
+            toast.dismiss();
+            toast.success("Maaf, kesalahan berlaku ketika memilih hadiah. Sila cuba lagi.");
         }
     }
     const showToast = (message: string) => toast(message);
@@ -138,12 +142,14 @@ const GiftSection = () => {
             setNewGiftName("");
             setNewGiftPhone("");
             handleClose();
-            showToast("Terima kasih, hadiah telah berhasil dipilih!");
+            toast.dismiss();
+            toast.success("Terima kasih, hadiah telah berhasil dipilih!");
             await fetchGifts();
 
         } catch (error) {
             setNewGiftStatus(NewGiftStatus.FAILURE);
-            showToast("Kesulitan berlaku, Sila cuba lagi.");
+            toast.dismiss();
+            toast.error("Kesulitan berlaku, Sila cuba lagi.");
         }
     }
 
