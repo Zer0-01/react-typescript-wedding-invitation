@@ -1,6 +1,7 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { colorBrown } from "../../constants/ColorsConstant";
+import marissa from "../../assets/background-card-place.jpg"
 
 const PlaceSection = () => {
     const handleClick = () => {
@@ -20,7 +21,7 @@ const PlaceSection = () => {
                         <Card
                             className="text-center px-2 py-5 border-0"
                             style={{
-                                backgroundImage: "url('../src/assets/background-card-place.jpg')",
+                                backgroundImage: `url('${marissa}')`,
                                 backgroundSize: "cover",
                                 backgroundPosition: "center",
                                 borderTopLeftRadius: "8rem",

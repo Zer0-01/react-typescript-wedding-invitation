@@ -1,6 +1,8 @@
 import { Col, Row, Image, Container } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { colorBackground, colorBrown } from "../../constants/ColorsConstant";
+import anas from "../../assets/anas-cartoon.png";
+import zatul from "../../assets/atul-cartoon.png";
 
 const fadeFromLeft = {
     hidden: { opacity: 0, x: -100 },
@@ -49,14 +51,14 @@ const CardCoupleSection = () => {
                         Dengan penuh kesyukuran ke hadrat Allah SWT, serta limpah dan rahmat-Nya, kami ingin memaklumkan dan menjemput Dato’/Datin/Tuan/Puan/Encik/Cik ke Majlis Resepsi Perkahwinan anakanda kami
                     </p>
                     <CoupleCard
-                        image="../src/assets/anas-cartoon.png"
+                        image={anas}
                         name="Anas Zulkifli"
                         description="Putera kepada Encik Mohd Jeffry dan Puan Jamilah"
                         variants={fadeFromRight}
                     />
                     <div className="fs-1 fst-italic">&</div>
                     <CoupleCard
-                        image="../src/assets/atul-cartoon.png"
+                        image={zatul}
                         name="Nur Izzatul Khairiah"
                         description="Puteri kepada Encik Mubin dan Puan Zoliana"
                         variants={fadeFromLeft}
