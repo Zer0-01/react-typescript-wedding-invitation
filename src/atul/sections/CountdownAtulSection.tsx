@@ -7,7 +7,7 @@ import backgroundVow from "../../assets/background-vow-2.jpg"
 
 const CountdownAtulSection = () => {
     const calculateTimeLeft = (): Record<string, number> => {
-        const targetDate = new Date("2025-04-26T19:30:00");
+        const targetDate = new Date("2025-04-26T18:00:00");
         const now = new Date();
         const difference = targetDate.getTime() - now.getTime();
 
@@ -105,7 +105,7 @@ const CountdownAtulSection = () => {
                             <Card.Body className="text-center py-5 px-3">
                                 <Card.Title className="text-center fs-1 fw-bold">Resepsi</Card.Title>
                                 <Card.Text className="text-center fs-5">Sabtu, 26 April 2025</Card.Text>
-                                <Card.Text className="text-center fs-5">07.30 PM - 10.30 PM</Card.Text>
+                                <Card.Text className="text-center fs-5">06.00 PM - 10.30 PM</Card.Text>
                                 <Card.Text className="text-center fs-2 fw-bold">The Vow Event Venue</Card.Text>
                                 <Card.Text className="text-center">Lot 1751, Jln Salleh, Kampung Parit Setongkat, 84000 Muar, Johor Darul Ta'zim</Card.Text>
                                 <Button
