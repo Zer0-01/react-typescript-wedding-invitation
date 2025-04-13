@@ -31,7 +31,7 @@ const LandingScreen = () => {
                     <Col sm={12} md={8} lg={6} xl={4} className="h-100" >
                         <Image
                             src={background}
-                            className="h-100 w-100 object-fit-contain"
+                            className="h-100 w-100 object-fit-fill"
                             fluid
                         />
                     </Col>
