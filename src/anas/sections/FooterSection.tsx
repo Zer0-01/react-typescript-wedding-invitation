@@ -11,7 +11,7 @@ import { AiOutlineLinkedin } from "react-icons/ai";
 const FooterSection = () => {
     return (
         <Container style={{
-            background: colorPrimary[850]
+            background: "black"
         }}
             fluid
         >
@@ -63,7 +63,7 @@ const FooterSection = () => {
             </Row>
 
             <div
-                className="fs-6 text-center"
+                className="pb-2 fs-6 text-center"
                 style={
                     {
                         color: colorPrimary[0]

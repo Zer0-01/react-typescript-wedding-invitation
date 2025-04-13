@@ -52,12 +52,12 @@ const GiftSection = () => {
         {
             name: "Anas Zulkifli bin Mohd Jeffry",
             bankName: "CIMB",
-            accountNumber: "0123456789"
+            accountNumber: "7633840159"
         },
         {
             name: "Nur Izzatul Khairiah binti Mubin",
             bankName: "Maybank",
-            accountNumber: "0123456789"
+            accountNumber: "154053687978"
         }
     ]
 
@@ -163,13 +163,14 @@ const GiftSection = () => {
                 }}
                 fluid
             >
-                <Row className="g-0 py-5 justify-content-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 100 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 2 }}
-                    >
+                <motion.div
+                    initial={{ opacity: 0, y: 100 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 2 }}
+                >
+                    <Row className="g-0 py-5 justify-content-center">
+
                         <Col sm={12} md={8} lg={6} xl={4} >
                             {cardDetailList.map((cardDetail, index) => (
                                 <Card key={index}
@@ -191,7 +192,7 @@ const GiftSection = () => {
                                 </Card>
 
                             ))}
-                            <Form>
+                            <Form className="pb-2">
                                 <Form.Group className="mb-3">
                                     <Form.Label>Nombor Telefon</Form.Label>
                                     <Form.Control
@@ -278,12 +279,13 @@ const GiftSection = () => {
 
 
                         </Col>
-                    </motion.div>
-
-                </Row>
 
 
-            </Container>
+                    </Row>
+                </motion.div>
+
+
+            </Container >
 
             <Modal
                 show={showAddGiftModal}
@@ -321,6 +323,7 @@ const GiftSection = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        className="w-100"
                         style={{
                             backgroundColor: colorBrown[500],
                             borderColor: colorBrown[500]
@@ -373,6 +376,7 @@ const GiftSection = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        className="w-100"
                         style={{
                             backgroundColor: colorBrown[500],
                             borderColor: colorBrown[500]
@@ -413,6 +417,7 @@ const GiftSection = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        className="w-100"
                         style={{
                             backgroundColor: colorBrown[500],
                             borderColor: colorBrown[500]

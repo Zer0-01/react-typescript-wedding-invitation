@@ -156,7 +156,7 @@ const MessageSection = () => {
                         <motion.div
                             initial={{ scale: 0.8, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            transition={{ duration: 2, ease: "easeOut" }}
                             viewport={{ once: true }}
                         >
                             <Card className="mt-2">
