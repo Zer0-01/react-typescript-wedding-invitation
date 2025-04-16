@@ -154,6 +154,17 @@ const GiftSection = () => {
         }
     }
 
+    const maskPhoneNumber = (phone?: string | number): string => {
+        if (!phone) return "N/A";
+      
+        const cleaned = phone.toString().replace(/\D/g, "");
+        const lastFour = cleaned.slice(-4);
+        const masked = "*".repeat(cleaned.length - 4) + lastFour;
+      
+        return masked;
+      };
+    
+
 
     return (
         <>
@@ -355,7 +366,7 @@ const GiftSection = () => {
                         </Row>
                         <Row>
                             <Col>
-                                Nombor Telefon Pemberi: {unvailableSelectedGift?.phone ?? "N/A"}
+                                Nombor Telefon Pemberi: {maskPhoneNumber(unvailableSelectedGift?.phone)}
                             </Col>
                         </Row>
                         <Row>
