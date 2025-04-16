@@ -8,3 +8,4 @@ export const FIREBASE_CONFIG = {
     appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 export const FONT_FAMILY = import.meta.env.VITE_APP_FONT;
+export const PAGE_TITLE = import.meta.env.VITE_PAGE_TITLE;
