@@ -1,0 +1,255 @@
+"use client";
+
+import { useEffect, useId, useState } from "react";
+import { CalendarDays, ChevronRight, Download, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+const EVENT_TITLE = "Walimatulurus Nasuhah dan Iskandar";
+const EVENT_LOCATION =
+  "Dewan Serbaguna Surau Abu Bakar As-Siddiq Taman Evergreen Heights, 83000 Batu Pahat, Johor";
+const EVENT_START = new Date("2026-06-16T11:00:00+08:00");
+const EVENT_END = new Date("2026-06-16T17:00:00+08:00");
+const ZERO_COUNTDOWN = { days: "00", hours: "00", minutes: "00", seconds: "00" };
+
+function getCountdownParts(now = new Date()) {
+  const remainingMs = Math.max(EVENT_START.getTime() - now.getTime(), 0);
+  const totalSeconds = Math.floor(remainingMs / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  return {
+    days: String(days).padStart(2, "0"),
+    hours: String(hours).padStart(2, "0"),
+    minutes: String(minutes).padStart(2, "0"),
+    seconds: String(seconds).padStart(2, "0"),
+  };
+}
+
+function formatCalendarDate(date: Date) {
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
+}
+
+function downloadAppleCalendarFile() {
+  const fileContent = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Wedding Invitation//EN",
+    "BEGIN:VEVENT",
+    `UID:${EVENT_START.getTime()}@wedding-invitation`,
+    `DTSTAMP:${formatCalendarDate(new Date())}`,
+    `DTSTART:${formatCalendarDate(EVENT_START)}`,
+    `DTEND:${formatCalendarDate(EVENT_END)}`,
+    `SUMMARY:${EVENT_TITLE}`,
+    `LOCATION:${EVENT_LOCATION.replace(/,/g, "\\,")}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+
+  const blob = new Blob([fileContent], { type: "text/calendar;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+
+  anchor.href = url;
+  anchor.download = "walimatulurus-nasuhah-iskandar.ics";
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
+function getGoogleCalendarHref() {
+  const params = new URLSearchParams({
+    action: "TEMPLATE",
+    text: EVENT_TITLE,
+    dates: `${formatCalendarDate(EVENT_START)}/${formatCalendarDate(EVENT_END)}`,
+    location: EVENT_LOCATION,
+  });
+
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+export function DateSection() {
+  const titleId = useId();
+  const descriptionId = useId();
+  const [countdown, setCountdown] = useState(ZERO_COUNTDOWN);
+
+  useEffect(() => {
+    setCountdown(getCountdownParts());
+
+    const intervalId = window.setInterval(() => {
+      setCountdown(getCountdownParts());
+    }, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  return (
+    <section className="flex w-full flex-col items-center text-center">
+      <div className="w-full space-y-8">
+        <div className="space-y-3">
+          <p className="text-sm font-medium uppercase tracking-[0.28em] text-muted-foreground">
+            Tarikh
+          </p>
+          <p className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
+            16.06.2026
+          </p>
+        </div>
+
+        <Calendar
+          mode="single"
+          month={EVENT_START}
+          selected={EVENT_START}
+          disableNavigation
+          fixedWeeks
+          hideNavigation
+          className="mx-auto bg-transparent p-0"
+          classNames={{
+            root: "w-fit",
+            month: "w-fit gap-3",
+            month_caption: "h-auto px-0 justify-center",
+            caption_label:
+              "font-heading text-2xl tracking-[-0.04em] text-foreground",
+            weekdays: "mt-2",
+            weekday:
+              "text-center text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground",
+            week: "mt-2",
+            day: "p-0",
+            day_button:
+              "pointer-events-none h-10 w-10 rounded-full text-sm font-medium data-[selected-single=true]:shadow-[0_12px_30px_rgba(0,0,0,0.14)]",
+          }}
+          formatters={{
+            formatCaption: () => "Jun 2026",
+            formatWeekdayName: (date) =>
+              ["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][date.getDay()],
+          }}
+        />
+
+        <div className="space-y-4">
+          <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">
+            Detik ke majlis
+          </p>
+          <div className="grid grid-cols-4 gap-3">
+            {[
+              { label: "D", value: countdown.days },
+              { label: "H", value: countdown.hours },
+              { label: "M", value: countdown.minutes },
+              { label: "S", value: countdown.seconds },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-[1.5rem] border border-border/70 bg-background px-2 py-4 shadow-sm"
+              >
+                <p className="font-heading text-3xl leading-none tracking-[-0.04em] text-foreground">
+                  {item.value}
+                </p>
+                <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                  {item.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button
+              type="button"
+              variant="outline"
+              className="h-12 w-full rounded-full border-border bg-background text-sm uppercase tracking-[0.18em] text-foreground"
+            >
+              <CalendarDays className="size-4" />
+              Simpan di kalendar
+            </Button>
+          </DrawerTrigger>
+
+          <DrawerContent
+            aria-describedby={descriptionId}
+            aria-labelledby={titleId}
+            className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border bg-card px-5 pb-8 pt-4"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div className="space-y-2 text-left">
+                <DrawerTitle
+                  id={titleId}
+                  className="font-heading text-2xl tracking-[-0.04em] text-foreground"
+                >
+                  Simpan di kalendar
+                </DrawerTitle>
+                <DrawerDescription
+                  id={descriptionId}
+                  className="text-sm leading-6 text-muted-foreground"
+                >
+                  Tambah majlis pada 16 Jun 2026, 11:00 pagi hingga 5:00 petang.
+                </DrawerDescription>
+              </div>
+
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  className="flex size-10 items-center justify-center rounded-full border border-border/70 bg-background text-muted-foreground transition-colors hover:text-foreground"
+                  aria-label="Tutup"
+                >
+                  <X className="size-4" />
+                </button>
+              </DrawerClose>
+            </div>
+
+            <div className="mt-6 space-y-3">
+              <DrawerClose asChild>
+                <a
+                  href={getGoogleCalendarHref()}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                >
+                  <div>
+                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                      Google
+                    </p>
+                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                      Google Calendar
+                    </p>
+                  </div>
+                  <ChevronRight className="size-5 text-muted-foreground" />
+                </a>
+              </DrawerClose>
+
+              <DrawerClose asChild>
+                <button
+                  type="button"
+                  onClick={downloadAppleCalendarFile}
+                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                >
+                  <div>
+                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                      Apple
+                    </p>
+                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                      Apple Calendar
+                    </p>
+                  </div>
+                  <Download className="size-5 text-muted-foreground" />
+                </button>
+              </DrawerClose>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </section>
+  );
+}
