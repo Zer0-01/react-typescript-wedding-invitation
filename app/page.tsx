@@ -1,6 +1,8 @@
 import { DateSection } from "@/app/sections/date-section";
 import { GreetingSection } from "@/app/sections/greeting-section";
+import { TentativeSection } from "@/app/sections/tentative-section";
 import { TitleSection } from "@/app/sections/title-section";
+import { VenueSection } from "@/app/sections/venue-section";
 
 export default function Home() {
   return (
@@ -9,6 +11,8 @@ export default function Home() {
         <TitleSection />
         <GreetingSection />
         <DateSection />
+        <TentativeSection />
+        <VenueSection />
       </div>
     </main>
   );
