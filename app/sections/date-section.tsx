@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarDays, ChevronRight, Download, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
+  DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
@@ -84,13 +85,9 @@ function getGoogleCalendarHref() {
 }
 
 export function DateSection() {
-  const titleId = useId();
-  const descriptionId = useId();
-  const [countdown, setCountdown] = useState(ZERO_COUNTDOWN);
+  const [countdown, setCountdown] = useState(getCountdownParts);
 
   useEffect(() => {
-    setCountdown(getCountdownParts());
-
     const intervalId = window.setInterval(() => {
       setCountdown(getCountdownParts());
     }, 1000);
@@ -177,27 +174,16 @@ export function DateSection() {
             </Button>
           </DrawerTrigger>
 
-          <DrawerContent
-            aria-describedby={descriptionId}
-            aria-labelledby={titleId}
-            className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border bg-card px-5 pb-8 pt-4"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="space-y-2 text-left">
-                <DrawerTitle
-                  id={titleId}
-                  className="font-heading text-2xl tracking-[-0.04em] text-foreground"
-                >
+          <DrawerContent className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border bg-card px-5 pb-8 pt-4">
+            <DrawerHeader className="flex-row items-start justify-between gap-4 px-0 pb-0 pt-0 text-left">
+              <div className="space-y-2">
+                <DrawerTitle className="font-heading text-2xl tracking-[-0.04em] text-foreground">
                   Simpan di kalendar
                 </DrawerTitle>
-                <DrawerDescription
-                  id={descriptionId}
-                  className="text-sm leading-6 text-muted-foreground"
-                >
+                <DrawerDescription className="text-sm leading-6 text-muted-foreground">
                   Tambah majlis pada 16 Jun 2026, 11:00 pagi hingga 5:00 petang.
                 </DrawerDescription>
               </div>
-
               <DrawerClose asChild>
                 <button
                   type="button"
@@ -207,7 +193,7 @@ export function DateSection() {
                   <X className="size-4" />
                 </button>
               </DrawerClose>
-            </div>
+            </DrawerHeader>
 
             <div className="mt-6 space-y-3">
               <DrawerClose asChild>
