@@ -1,6 +1,7 @@
 import { MessageCircle, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const CONTACTS = [
   {
@@ -44,48 +45,50 @@ export function ContactSection() {
 
         <div className="space-y-4">
           {CONTACTS.map((contact) => (
-            <div
+            <Card
               key={contact.phoneLink}
-              className="rounded-[1.75rem] border border-border/70 bg-background px-5 py-5 text-left shadow-sm"
+              className="rounded-[1.75rem] bg-background py-0 text-left shadow-sm ring-border/70"
             >
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                {contact.relation}
-              </p>
-              <p className="mt-2 font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
-                {contact.name}
-              </p>
-              <p className="mt-2 text-base text-muted-foreground">
-                {contact.phoneDisplay}
-              </p>
+              <CardContent className="px-5 py-5">
+                <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                  {contact.relation}
+                </p>
+                <p className="mt-2 font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
+                  {contact.name}
+                </p>
+                <p className="mt-2 text-base text-muted-foreground">
+                  {contact.phoneDisplay}
+                </p>
 
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-11 rounded-full border-border bg-background text-sm uppercase tracking-[0.16em] text-foreground"
-                >
-                  <a
-                    href={`https://wa.me/${contact.phoneLink}`}
-                    target="_blank"
-                    rel="noreferrer"
+                <div className="mt-5 grid grid-cols-2 gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-11 rounded-full border-border bg-background text-sm uppercase tracking-[0.16em] text-foreground"
                   >
-                    <MessageCircle className="size-4" />
-                    WhatsApp
-                  </a>
-                </Button>
+                    <a
+                      href={`https://wa.me/${contact.phoneLink}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <MessageCircle className="size-4" />
+                      WhatsApp
+                    </a>
+                  </Button>
 
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-11 rounded-full border-border bg-background text-sm uppercase tracking-[0.16em] text-foreground"
-                >
-                  <a href={`tel:${contact.phoneLink}`}>
-                    <Phone className="size-4" />
-                    Call
-                  </a>
-                </Button>
-              </div>
-            </div>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-11 rounded-full border-border bg-background text-sm uppercase tracking-[0.16em] text-foreground"
+                  >
+                    <a href={`tel:${contact.phoneLink}`}>
+                      <Phone className="size-4" />
+                      Call
+                    </a>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

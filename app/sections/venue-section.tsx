@@ -3,6 +3,7 @@
 import { ChevronRight, MapPinned, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerClose,
@@ -30,16 +31,18 @@ export function VenueSection() {
           </h2>
         </div>
 
-        <div className="rounded-[1.75rem] border border-border/70 bg-background px-6 py-7 shadow-sm">
-          <p className="font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
-            Dewan Serbaguna Surau Abu Bakar
-          </p>
-          <p className="mt-2 text-base leading-7 text-muted-foreground">
-            As-Siddiq Taman Evergreen Heights
-            <br />
-            83000 Batu Pahat, Johor
-          </p>
-        </div>
+        <Card className="rounded-[1.75rem] bg-background py-0 shadow-sm ring-border/70">
+          <CardContent className="px-6 py-7">
+            <p className="font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
+              Dewan Serbaguna Surau Abu Bakar
+            </p>
+            <p className="mt-2 text-base leading-7 text-muted-foreground">
+              As-Siddiq Taman Evergreen Heights
+              <br />
+              83000 Batu Pahat, Johor
+            </p>
+          </CardContent>
+        </Card>
 
         <Drawer>
           <DrawerTrigger asChild>
@@ -80,17 +83,21 @@ export function VenueSection() {
                   href={GOOGLE_MAPS_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                  className="block w-full text-left"
                 >
-                  <div>
-                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                      Google
-                    </p>
-                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
-                      Google Maps
-                    </p>
-                  </div>
-                  <ChevronRight className="size-5 text-muted-foreground" />
+                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                    <CardContent className="flex items-center justify-between px-4 py-4">
+                      <div>
+                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                          Google
+                        </p>
+                        <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                          Google Maps
+                        </p>
+                      </div>
+                      <ChevronRight className="size-5 text-muted-foreground" />
+                    </CardContent>
+                  </Card>
                 </a>
               </DrawerClose>
 
@@ -99,17 +106,21 @@ export function VenueSection() {
                   href={WAZE_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                  className="block w-full text-left"
                 >
-                  <div>
-                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                      Waze
-                    </p>
-                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
-                      Waze
-                    </p>
-                  </div>
-                  <ChevronRight className="size-5 text-muted-foreground" />
+                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                    <CardContent className="flex items-center justify-between px-4 py-4">
+                      <div>
+                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                          Waze
+                        </p>
+                        <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                          Waze
+                        </p>
+                      </div>
+                      <ChevronRight className="size-5 text-muted-foreground" />
+                    </CardContent>
+                  </Card>
                 </a>
               </DrawerClose>
             </div>

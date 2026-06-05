@@ -1,3 +1,5 @@
+import { Card, CardContent } from "@/components/ui/card";
+
 const TENTATIVE_ITEMS = [
   {
     title: "Jamuan makan",
@@ -24,17 +26,19 @@ export function TentativeSection() {
 
         <div className="space-y-3">
           {TENTATIVE_ITEMS.map((item) => (
-            <div
+            <Card
               key={item.title}
-              className="rounded-[1.5rem] border border-border/70 bg-background px-5 py-5 shadow-sm"
+              className="rounded-[1.5rem] bg-background py-0 shadow-sm ring-border/70"
             >
-              <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                {item.title}
-              </p>
-              <p className="mt-2 font-heading text-2xl tracking-[-0.03em] text-foreground">
-                {item.time}
-              </p>
-            </div>
+              <CardContent className="px-5 py-5">
+                <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                  {item.title}
+                </p>
+                <p className="mt-2 font-heading text-2xl tracking-[-0.03em] text-foreground">
+                  {item.time}
+                </p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

@@ -5,6 +5,7 @@ import { CalendarDays, ChevronRight, Download, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Drawer,
   DrawerClose,
@@ -147,17 +148,19 @@ export function DateSection() {
               { label: "M", value: countdown.minutes },
               { label: "S", value: countdown.seconds },
             ].map((item) => (
-              <div
+              <Card
                 key={item.label}
-                className="rounded-[1.5rem] border border-border/70 bg-background px-2 py-4 shadow-sm"
+                className="rounded-[1.5rem] bg-background py-0 shadow-sm ring-border/70"
               >
-                <p className="font-heading text-3xl leading-none tracking-[-0.04em] text-foreground">
-                  {item.value}
-                </p>
-                <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
-                  {item.label}
-                </p>
-              </div>
+                <CardContent className="px-2 py-4">
+                  <p className="font-heading text-3xl leading-none tracking-[-0.04em] text-foreground">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                    {item.label}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
@@ -201,17 +204,21 @@ export function DateSection() {
                   href={getGoogleCalendarHref()}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                  className="block w-full text-left"
                 >
-                  <div>
-                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                      Google
-                    </p>
-                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
-                      Google Calendar
-                    </p>
-                  </div>
-                  <ChevronRight className="size-5 text-muted-foreground" />
+                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                    <CardContent className="flex items-center justify-between px-4 py-4">
+                      <div>
+                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                          Google
+                        </p>
+                        <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                          Google Calendar
+                        </p>
+                      </div>
+                      <ChevronRight className="size-5 text-muted-foreground" />
+                    </CardContent>
+                  </Card>
                 </a>
               </DrawerClose>
 
@@ -219,17 +226,21 @@ export function DateSection() {
                 <button
                   type="button"
                   onClick={downloadAppleCalendarFile}
-                  className="flex w-full items-center justify-between rounded-[1.5rem] border border-border/70 bg-background px-4 py-4 text-left transition-colors hover:bg-muted/60"
+                  className="block w-full text-left"
                 >
-                  <div>
-                    <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
-                      Apple
-                    </p>
-                    <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
-                      Apple Calendar
-                    </p>
-                  </div>
-                  <Download className="size-5 text-muted-foreground" />
+                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                    <CardContent className="flex items-center justify-between px-4 py-4">
+                      <div>
+                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                          Apple
+                        </p>
+                        <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
+                          Apple Calendar
+                        </p>
+                      </div>
+                      <Download className="size-5 text-muted-foreground" />
+                    </CardContent>
+                  </Card>
                 </button>
               </DrawerClose>
             </div>
