@@ -9,7 +9,7 @@ import { VenueSection } from "@/app/sections/venue-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background px-4">
+    <main className="min-h-screen bg-background">
       <div className="mx-auto flex w-full max-w-[430px] flex-col items-center gap-0 text-center">
         <TitleSection />
         <GreetingSection />

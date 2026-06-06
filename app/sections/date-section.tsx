@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { CalendarDays, ChevronRight, Download, X } from "lucide-react";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -111,10 +112,16 @@ export function DateSection() {
   );
 
   return (
-    <section className="flex w-full flex-col items-center text-center">
-      <div className="w-full space-y-8">
+    <section className="w-full bg-[#efdbdb] px-6 py-12 text-center">
+      <motion.div
+        className="w-full space-y-8"
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.25 }}
+      >
         <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
             Tarikh
           </p>
           <p className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
@@ -122,37 +129,39 @@ export function DateSection() {
           </p>
         </div>
 
-        <Calendar
-          mode="single"
-          month={EVENT_START}
-          selected={EVENT_START}
-          disableNavigation
-          fixedWeeks
-          hideNavigation
-          className="mx-auto bg-transparent p-0"
-          classNames={{
-            root: "w-fit",
-            month: "w-fit gap-3",
-            month_caption: "h-auto px-0 justify-center",
-            caption_label:
-              "font-heading text-2xl tracking-[-0.04em] text-foreground",
-            weekdays: "mt-2",
-            weekday:
-              "text-center text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground",
-            week: "mt-2",
-            day: "p-0",
-            day_button:
-              "pointer-events-none h-10 w-10 rounded-full text-sm font-medium data-[selected-single=true]:shadow-[0_12px_30px_rgba(0,0,0,0.14)]",
-          }}
-          formatters={{
-            formatCaption: () => "Jun 2026",
-            formatWeekdayName: (date) =>
-              ["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][date.getDay()],
-          }}
-        />
+        <div className="rounded-[2rem] bg-background/55 px-5 py-6 backdrop-blur-sm">
+          <Calendar
+            mode="single"
+            month={EVENT_START}
+            selected={EVENT_START}
+            disableNavigation
+            fixedWeeks
+            hideNavigation
+            className="mx-auto bg-transparent p-0"
+            classNames={{
+              root: "w-fit",
+              month: "w-fit gap-3",
+              month_caption: "h-auto px-0 justify-center",
+              caption_label:
+                "font-heading text-2xl tracking-[-0.04em] text-foreground",
+              weekdays: "mt-3",
+              weekday:
+                "text-center text-[11px] font-medium uppercase tracking-[0.18em] text-foreground/55",
+              week: "mt-2.5",
+              day: "p-0",
+              day_button:
+                "pointer-events-none h-10 w-10 rounded-full text-sm font-medium text-foreground data-[selected-single=true]:bg-primary data-[selected-single=true]:text-primary-foreground data-[selected-single=true]:shadow-[0_14px_24px_rgba(40,24,18,0.18)]",
+            }}
+            formatters={{
+              formatCaption: () => "Jun 2026",
+              formatWeekdayName: (date) =>
+                ["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][date.getDay()],
+            }}
+          />
+        </div>
 
         <div className="space-y-4">
-          <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">
+          <p className="text-sm font-medium uppercase tracking-[0.24em] text-foreground/65">
             Detik ke majlis
           </p>
           <div className="grid grid-cols-4 gap-3">
@@ -164,13 +173,13 @@ export function DateSection() {
             ].map((item) => (
               <Card
                 key={item.label}
-                className="rounded-[1.5rem] bg-background py-0 shadow-sm ring-border/70"
+                className="rounded-[1.5rem] border-0 bg-[#f7ead4] py-0 shadow-none"
               >
                 <CardContent className="px-2 py-4">
                   <p className="font-heading text-3xl leading-none tracking-[-0.04em] text-foreground">
                     {item.value}
                   </p>
-                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground">
+                  <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.28em] text-foreground/55">
                     {item.label}
                   </p>
                 </CardContent>
@@ -183,8 +192,7 @@ export function DateSection() {
           <DrawerTrigger asChild>
             <Button
               type="button"
-              variant="outline"
-              className="h-12 w-full rounded-full border-border bg-background text-sm uppercase tracking-[0.18em] text-foreground"
+              className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
             >
               <CalendarDays className="size-4" />
               Simpan di kalendar
@@ -260,7 +268,7 @@ export function DateSection() {
             </div>
           </DrawerContent>
         </Drawer>
-      </div>
+      </motion.div>
     </section>
   );
 }
