@@ -12,6 +12,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { MessageCircleMore } from "lucide-react";
+import { motion } from "motion/react";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -165,10 +166,16 @@ export function MessageSection() {
   });
 
   return (
-    <section className="flex w-full flex-col items-center text-center">
-      <div className="w-full space-y-8">
+    <section className="w-full bg-[#f8f6f2] px-6 py-12 text-center">
+      <motion.div
+        className="w-full space-y-8"
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.25 }}
+      >
         <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
             Ucapan dan Doa
           </p>
           <h2 className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
@@ -176,188 +183,202 @@ export function MessageSection() {
           </h2>
         </div>
 
-        <Card className="rounded-[1.75rem] bg-background py-0 text-left shadow-sm ring-border/70">
-          <CardContent className="space-y-6 px-5 py-6">
-            <form
-              className="space-y-5"
-              onSubmit={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                void form.handleSubmit();
-              }}
-            >
-              <form.Field
-                name="name"
-                validators={{
-                  onBlur: ({ value }) => validateName(value),
-                  onChange: ({ value }) => validateName(value),
-                  onSubmit: ({ value }) => validateName(value),
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.35 }}
+        >
+          <Card className="rounded-[1.75rem] border-0 bg-background py-0 text-left shadow-none">
+            <CardContent className="space-y-8 px-5 py-6">
+              <form
+                className="space-y-5"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  void form.handleSubmit();
                 }}
               >
-                {(field) => {
-                  const showError =
-                    (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
-                    !field.state.meta.isValid;
-                  const errorMessage = getFieldError(field.state.meta.errors);
-
-                  return (
-                    <div className="space-y-2">
-                      <label
-                        htmlFor={field.name}
-                        className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
-                      >
-                        Nama
-                      </label>
-                      <input
-                        id={field.name}
-                        name={field.name}
-                        type="text"
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(event) => field.handleChange(event.target.value)}
-                        aria-invalid={showError}
-                        aria-describedby={showError ? `${field.name}-error` : undefined}
-                        className={cn(
-                          "flex h-12 w-full rounded-full border bg-background px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
-                          showError ? "border-destructive" : "border-border",
-                        )}
-                        placeholder="Masukkan nama anda"
-                      />
-                      {showError && errorMessage ? (
-                        <p
-                          id={`${field.name}-error`}
-                          className="text-sm text-destructive"
-                        >
-                          {errorMessage}
-                        </p>
-                      ) : null}
-                    </div>
-                  );
-                }}
-              </form.Field>
-
-              <form.Field
-                name="message"
-                validators={{
-                  onBlur: ({ value }) => validateMessage(value),
-                  onChange: ({ value }) => validateMessage(value),
-                  onSubmit: ({ value }) => validateMessage(value),
-                }}
-              >
-                {(field) => {
-                  const showError =
-                    (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
-                    !field.state.meta.isValid;
-                  const errorMessage = getFieldError(field.state.meta.errors);
-
-                  return (
-                    <div className="space-y-2">
-                      <label
-                        htmlFor={field.name}
-                        className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
-                      >
-                        Ucapan dan doa
-                      </label>
-                      <textarea
-                        id={field.name}
-                        name={field.name}
-                        value={field.state.value}
-                        onBlur={field.handleBlur}
-                        onChange={(event) => field.handleChange(event.target.value)}
-                        aria-invalid={showError}
-                        aria-describedby={showError ? `${field.name}-error` : undefined}
-                        className={cn(
-                          "flex min-h-32 w-full rounded-[1.5rem] border bg-background px-4 py-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
-                          showError ? "border-destructive" : "border-border",
-                        )}
-                        placeholder="Titipkan ucapan dan doa anda"
-                      />
-                      {showError && errorMessage ? (
-                        <p
-                          id={`${field.name}-error`}
-                          className="text-sm text-destructive"
-                        >
-                          {errorMessage}
-                        </p>
-                      ) : null}
-                    </div>
-                  );
-                }}
-              </form.Field>
-
-              <form.Subscribe selector={(state) => state.isSubmitting}>
-                {(isSubmitting) => (
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={isSubmitting}
-                    className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
-                  >
-                    {isSubmitting ? "Menghantar..." : "Hantar Ucapan"}
-                  </Button>
-                )}
-              </form.Subscribe>
-            </form>
-
-            <div className="space-y-3">
-              <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Pesanan tetamu
-              </p>
-
-              <div
-                ref={scrollContainerRef}
-                className="flex h-80 flex-col gap-3 overflow-y-auto rounded-[1.5rem] border border-border bg-muted/50 px-3 py-4"
-              >
-                {isMessagesLoading ? (
-                  <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                    Memuatkan ucapan...
-                  </div>
-                ) : messages.length === 0 ? (
-                  <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center text-muted-foreground">
-                    <MessageCircleMore className="size-6" />
-                    <p className="text-sm leading-6">
-                      Belum ada ucapan lagi. Jadilah tetamu pertama yang
-                      meninggalkan doa dan pesanan.
-                    </p>
-                  </div>
-                ) : (
-                  messages.map((message) => {
-                    const bubbleStyle = getBubbleStyle(message.id);
+                <form.Field
+                  name="name"
+                  validators={{
+                    onBlur: ({ value }) => validateName(value),
+                    onChange: ({ value }) => validateName(value),
+                    onSubmit: ({ value }) => validateName(value),
+                  }}
+                >
+                  {(field) => {
+                    const showError =
+                      (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
+                      !field.state.meta.isValid;
+                    const errorMessage = getFieldError(field.state.meta.errors);
 
                     return (
-                      <div key={message.id} className="flex w-full justify-start">
-                        <div
-                          className={cn(
-                            "max-w-[85%] rounded-[1.5rem] px-4 py-3 shadow-sm",
-                            bubbleStyle.bubbleClassName,
-                          )}
+                      <div className="space-y-2">
+                        <label
+                          htmlFor={field.name}
+                          className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
                         >
+                          Nama
+                        </label>
+                        <input
+                          id={field.name}
+                          name={field.name}
+                          type="text"
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(event) => field.handleChange(event.target.value)}
+                          aria-invalid={showError}
+                          aria-describedby={showError ? `${field.name}-error` : undefined}
+                          className={cn(
+                            "flex h-12 w-full rounded-full border bg-background px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+                            showError ? "border-destructive" : "border-border",
+                          )}
+                          placeholder="Masukkan nama anda"
+                        />
+                        {showError && errorMessage ? (
                           <p
-                            className={cn(
-                              "text-xs font-medium uppercase tracking-[0.18em]",
-                              bubbleStyle.nameClassName,
-                            )}
+                            id={`${field.name}-error`}
+                            className="text-sm text-destructive"
                           >
-                            {message.name}
+                            {errorMessage}
                           </p>
-                          <p
-                            className={cn(
-                              "mt-2 text-sm leading-6 whitespace-pre-wrap",
-                              bubbleStyle.messageClassName,
-                            )}
-                          >
-                            {message.message}
-                          </p>
-                        </div>
+                        ) : null}
                       </div>
                     );
-                  })
-                )}
+                  }}
+                </form.Field>
+
+                <form.Field
+                  name="message"
+                  validators={{
+                    onBlur: ({ value }) => validateMessage(value),
+                    onChange: ({ value }) => validateMessage(value),
+                    onSubmit: ({ value }) => validateMessage(value),
+                  }}
+                >
+                  {(field) => {
+                    const showError =
+                      (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
+                      !field.state.meta.isValid;
+                    const errorMessage = getFieldError(field.state.meta.errors);
+
+                    return (
+                      <div className="space-y-2">
+                        <label
+                          htmlFor={field.name}
+                          className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
+                        >
+                          Ucapan dan doa
+                        </label>
+                        <textarea
+                          id={field.name}
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(event) => field.handleChange(event.target.value)}
+                          aria-invalid={showError}
+                          aria-describedby={showError ? `${field.name}-error` : undefined}
+                          className={cn(
+                            "flex min-h-32 w-full rounded-[1.5rem] border bg-background px-4 py-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+                            showError ? "border-destructive" : "border-border",
+                          )}
+                          placeholder="Titipkan ucapan dan doa anda"
+                        />
+                        {showError && errorMessage ? (
+                          <p
+                            id={`${field.name}-error`}
+                            className="text-sm text-destructive"
+                          >
+                            {errorMessage}
+                          </p>
+                        ) : null}
+                      </div>
+                    );
+                  }}
+                </form.Field>
+
+                <form.Subscribe selector={(state) => state.isSubmitting}>
+                  {(isSubmitting) => (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={isSubmitting}
+                      className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
+                    >
+                      {isSubmitting ? "Menghantar..." : "Hantar Ucapan"}
+                    </Button>
+                  )}
+                </form.Subscribe>
+              </form>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                    Pesanan tetamu
+                  </p>
+                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                    {isMessagesLoading ? "..." : messages.length}
+                  </span>
+                </div>
+
+                <div
+                  ref={scrollContainerRef}
+                  className="flex h-80 flex-col gap-3 overflow-y-auto rounded-[1.5rem] bg-muted/55 px-3 py-4"
+                >
+                  {isMessagesLoading ? (
+                    <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                      Memuatkan ucapan...
+                    </div>
+                  ) : messages.length === 0 ? (
+                    <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center text-muted-foreground">
+                      <div className="flex size-12 items-center justify-center rounded-full bg-background">
+                        <MessageCircleMore className="size-6" />
+                      </div>
+                      <p className="text-sm leading-6">
+                        Belum ada ucapan lagi. Jadilah tetamu pertama yang
+                        meninggalkan doa dan pesanan.
+                      </p>
+                    </div>
+                  ) : (
+                    messages.map((message) => {
+                      const bubbleStyle = getBubbleStyle(message.id);
+
+                      return (
+                        <div key={message.id} className="flex w-full justify-start">
+                          <div
+                            className={cn(
+                              "max-w-[85%] rounded-[1.5rem] px-4 py-3 shadow-sm",
+                              bubbleStyle.bubbleClassName,
+                            )}
+                          >
+                            <p
+                              className={cn(
+                                "text-xs font-medium uppercase tracking-[0.18em]",
+                                bubbleStyle.nameClassName,
+                              )}
+                            >
+                              {message.name}
+                            </p>
+                            <p
+                              className={cn(
+                                "mt-2 text-sm leading-6 whitespace-pre-wrap",
+                                bubbleStyle.messageClassName,
+                              )}
+                            >
+                              {message.message}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
