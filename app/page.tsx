@@ -1,6 +1,7 @@
 import { DateSection } from "@/app/sections/date-section";
 import { ContactSection } from "@/app/sections/contact-section";
 import { GreetingSection } from "@/app/sections/greeting-section";
+import { MessageSection } from "@/app/sections/message-section";
 import { RsvpSection } from "@/app/sections/rsvp-section";
 import { TentativeSection } from "@/app/sections/tentative-section";
 import { TitleSection } from "@/app/sections/title-section";
@@ -16,6 +17,7 @@ export default function Home() {
         <TentativeSection />
         <VenueSection />
         <RsvpSection />
+        <MessageSection />
         <ContactSection />
       </div>
     </main>
