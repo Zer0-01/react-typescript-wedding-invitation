@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { firestore } from "@/lib/firebase";
 import { cn } from "@/lib/utils";
 
 const ATTENDANCE_VALUES = ["ya", "tidak"] as const;
@@ -23,8 +26,8 @@ type RsvpFormValues = {
 };
 
 type SubmittedRsvp = {
-  nama: string;
-  hadir: AttendanceValue;
+  name: string;
+  isAttend: boolean;
 };
 
 const namaSchema = z.string().trim().min(1, "Sila masukkan nama.");
@@ -56,15 +59,31 @@ function getFieldError(errors: unknown[]) {
 export function RsvpSection() {
   const [submittedRsvp, setSubmittedRsvp] = useState<SubmittedRsvp | null>(null);
 
-  const form = useForm({
-    defaultValues: {
-      nama: "",
-      hadir: "",
-    } satisfies RsvpFormValues,
-    onSubmit: ({ value }) => {
-      const parsedValue = rsvpSchema.parse(value);
+  const defaultValues: RsvpFormValues = {
+    nama: "",
+    hadir: "",
+  };
 
-      setSubmittedRsvp(parsedValue);
+  const form = useForm({
+    defaultValues,
+    onSubmit: async ({ value }) => {
+      const parsedValue = rsvpSchema.parse(value);
+      const submittedRsvp = {
+        name: parsedValue.nama,
+        isAttend: parsedValue.hadir === "ya",
+      } satisfies SubmittedRsvp;
+
+      try {
+        await addDoc(collection(firestore, "rsvpMil"), {
+          ...submittedRsvp,
+          timestamp: serverTimestamp(),
+        });
+
+        setSubmittedRsvp(submittedRsvp);
+        toast.success("RSVP berjaya dihantar.");
+      } catch {
+        toast.error("RSVP tidak berjaya dihantar. Sila cuba lagi.");
+      }
     },
   });
 
@@ -88,12 +107,12 @@ export function RsvpSection() {
                   RSVP diterima
                 </p>
                 <p className="font-heading text-3xl leading-tight tracking-[-0.03em] text-foreground">
-                  Terima kasih, {submittedRsvp.nama}
+                  Terima kasih, {submittedRsvp.name}
                 </p>
                 <p className="text-base leading-7 text-muted-foreground">
                   Kehadiran anda:{" "}
                   <span className="font-medium text-foreground">
-                    {submittedRsvp.hadir === "ya" ? "Ya, hadir" : "Tidak hadir"}
+                    {submittedRsvp.isAttend ? "Ya, hadir" : "Tidak hadir"}
                   </span>
                 </p>
               </div>
@@ -226,7 +245,7 @@ export function RsvpSection() {
                       disabled={isSubmitting}
                       className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
                     >
-                      Hantar RSVP
+                      {isSubmitting ? "Menghantar..." : "Hantar RSVP"}
                     </Button>
                   )}
                 </form.Subscribe>

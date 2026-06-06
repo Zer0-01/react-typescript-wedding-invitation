@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { CalendarDays, ChevronRight, Download, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -22,21 +22,31 @@ const EVENT_LOCATION =
 const EVENT_START = new Date("2026-06-16T11:00:00+08:00");
 const EVENT_END = new Date("2026-06-16T17:00:00+08:00");
 const ZERO_COUNTDOWN = { days: "00", hours: "00", minutes: "00", seconds: "00" };
+let cachedCountdownTotalSeconds = -1;
+let cachedCountdownSnapshot = ZERO_COUNTDOWN;
 
 function getCountdownParts(now = new Date()) {
   const remainingMs = Math.max(EVENT_START.getTime() - now.getTime(), 0);
   const totalSeconds = Math.floor(remainingMs / 1000);
+
+  if (totalSeconds === cachedCountdownTotalSeconds) {
+    return cachedCountdownSnapshot;
+  }
+
   const days = Math.floor(totalSeconds / 86400);
   const hours = Math.floor((totalSeconds % 86400) / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
   const seconds = totalSeconds % 60;
 
-  return {
+  cachedCountdownTotalSeconds = totalSeconds;
+  cachedCountdownSnapshot = {
     days: String(days).padStart(2, "0"),
     hours: String(hours).padStart(2, "0"),
     minutes: String(minutes).padStart(2, "0"),
     seconds: String(seconds).padStart(2, "0"),
   };
+
+  return cachedCountdownSnapshot;
 }
 
 function formatCalendarDate(date: Date) {
@@ -85,16 +95,20 @@ function getGoogleCalendarHref() {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
+function subscribeToCountdown(onStoreChange: () => void) {
+  const intervalId = window.setInterval(() => {
+    onStoreChange();
+  }, 1000);
+
+  return () => window.clearInterval(intervalId);
+}
+
 export function DateSection() {
-  const [countdown, setCountdown] = useState(getCountdownParts);
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setCountdown(getCountdownParts());
-    }, 1000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
+  const countdown = useSyncExternalStore(
+    subscribeToCountdown,
+    getCountdownParts,
+    () => ZERO_COUNTDOWN,
+  );
 
   return (
     <section className="flex w-full flex-col items-center text-center">
