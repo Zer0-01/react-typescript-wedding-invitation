@@ -10,7 +10,7 @@ import { VenueSection } from "@/app/sections/venue-section";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      <div className="mx-auto flex w-full max-w-[430px] flex-col items-center gap-0 text-center">
+      <div className="mx-auto flex w-full max-w-[430px] flex-col items-center gap-0 text-center sm:shadow-[-18px_0_28px_rgba(0,0,0,0.08),18px_0_28px_rgba(0,0,0,0.08)]">
         <TitleSection />
         <GreetingSection />
         <DateSection />
