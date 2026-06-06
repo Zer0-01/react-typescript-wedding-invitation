@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  addDoc,
+  collection,
+  getCountFromServer,
+  query,
+  serverTimestamp,
+  where,
+} from "firebase/firestore";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -56,8 +64,23 @@ function getFieldError(errors: unknown[]) {
   return typeof firstError === "string" ? firstError : undefined;
 }
 
+async function getAttendCount() {
+  const attendQuery = query(
+    collection(firestore, "rsvpMil"),
+    where("isAttend", "==", true),
+  );
+  const snapshot = await getCountFromServer(attendQuery);
+
+  return snapshot.data().count;
+}
+
 export function RsvpSection() {
   const [submittedRsvp, setSubmittedRsvp] = useState<SubmittedRsvp | null>(null);
+  const queryClient = useQueryClient();
+  const { data: attendCount, isLoading: isAttendCountLoading } = useQuery({
+    queryKey: ["rsvpMil", "attend-count"],
+    queryFn: getAttendCount,
+  });
 
   const defaultValues: RsvpFormValues = {
     nama: "",
@@ -79,6 +102,9 @@ export function RsvpSection() {
           timestamp: serverTimestamp(),
         });
 
+        await queryClient.invalidateQueries({
+          queryKey: ["rsvpMil", "attend-count"],
+        });
         setSubmittedRsvp(submittedRsvp);
         toast.success("RSVP berjaya dihantar.");
       } catch {
@@ -253,6 +279,13 @@ export function RsvpSection() {
             )}
           </CardContent>
         </Card>
+
+        <p className="text-sm leading-6 text-muted-foreground">
+          Tetamu yang hadir:{" "}
+          <span className="font-medium text-foreground">
+            {isAttendCountLoading ? "..." : attendCount ?? 0}
+          </span>
+        </p>
       </div>
     </section>
   );
