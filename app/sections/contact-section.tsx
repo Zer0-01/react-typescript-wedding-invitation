@@ -5,6 +5,12 @@ import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  calmViewport,
+  gentleContentReveal,
+  gentleItemReveal,
+  gentleSectionReveal,
+} from "@/lib/section-motion";
 
 const CONTACTS = [
   {
@@ -38,10 +44,8 @@ export function ContactSection() {
     <section className="w-full bg-background px-6 py-12 text-center">
       <motion.div
         className="w-full space-y-8"
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true, amount: 0.25 }}
+        {...gentleSectionReveal}
+        viewport={calmViewport}
       >
         <div className="space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
@@ -58,22 +62,14 @@ export function ContactSection() {
 
         <motion.div
           className="space-y-4"
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: true, amount: 0.35 }}
+          {...gentleContentReveal(0.18)}
+          viewport={{ ...calmViewport, amount: 0.3 }}
         >
           {CONTACTS.map((contact, index) => (
             <motion.div
               key={contact.phoneLink}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                delay: 0.16 + index * 0.06,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              viewport={{ once: true, amount: 0.35 }}
+              {...gentleItemReveal(0.22 + index * 0.08)}
+              viewport={{ ...calmViewport, amount: 0.3 }}
             >
               <Card className="rounded-[1.75rem] border-0 bg-background py-0 text-left shadow-none">
                 <CardContent className="px-5 py-5">

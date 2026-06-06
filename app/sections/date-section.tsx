@@ -16,6 +16,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { calmViewport, gentleSectionReveal } from "@/lib/section-motion";
 
 const EVENT_TITLE = "Walimatulurus Nasuhah dan Iskandar";
 const EVENT_LOCATION =
@@ -115,10 +116,8 @@ export function DateSection() {
     <section className="w-full bg-[#efdbdb] px-6 py-12 text-center">
       <motion.div
         className="w-full space-y-8"
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true, amount: 0.25 }}
+        {...gentleSectionReveal}
+        viewport={calmViewport}
       >
         <div className="space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">

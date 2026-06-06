@@ -3,6 +3,11 @@
 import { motion } from "motion/react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  calmViewport,
+  gentleContentReveal,
+  gentleSectionReveal,
+} from "@/lib/section-motion";
 
 const TENTATIVE_ITEMS = [
   {
@@ -20,10 +25,8 @@ export function TentativeSection() {
     <section className="w-full bg-[#efdbdb] px-6 py-12 text-center">
       <motion.div
         className="w-full space-y-8"
-        initial={{ opacity: 0, y: 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true, amount: 0.25 }}
+        {...gentleSectionReveal}
+        viewport={calmViewport}
       >
         <div className="space-y-3">
           <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
@@ -35,14 +38,8 @@ export function TentativeSection() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.6,
-            delay: 0.12,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          viewport={{ once: true, amount: 0.45 }}
+          {...gentleContentReveal(0.18)}
+          viewport={{ ...calmViewport, amount: 0.4 }}
         >
           <Card className="rounded-[1.75rem] border-0 bg-background/55 py-0 shadow-none backdrop-blur-sm">
             <CardContent className="px-5 py-5">
