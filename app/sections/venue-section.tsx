@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronRight, MapPinned, X } from "lucide-react";
+import { motion } from "motion/react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,15 +16,20 @@ import {
 } from "@/components/ui/drawer";
 
 const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/TdXTx87Jt6RkBAZTA";
-const WAZE_URL =
-  "https://waze.com/ul/hw234r1kbs";
+const WAZE_URL = "https://waze.com/ul/hw234r1kbs";
 
 export function VenueSection() {
   return (
-    <section className="flex w-full flex-col items-center text-center">
-      <div className="w-full space-y-8">
+    <section className="w-full bg-[#efdbdb] px-6 py-12 text-center">
+      <motion.div
+        className="w-full space-y-8"
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true, amount: 0.25 }}
+      >
         <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
             Lokasi
           </p>
           <h2 className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
@@ -31,25 +37,31 @@ export function VenueSection() {
           </h2>
         </div>
 
-        <Card className="rounded-[1.75rem] bg-background py-0 shadow-sm ring-border/70">
-          <CardContent className="px-6 py-7">
-            <p className="font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
-              Dewan Serbaguna Surau Abu Bakar
-            </p>
-            <p className="mt-2 text-base leading-7 text-muted-foreground">
-              As-Siddiq Taman Evergreen Heights
-              <br />
-              83000 Batu Pahat, Johor
-            </p>
-          </CardContent>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.45 }}
+        >
+          <Card className="rounded-[1.75rem] border-0 bg-background/55 py-0 shadow-none backdrop-blur-sm">
+            <CardContent className="px-6 py-7">
+              <p className="font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
+                Dewan Serbaguna Surau Abu Bakar
+              </p>
+              <p className="mt-2 text-base leading-7 text-foreground/65">
+                As-Siddiq Taman Evergreen Heights
+                <br />
+                83000 Batu Pahat, Johor
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
         <Drawer>
           <DrawerTrigger asChild>
             <Button
               type="button"
-              variant="outline"
-              className="h-12 w-full rounded-full border-border bg-background text-sm uppercase tracking-[0.18em] text-foreground"
+              className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
             >
               <MapPinned className="size-4" />
               Buka peta
@@ -126,7 +138,7 @@ export function VenueSection() {
             </div>
           </DrawerContent>
         </Drawer>
-      </div>
+      </motion.div>
     </section>
   );
 }
