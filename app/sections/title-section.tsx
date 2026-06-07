@@ -12,6 +12,7 @@ import {
   gentleItemReveal,
   ornamentReveal,
 } from "@/lib/section-motion";
+import { invitationDetails } from "@/lib/invitation-details";
 import { InvitationSection } from "@/app/sections/section-shell";
 
 export function TitleSection() {
@@ -40,7 +41,7 @@ export function TitleSection() {
             className="text-[0.72rem] font-semibold uppercase tracking-[0.38em] text-primary/58"
             {...editorialStaggerItem}
           >
-            Walimatulurus
+            {invitationDetails.eventLabel}
           </motion.p>
 
           <motion.div
@@ -58,14 +59,14 @@ export function TitleSection() {
               {...gentleItemReveal(0.08)}
               viewport={{ ...calmViewport, amount: 0.7 }}
             >
-              Dengan penuh syukur kami menjemput anda ke majlis perkahwinan
+              {invitationDetails.invitationLine}
             </motion.p>
             <motion.h1
               className="font-heading text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl"
               {...gentleContentReveal(0.16)}
               viewport={{ ...calmViewport, amount: 0.7 }}
             >
-              Nasuhah
+              {invitationDetails.brideFirstName}
             </motion.h1>
             <motion.p
               className="text-xs uppercase tracking-[0.5em] text-primary/72"
@@ -79,7 +80,7 @@ export function TitleSection() {
               {...gentleContentReveal(0.24)}
               viewport={{ ...calmViewport, amount: 0.7 }}
             >
-              Iskandar
+              {invitationDetails.groomFirstName}
             </motion.h2>
           </motion.div>
 
@@ -92,14 +93,14 @@ export function TitleSection() {
               {...gentleItemReveal(0.3)}
               viewport={{ ...calmViewport, amount: 0.7 }}
             >
-              16.06.2026
+              {invitationDetails.displayDate}
             </motion.div>
             <motion.p
               className="mx-auto max-w-xs text-sm leading-7 text-foreground/58"
               {...gentleItemReveal(0.38)}
               viewport={{ ...calmViewport, amount: 0.7 }}
             >
-              Sebuah pertemuan yang dirancang dengan sederhana, tenang, dan penuh kasih.
+              {invitationDetails.coverDescription}
             </motion.p>
           </motion.div>
         </motion.div>
