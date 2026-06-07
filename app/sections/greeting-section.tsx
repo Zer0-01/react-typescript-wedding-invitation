@@ -3,82 +3,76 @@
 import { motion } from "motion/react";
 import {
   calmViewport,
-  gentleContentReveal,
-  gentleItemReveal,
+  editorialStaggerContainer,
+  editorialStaggerItem,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
+import { InvitationSection, SectionIntro } from "@/app/sections/section-shell";
 
 export function GreetingSection() {
   return (
-    <section className="w-full bg-primary px-6 py-12 text-center text-primary-foreground">
+    <InvitationSection tone="accent" className="py-16" contentClassName="space-y-10">
       <motion.div
-        className="space-y-8"
+        className="space-y-10"
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <div className="space-y-4">
-          <motion.p
-            className="text-sm font-medium uppercase tracking-[0.18em] text-primary-foreground/70"
-            {...gentleItemReveal(0.12)}
-            viewport={{ ...calmViewport, amount: 0.45 }}
-          >
-            Bismillairrahminirrahim
-          </motion.p>
-          <motion.p
-            className="text-base uppercase tracking-[0.24em] text-primary-foreground"
-            {...gentleItemReveal(0.22)}
-            viewport={{ ...calmViewport, amount: 0.45 }}
-          >
-            Assalammualaikum
-          </motion.p>
-        </div>
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Bismillahirrahmanirrahim"
+            title="Assalamualaikum"
+            inverse
+            description="Dengan penuh kesyukuran ke hadrat Ilahi, kami menjemput Dato'/Datin/Tuan/Puan/Encik/Cik untuk bersama meraikan hari bahagia puteri kami."
+          />
+        </motion.div>
 
-        <motion.div
-          className="space-y-3"
-          {...gentleContentReveal(0.3)}
-          viewport={{ ...calmViewport, amount: 0.35 }}
-        >
-          <p className="font-heading text-3xl leading-tight tracking-[-0.03em] text-primary-foreground sm:text-4xl">
-            Ismail bin Salleh
-          </p>
-          <p className="text-sm font-medium uppercase tracking-[0.32em] text-primary-foreground/65">
-            &
-          </p>
-          <p className="font-heading text-3xl leading-tight tracking-[-0.03em] text-primary-foreground sm:text-4xl">
-            Rogayah@Intan Binti Md Said
-          </p>
+        <motion.div className="space-y-5" {...editorialStaggerContainer(0.08, 0.1)}>
+          <motion.p
+            className="text-[0.72rem] font-semibold uppercase tracking-[0.4em] text-primary-foreground/62"
+            {...editorialStaggerItem}
+          >
+            Tuan Rumah
+          </motion.p>
+          <motion.div
+            className="space-y-3"
+            {...editorialStaggerItem}
+          >
+            <p className="font-heading text-4xl leading-tight tracking-[-0.04em] text-primary-foreground sm:text-5xl">
+              Ismail bin Salleh
+            </p>
+            <p className="text-xs font-semibold uppercase tracking-[0.48em] text-primary-foreground/58">
+              &
+            </p>
+            <p className="font-heading text-4xl leading-tight tracking-[-0.04em] text-primary-foreground sm:text-5xl">
+              Rogayah@Intan Binti Md Said
+            </p>
+          </motion.div>
         </motion.div>
 
         <motion.div
-          className="mx-auto max-w-[20rem] space-y-6 text-sm leading-7 text-primary-foreground/78"
-          {...gentleContentReveal(0.42)}
+          className="mx-auto max-w-[22rem] space-y-6 rounded-[2rem] border border-white/10 bg-white/[0.06] px-6 py-7 text-sm leading-7 text-primary-foreground/78 backdrop-blur-[2px]"
+          {...softPanelReveal(0.18)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
-          <p>
-            Dengan penuh kesyukuran ke hadrat Ilahi, kami
-            <br />
-            menjemput yang berhormat
-            <br />
-            Dato&apos;/Datin/Tuan/Puan/Encik/Cik untuk ke majlis
-            <br />
-            perkahwinan puteri kesayangan kami
-          </p>
-
           <div className="space-y-3 text-primary-foreground">
-            <p className="font-heading text-3xl leading-tight tracking-[-0.03em] sm:text-4xl">
-              izyana nasuhah binti ismail
+            <p className="font-heading text-4xl leading-tight tracking-[-0.04em] sm:text-5xl">
+              Izyana Nasuhah
+              <br />
+              binti Ismail
             </p>
-            <p className="text-sm uppercase tracking-[0.24em] text-primary-foreground/65">
+            <p className="text-[0.72rem] uppercase tracking-[0.38em] text-primary-foreground/58">
               dengan pilihan hatinya
             </p>
-            <p className="font-heading text-3xl leading-tight tracking-[-0.03em] sm:text-4xl">
-              Muhammad Iskandar bin
+            <p className="font-heading text-4xl leading-tight tracking-[-0.04em] sm:text-5xl">
+              Muhammad Iskandar
               <br />
-              Zulkarnain
+              bin Zulkarnain
             </p>
           </div>
         </motion.div>
       </motion.div>
-    </section>
+    </InvitationSection>
   );
 }
