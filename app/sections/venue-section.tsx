@@ -23,6 +23,8 @@ import {
   calmViewport,
   gentleContentReveal,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 
 const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/TdXTx87Jt6RkBAZTA";
@@ -36,14 +38,16 @@ export function VenueSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Lokasi"
-          title="Bertempat di"
-          description="Majlis akan berlangsung di ruang yang nyaman dan mudah diakses untuk keluarga serta sahabat terdekat."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Lokasi"
+            title="Bertempat di"
+            description="Majlis akan berlangsung di ruang yang nyaman dan mudah diakses untuk keluarga serta sahabat terdekat."
+          />
+        </motion.div>
 
         <motion.div
-          {...gentleContentReveal(0.18)}
+          {...softPanelReveal(0.12)}
           viewport={{ ...calmViewport, amount: 0.4 }}
         >
           <SoftPanel className="px-6 py-7">
@@ -64,15 +68,17 @@ export function VenueSection() {
         </motion.div>
 
         <Drawer>
-          <DrawerTrigger asChild>
-            <Button
-              type="button"
-              className="h-12 w-full rounded-full border border-primary/10 bg-primary/92 text-sm uppercase tracking-[0.24em] shadow-[0_14px_34px_rgba(94,67,58,0.16)] hover:bg-primary"
-            >
-              <MapPinned className="size-4" />
-              Buka peta
-            </Button>
-          </DrawerTrigger>
+          <motion.div {...gentleContentReveal(0.18)} viewport={{ ...calmViewport, amount: 0.3 }}>
+            <DrawerTrigger asChild>
+              <Button
+                type="button"
+                className="h-12 w-full rounded-full border border-primary/10 bg-primary/92 text-sm uppercase tracking-[0.24em] shadow-[0_14px_34px_rgba(94,67,58,0.16)] hover:bg-primary"
+              >
+                <MapPinned className="size-4" />
+                Buka peta
+              </Button>
+            </DrawerTrigger>
+          </motion.div>
 
           <DrawerContent className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border/60 bg-card/96 px-5 pb-8 pt-4 backdrop-blur-sm">
             <DrawerHeader className="flex-row items-start justify-between gap-4 px-0 pb-0 pt-0 text-left">

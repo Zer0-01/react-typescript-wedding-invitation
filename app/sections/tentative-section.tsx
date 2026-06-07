@@ -9,9 +9,11 @@ import {
 } from "@/app/sections/section-shell";
 import {
   calmViewport,
-  gentleContentReveal,
-  gentleItemReveal,
+  editorialStaggerContainer,
+  editorialStaggerItem,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 
 const TENTATIVE_ITEMS = [
@@ -33,24 +35,28 @@ export function TentativeSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Tentatif"
-          title="Aturcara Majlis"
-          description="Susunan majlis direka santai agar setiap tetamu dapat hadir dan menikmati hari istimewa ini dengan tenang."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Tentatif"
+            title="Aturcara Majlis"
+            description="Susunan majlis direka santai agar setiap tetamu dapat hadir dan menikmati hari istimewa ini dengan tenang."
+          />
+        </motion.div>
 
         <motion.div
-          {...gentleContentReveal(0.18)}
+          {...softPanelReveal(0.12)}
           viewport={{ ...calmViewport, amount: 0.4 }}
         >
           <SoftPanel className="px-5 py-5 sm:px-6">
-            <div className="space-y-4 text-left">
+            <motion.div
+              className="space-y-4 text-left"
+              {...editorialStaggerContainer(0.08, 0.1)}
+            >
               {TENTATIVE_ITEMS.map((item, index) => (
                 <motion.div
                   key={item.title}
                   className={index === 0 ? "flex items-start justify-between gap-4" : "flex items-start justify-between gap-4 border-t border-foreground/10 pt-4"}
-                  {...gentleItemReveal(0.24 + index * 0.08)}
-                  viewport={{ ...calmViewport, amount: 0.4 }}
+                  {...editorialStaggerItem}
                 >
                   <div className="space-y-2">
                     <p className="text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-foreground/48">
@@ -62,7 +68,7 @@ export function TentativeSection() {
                   </p>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </SoftPanel>
         </motion.div>
       </motion.div>

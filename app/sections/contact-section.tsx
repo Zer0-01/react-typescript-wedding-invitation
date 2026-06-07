@@ -11,9 +11,11 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   calmViewport,
-  gentleContentReveal,
-  gentleItemReveal,
+  editorialStaggerContainer,
+  editorialStaggerItem,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 
 const CONTACTS = [
@@ -51,24 +53,25 @@ export function ContactSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Hubungi"
-          title="Untuk pertanyaan"
-          description="Hubungi ahli keluarga kami sekiranya anda memerlukan bantuan arah, maklumat majlis, atau sebarang pertanyaan lanjut."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Hubungi"
+            title="Untuk pertanyaan"
+            description="Hubungi ahli keluarga kami sekiranya anda memerlukan bantuan arah, maklumat majlis, atau sebarang pertanyaan lanjut."
+          />
+        </motion.div>
 
         <motion.div
           className="space-y-4"
-          {...gentleContentReveal(0.18)}
-          viewport={{ ...calmViewport, amount: 0.3 }}
+          {...editorialStaggerContainer(0.08, 0.09)}
         >
           {CONTACTS.map((contact, index) => (
             <motion.div
               key={contact.phoneLink}
-              {...gentleItemReveal(0.22 + index * 0.08)}
-              viewport={{ ...calmViewport, amount: 0.3 }}
+              {...editorialStaggerItem}
             >
-              <SoftPanel className="px-5 py-5 text-left">
+              <motion.div {...softPanelReveal(index * 0.04)} viewport={{ ...calmViewport, amount: 0.3 }}>
+                <SoftPanel className="px-5 py-5 text-left">
                 <div className="flex items-start justify-between gap-4">
                   <div className="space-y-2">
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
@@ -111,7 +114,8 @@ export function ContactSection() {
                     </a>
                   </Button>
                 </div>
-              </SoftPanel>
+                </SoftPanel>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>

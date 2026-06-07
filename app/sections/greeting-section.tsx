@@ -3,9 +3,11 @@
 import { motion } from "motion/react";
 import {
   calmViewport,
-  gentleContentReveal,
-  gentleItemReveal,
+  editorialStaggerContainer,
+  editorialStaggerItem,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 import { InvitationSection, SectionIntro } from "@/app/sections/section-shell";
 
@@ -17,25 +19,25 @@ export function GreetingSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Bismillahirrahmanirrahim"
-          title="Assalamualaikum"
-          inverse
-          description="Dengan penuh kesyukuran ke hadrat Ilahi, kami menjemput Dato'/Datin/Tuan/Puan/Encik/Cik untuk bersama meraikan hari bahagia puteri kami."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Bismillahirrahmanirrahim"
+            title="Assalamualaikum"
+            inverse
+            description="Dengan penuh kesyukuran ke hadrat Ilahi, kami menjemput Dato'/Datin/Tuan/Puan/Encik/Cik untuk bersama meraikan hari bahagia puteri kami."
+          />
+        </motion.div>
 
-        <div className="space-y-5">
+        <motion.div className="space-y-5" {...editorialStaggerContainer(0.08, 0.1)}>
           <motion.p
             className="text-[0.72rem] font-semibold uppercase tracking-[0.4em] text-primary-foreground/62"
-            {...gentleItemReveal(0.22)}
-            viewport={{ ...calmViewport, amount: 0.45 }}
+            {...editorialStaggerItem}
           >
             Tuan Rumah
           </motion.p>
           <motion.div
             className="space-y-3"
-            {...gentleContentReveal(0.3)}
-            viewport={{ ...calmViewport, amount: 0.35 }}
+            {...editorialStaggerItem}
           >
             <p className="font-heading text-4xl leading-tight tracking-[-0.04em] text-primary-foreground sm:text-5xl">
               Ismail bin Salleh
@@ -47,11 +49,11 @@ export function GreetingSection() {
               Rogayah@Intan Binti Md Said
             </p>
           </motion.div>
-        </div>
+        </motion.div>
 
         <motion.div
           className="mx-auto max-w-[22rem] space-y-6 rounded-[2rem] border border-white/10 bg-white/[0.06] px-6 py-7 text-sm leading-7 text-primary-foreground/78 backdrop-blur-[2px]"
-          {...gentleContentReveal(0.42)}
+          {...softPanelReveal(0.18)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
           <div className="space-y-3 text-primary-foreground">

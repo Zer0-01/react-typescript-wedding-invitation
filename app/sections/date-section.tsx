@@ -21,7 +21,13 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { calmViewport, gentleSectionReveal } from "@/lib/section-motion";
+import {
+  calmViewport,
+  gentleItemReveal,
+  gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
+} from "@/lib/section-motion";
 
 const EVENT_TITLE = "Walimatulurus Nasuhah dan Iskandar";
 const EVENT_LOCATION =
@@ -124,13 +130,16 @@ export function DateSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Tarikh"
-          title="16.06.2026"
-          description="Kami menantikan kehadiran anda pada hari Selasa, 16 Jun 2026, bermula 11:00 pagi hingga 5:00 petang."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Tarikh"
+            title="16.06.2026"
+            description="Kami menantikan kehadiran anda pada hari Selasa, 16 Jun 2026, bermula 11:00 pagi hingga 5:00 petang."
+          />
+        </motion.div>
 
-        <SoftPanel className="px-5 py-6">
+        <motion.div {...softPanelReveal(0.12)} viewport={{ ...calmViewport, amount: 0.3 }}>
+          <SoftPanel className="px-5 py-6">
           <Calendar
             mode="single"
             month={EVENT_START}
@@ -159,9 +168,10 @@ export function DateSection() {
                 ["Ahd", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"][date.getDay()],
             }}
           />
-        </SoftPanel>
+          </SoftPanel>
+        </motion.div>
 
-        <div className="space-y-4">
+        <motion.div className="space-y-4" {...ornamentReveal(0.12)} viewport={{ ...calmViewport, amount: 0.3 }}>
           <p className="text-[0.72rem] font-semibold uppercase tracking-[0.34em] text-foreground/55">
             Detik ke majlis
           </p>
@@ -172,22 +182,25 @@ export function DateSection() {
               { label: "M", value: countdown.minutes },
               { label: "S", value: countdown.seconds },
             ].map((item) => (
-              <Card
+              <motion.div
                 key={item.label}
-                className="rounded-[1.5rem] border-white/60 bg-white/60 py-0 shadow-none"
+                {...gentleItemReveal(0.14 + (["D", "H", "M", "S"].indexOf(item.label) * 0.06))}
+                viewport={{ ...calmViewport, amount: 0.35 }}
               >
-                <CardContent className="px-2 py-4">
-                  <p className="font-heading text-4xl leading-none tracking-[-0.05em] text-foreground">
-                    {item.value}
-                  </p>
-                  <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-foreground/48">
-                    {item.label}
-                  </p>
-                </CardContent>
-              </Card>
+                <Card className="rounded-[1.5rem] border-white/60 bg-white/60 py-0 shadow-none">
+                  <CardContent className="px-2 py-4">
+                    <p className="font-heading text-4xl leading-none tracking-[-0.05em] text-foreground">
+                      {item.value}
+                    </p>
+                    <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-foreground/48">
+                      {item.label}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         <Drawer>
           <DrawerTrigger asChild>

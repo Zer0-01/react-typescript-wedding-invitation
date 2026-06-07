@@ -25,8 +25,10 @@ import { Button } from "@/components/ui/button";
 import { firestore } from "@/lib/firebase";
 import {
   calmViewport,
-  gentleContentReveal,
+  gentleItemReveal,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 import { cn } from "@/lib/utils";
 
@@ -183,14 +185,16 @@ export function MessageSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="Ucapan dan Doa"
-          title="Tinggalkan pesanan anda"
-          description="Sekiranya berkelapangan, titipkan sepatah dua kata, doa, atau ucapan manis untuk memeriahkan hari bahagia kami."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="Ucapan dan Doa"
+            title="Tinggalkan pesanan anda"
+            description="Sekiranya berkelapangan, titipkan sepatah dua kata, doa, atau ucapan manis untuk memeriahkan hari bahagia kami."
+          />
+        </motion.div>
 
         <motion.div
-          {...gentleContentReveal(0.18)}
+          {...softPanelReveal(0.12)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
           <SoftPanel className="px-5 py-6 text-left sm:px-6">
@@ -343,7 +347,12 @@ export function MessageSection() {
                       const bubbleStyle = getBubbleStyle(message.id);
 
                       return (
-                        <div key={message.id} className="flex w-full justify-start">
+                        <motion.div
+                          key={message.id}
+                          className="flex w-full justify-start"
+                          {...gentleItemReveal(0)}
+                          viewport={{ ...calmViewport, amount: 0.2, once: false }}
+                        >
                           <div
                             className={cn(
                               "max-w-[85%] rounded-[1.5rem] rounded-bl-md px-4 py-3 shadow-[0_10px_24px_rgba(112,82,72,0.06)]",
@@ -367,7 +376,7 @@ export function MessageSection() {
                               {message.message}
                             </p>
                           </div>
-                        </div>
+                        </motion.div>
                       );
                     })
                   )}

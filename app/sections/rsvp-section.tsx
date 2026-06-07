@@ -24,8 +24,10 @@ import { Button } from "@/components/ui/button";
 import { firestore } from "@/lib/firebase";
 import {
   calmViewport,
-  gentleContentReveal,
+  gentleItemReveal,
   gentleSectionReveal,
+  ornamentReveal,
+  softPanelReveal,
 } from "@/lib/section-motion";
 import { cn } from "@/lib/utils";
 
@@ -130,14 +132,16 @@ export function RsvpSection() {
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <SectionIntro
-          eyebrow="RSVP"
-          title="Mohon sahkan kehadiran"
-          description="Kehadiran anda amat bermakna buat kami. Sila isi nama dan maklumkan kehadiran anda secara ringkas di bawah."
-        />
+        <motion.div {...ornamentReveal(0.04)} viewport={{ ...calmViewport, amount: 0.35 }}>
+          <SectionIntro
+            eyebrow="RSVP"
+            title="Mohon sahkan kehadiran"
+            description="Kehadiran anda amat bermakna buat kami. Sila isi nama dan maklumkan kehadiran anda secara ringkas di bawah."
+          />
+        </motion.div>
 
         <motion.div
-          {...gentleContentReveal(0.18)}
+          {...softPanelReveal(0.12)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
           <SoftPanel className="px-5 py-6 text-left sm:px-6">
@@ -288,12 +292,16 @@ export function RsvpSection() {
           </SoftPanel>
         </motion.div>
 
-        <p className="text-sm leading-6 text-muted-foreground">
+        <motion.p
+          className="text-sm leading-6 text-muted-foreground"
+          {...gentleItemReveal(0.18)}
+          viewport={{ ...calmViewport, amount: 0.35 }}
+        >
           Tetamu yang hadir:{" "}
           <span className="font-semibold text-foreground">
             {isAttendCountLoading ? "..." : attendCount ?? 0}
           </span>
-        </p>
+        </motion.p>
       </motion.div>
     </InvitationSection>
   );
