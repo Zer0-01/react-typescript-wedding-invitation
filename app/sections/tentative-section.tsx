@@ -39,7 +39,6 @@ export function TentativeSection() {
           <SectionIntro
             eyebrow="Tentatif"
             title="Aturcara Majlis"
-            description="Susunan majlis direka santai agar setiap tetamu dapat hadir dan menikmati hari istimewa ini dengan tenang."
           />
         </motion.div>
 

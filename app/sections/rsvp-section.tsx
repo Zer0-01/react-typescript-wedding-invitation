@@ -136,7 +136,6 @@ export function RsvpSection() {
           <SectionIntro
             eyebrow="RSVP"
             title="Mohon sahkan kehadiran"
-            description="Kehadiran anda amat bermakna buat kami. Sila isi nama dan maklumkan kehadiran anda secara ringkas di bawah."
           />
         </motion.div>
 

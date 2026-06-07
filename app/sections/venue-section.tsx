@@ -42,7 +42,6 @@ export function VenueSection() {
           <SectionIntro
             eyebrow="Lokasi"
             title="Bertempat di"
-            description="Majlis akan berlangsung di ruang yang nyaman dan mudah diakses untuk keluarga serta sahabat terdekat."
           />
         </motion.div>
 

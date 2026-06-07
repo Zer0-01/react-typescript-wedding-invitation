@@ -134,7 +134,7 @@ export function DateSection() {
           <SectionIntro
             eyebrow="Tarikh"
             title="16.06.2026"
-            description="Kami menantikan kehadiran anda pada hari Selasa, 16 Jun 2026, bermula 11:00 pagi hingga 5:00 petang."
+            
           />
         </motion.div>
 

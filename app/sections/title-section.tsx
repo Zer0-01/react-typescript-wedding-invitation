@@ -1,21 +1,55 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useOpeningOverlay } from "@/components/opening-overlay-context";
 import {
   ambientFloat,
   ambientGlow,
-  calmViewport,
-  editorialStaggerContainer,
-  editorialStaggerItem,
-  heroReveal,
-  gentleContentReveal,
-  gentleItemReveal,
-  ornamentReveal,
+  editorialEase,
 } from "@/lib/section-motion";
 import { invitationDetails } from "@/lib/invitation-details";
 import { InvitationSection } from "@/app/sections/section-shell";
 
+const revealContainerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 0.08,
+      staggerChildren: 0.12,
+    },
+  },
+} as const;
+
+const revealItemVariants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.86,
+      ease: editorialEase,
+    },
+  },
+} as const;
+
+function delayedReveal(delay = 0, y = 14, duration = 0.94) {
+  return {
+    hidden: { opacity: 0, y },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration,
+        delay,
+        ease: editorialEase,
+      },
+    },
+  } as const;
+}
+
 export function TitleSection() {
+  const { isInvitationRevealed } = useOpeningOverlay();
+
   return (
     <InvitationSection
       tone="ivory"
@@ -33,52 +67,47 @@ export function TitleSection() {
       />
       <motion.div
         className="relative w-full px-5"
-        {...heroReveal}
-        viewport={{ ...calmViewport, amount: 0.55 }}
+        initial={{ opacity: 0, y: 26 }}
+        animate={isInvitationRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 26 }}
+        transition={{ duration: 1.2, ease: editorialEase }}
       >
-        <motion.div className="space-y-7" {...editorialStaggerContainer(0.08, 0.12)}>
+        <motion.div
+          className="space-y-7"
+          variants={revealContainerVariants}
+          initial="hidden"
+          animate={isInvitationRevealed ? "show" : "hidden"}
+        >
           <motion.p
             className="text-[0.72rem] font-semibold uppercase tracking-[0.38em] text-primary/58"
-            {...editorialStaggerItem}
+            variants={revealItemVariants}
           >
             {invitationDetails.eventLabel}
           </motion.p>
 
           <motion.div
             className="mx-auto h-px w-20 bg-[linear-gradient(90deg,transparent,rgba(120,90,79,0.42),transparent)]"
-            {...ornamentReveal(0.12)}
-            viewport={{ ...calmViewport, amount: 0.7 }}
+            variants={delayedReveal(0.12, 8, 1)}
           />
 
           <motion.div
             className="space-y-4 text-primary"
-            {...editorialStaggerItem}
+            variants={revealItemVariants}
           >
-            <motion.p
-              className="text-sm tracking-[0.2em] text-foreground/58"
-              {...gentleItemReveal(0.08)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
-            >
-              {invitationDetails.invitationLine}
-            </motion.p>
             <motion.h1
               className="font-heading text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl"
-              {...gentleContentReveal(0.16)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
+              variants={delayedReveal(0.16, 14, 0.94)}
             >
               {invitationDetails.brideFirstName}
             </motion.h1>
             <motion.p
               className="text-xs uppercase tracking-[0.5em] text-primary/72"
-              {...ornamentReveal(0.22)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
+              variants={delayedReveal(0.22, 8, 1)}
             >
               dan
             </motion.p>
             <motion.h2
               className="font-heading text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl"
-              {...gentleContentReveal(0.24)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
+              variants={delayedReveal(0.24, 14, 0.94)}
             >
               {invitationDetails.groomFirstName}
             </motion.h2>
@@ -86,19 +115,17 @@ export function TitleSection() {
 
           <motion.div
             className="space-y-4 pt-2"
-            {...editorialStaggerItem}
+            variants={revealItemVariants}
           >
             <motion.div
               className="mx-auto inline-flex rounded-full border border-[color:var(--ornament)] bg-white/60 px-6 py-2 text-sm font-semibold tracking-[0.32em] text-primary/80 shadow-[0_12px_30px_rgba(110,87,77,0.08)]"
-              {...gentleItemReveal(0.3)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
+              variants={delayedReveal(0.3, 10, 0.82)}
             >
               {invitationDetails.displayDate}
             </motion.div>
             <motion.p
               className="mx-auto max-w-xs text-sm leading-7 text-foreground/58"
-              {...gentleItemReveal(0.38)}
-              viewport={{ ...calmViewport, amount: 0.7 }}
+              variants={delayedReveal(0.38, 10, 0.82)}
             >
               {invitationDetails.coverDescription}
             </motion.p>

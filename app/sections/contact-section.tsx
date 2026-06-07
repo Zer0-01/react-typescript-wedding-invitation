@@ -57,7 +57,6 @@ export function ContactSection() {
           <SectionIntro
             eyebrow="Hubungi"
             title="Untuk pertanyaan"
-            description="Hubungi ahli keluarga kami sekiranya anda memerlukan bantuan arah, maklumat majlis, atau sebarang pertanyaan lanjut."
           />
         </motion.div>
 

@@ -3,9 +3,14 @@
 import { Music2, Pause, Play } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { OpeningOverlayProvider } from "@/components/opening-overlay-context";
 import { Button } from "@/components/ui/button";
 import { invitationDetails } from "@/lib/invitation-details";
 import { cn } from "@/lib/utils";
+
+type OverlayPhase = "closed" | "opening" | "opened";
+
+const gateEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export function OpeningOverlay({
   children,
@@ -13,20 +18,25 @@ export function OpeningOverlay({
   children: ReactNode;
 }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [phase, setPhase] = useState<OverlayPhase>("closed");
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const isOpened = phase !== "closed";
+  const showOverlay = phase !== "opened";
 
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
-    root.style.overflow = isOpen ? "" : "hidden";
-    body.style.overflow = isOpen ? "" : "hidden";
+    const shouldLockScroll = phase !== "opened";
+
+    root.style.overflow = shouldLockScroll ? "hidden" : "";
+    body.style.overflow = shouldLockScroll ? "hidden" : "";
 
     return () => {
       root.style.overflow = "";
       body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [phase]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -50,6 +60,20 @@ export function OpeningOverlay({
     };
   }, []);
 
+  useEffect(() => {
+    if (phase !== "opening") {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setPhase("opened");
+    }, 1220);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [phase]);
+
   async function startAudioPlayback() {
     const audio = audioRef.current;
 
@@ -68,8 +92,12 @@ export function OpeningOverlay({
   }
 
   async function handleOpenInvitation() {
-    setIsOpen(true);
-    await startAudioPlayback();
+    if (phase !== "closed") {
+      return;
+    }
+
+    setPhase("opening");
+    void startAudioPlayback();
   }
 
   async function handleTogglePlayback() {
@@ -98,107 +126,129 @@ export function OpeningOverlay({
     <>
       <audio ref={audioRef} src="/song.mp3" preload="auto" loop />
 
-      <div
-        aria-hidden={!isOpen}
-        className={cn(
-          "transition-[filter,transform,opacity] duration-700 ease-out",
-          !isOpen && "pointer-events-none max-h-screen overflow-hidden blur-[2px] saturate-[0.92]",
-        )}
-      >
-        {children}
-      </div>
+      <OpeningOverlayProvider value={{ isInvitationRevealed: isOpened }}>
+        <div
+          aria-hidden={!isOpened}
+          className={cn(
+            "transition-[filter,opacity] duration-300 ease-out",
+            phase === "closed" && "pointer-events-none max-h-screen overflow-hidden blur-[1px] saturate-[0.95]",
+          )}
+        >
+          {children}
+        </div>
+      </OpeningOverlayProvider>
 
       <AnimatePresence>
-        {!isOpen ? (
+        {showOverlay ? (
           <motion.div
             key="opening-overlay"
-            className="fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-hidden bg-[color:var(--background)] px-6 py-8"
+            className="fixed inset-0 z-50 overflow-hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Wedding invitation opening cover"
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, y: -24, scale: 0.985 }}
-            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.24, ease: gateEase }}
           >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.92),transparent_62%)]" />
             <motion.div
-              className="pointer-events-none absolute left-1/2 top-16 h-72 w-72 -translate-x-[130%] rounded-full bg-[radial-gradient(circle,rgba(226,188,184,0.34),transparent_70%)] blur-3xl"
-              animate={{
-                y: [0, -18, 0],
-                opacity: [0.56, 0.84, 0.56],
-              }}
-              transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,244,239,0.98))]"
+              initial={false}
+              animate={phase === "opening" ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.16, ease: gateEase }}
             />
             <motion.div
-              className="pointer-events-none absolute bottom-12 right-1/2 h-80 w-80 translate-x-[138%] rounded-full bg-[radial-gradient(circle,rgba(214,202,189,0.3),transparent_72%)] blur-3xl"
-              animate={{
-                y: [0, 14, 0],
-                opacity: [0.42, 0.68, 0.42],
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+              className="pointer-events-none absolute inset-y-0 left-1/2 z-20 w-px -translate-x-1/2 bg-[linear-gradient(180deg,rgba(84,67,61,0.1),rgba(84,67,61,0.28),rgba(84,67,61,0.1))]"
+              initial={false}
+              animate={phase === "opening" ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.16, ease: gateEase }}
+            />
+            <motion.div
+              className="pointer-events-none absolute inset-y-0 left-1/2 z-10 w-28 -translate-x-1/2 bg-[radial-gradient(circle_at_center,rgba(108,92,84,0.14),transparent_72%)] blur-2xl"
+              animate={
+                phase === "opening"
+                  ? { opacity: 0, scaleX: 2.2 }
+                  : { opacity: 1, scaleX: 1 }
+              }
+              transition={{ duration: 1.1, ease: gateEase }}
             />
 
             <motion.div
-              className="relative mx-auto flex w-full max-w-[420px] flex-col items-center justify-center rounded-[2.25rem] border border-white/60 bg-white/82 px-8 py-12 text-center shadow-[0_24px_80px_rgba(113,84,73,0.14)] backdrop-blur-md sm:px-10 sm:py-14"
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: {},
-                show: {
-                  transition: {
-                    delayChildren: 0.12,
-                    staggerChildren: 0.1,
-                  },
-                },
-              }}
+              className="absolute inset-y-0 left-0 w-1/2 border-r border-[color:rgba(120,101,92,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,244,239,0.98))] shadow-[inset_-1px_0_0_rgba(255,255,255,0.9)]"
+              initial={false}
+              animate={
+                phase === "opening"
+                  ? { x: "-104%" }
+                  : { x: "0%" }
+              }
+              transition={{ duration: 1.18, ease: gateEase }}
             >
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.2),rgba(255,255,255,0),rgba(98,79,70,0.05))]" />
+            </motion.div>
+
+            <motion.div
+              className="absolute inset-y-0 right-0 w-1/2 border-l border-[color:rgba(120,101,92,0.08)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(248,244,239,0.98))] shadow-[inset_1px_0_0_rgba(255,255,255,0.9)]"
+              initial={false}
+              animate={
+                phase === "opening"
+                  ? { x: "104%" }
+                  : { x: "0%" }
+              }
+              transition={{ duration: 1.18, ease: gateEase }}
+            >
+              <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(255,255,255,0.2),rgba(255,255,255,0),rgba(98,79,70,0.05))]" />
+            </motion.div>
+
+            <div className="relative flex min-h-screen items-center justify-center px-6 py-8">
               <motion.div
-                className="space-y-2 text-primary"
-                variants={{
-                  hidden: { opacity: 0, y: 16 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.92 } },
-                }}
-              >
-                <h1 className="font-heading text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl">
-                  {invitationDetails.brideFirstName}
-                </h1>
-                <p className="text-xs uppercase tracking-[0.5em] text-primary/72">dan</p>
-                <h2 className="font-heading text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl">
-                  {invitationDetails.groomFirstName}
-                </h2>
-              </motion.div>
-              <motion.div
-                className="mt-10"
-                variants={{
-                  hidden: { opacity: 0, y: 14 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.84 } },
-                }}
+                className="relative z-30"
+                initial={false}
+                animate={
+                  phase === "opening"
+                    ? { opacity: 0, scale: 0.82, y: 16 }
+                    : { opacity: 1, scale: 1, y: 0 }
+                }
+                transition={{ duration: 0.42, ease: gateEase }}
               >
                 <Button
                   type="button"
-                  size="lg"
-                  className="h-12 rounded-full px-8 text-sm font-semibold tracking-[0.22em] uppercase shadow-[0_14px_30px_rgba(110,87,77,0.16)]"
+                  size="icon"
+                  className="group relative flex size-[9rem] rounded-full border border-[color:rgba(120,101,92,0.12)] bg-[linear-gradient(180deg,rgba(238,237,249,0.96),rgba(245,243,252,0.98))] text-primary shadow-[0_18px_44px_rgba(102,85,77,0.2)] transition-transform duration-300 hover:scale-[1.02] hover:bg-[linear-gradient(180deg,rgba(238,237,249,1),rgba(245,243,252,1))] sm:size-[10rem]"
                   onClick={handleOpenInvitation}
                   autoFocus
+                  aria-label="Open invitation"
                 >
-                  Open Invitation
+                  <span className="pointer-events-none absolute inset-[0.4rem] rounded-full border border-white/60" />
+                  <span className="flex flex-col items-center justify-center text-center">
+                    <span className="font-heading text-[1.55rem] leading-[0.9] tracking-[-0.06em] text-primary sm:text-[1.75rem]">
+                      {invitationDetails.brideFirstName}
+                    </span>
+                    <span className="mt-0.5 text-[0.5rem] uppercase tracking-[0.36em] text-primary/42">
+                      &
+                    </span>
+                    <span className="font-heading text-[1.55rem] leading-[0.9] tracking-[-0.06em] text-primary sm:text-[1.75rem]">
+                      {invitationDetails.groomFirstName}
+                    </span>
+                    <span className="mt-3 text-[0.62rem] font-medium uppercase tracking-[0.28em] text-primary/78">
+                      Open
+                    </span>
+                  </span>
                 </Button>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>
 
       <AnimatePresence>
-        {isOpen ? (
+        {isOpened ? (
           <motion.div
             key="music-toggle"
             className="fixed bottom-5 right-5 z-40 sm:bottom-8 sm:right-8"
             initial={{ opacity: 0, y: 18, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.92 }}
-            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.42, ease: gateEase }}
           >
             <Button
               type="button"

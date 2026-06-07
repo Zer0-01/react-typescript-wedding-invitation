@@ -189,7 +189,6 @@ export function MessageSection() {
           <SectionIntro
             eyebrow="Ucapan dan Doa"
             title="Tinggalkan pesanan anda"
-            description="Sekiranya berkelapangan, titipkan sepatah dua kata, doa, atau ucapan manis untuk memeriahkan hari bahagia kami."
           />
         </motion.div>
 
