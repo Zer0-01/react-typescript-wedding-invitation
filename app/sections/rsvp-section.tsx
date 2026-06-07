@@ -15,8 +15,12 @@ import { motion } from "motion/react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import {
+  InvitationSection,
+  SectionIntro,
+  SoftPanel,
+} from "@/app/sections/section-shell";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { firestore } from "@/lib/firebase";
 import {
   calmViewport,
@@ -120,188 +124,177 @@ export function RsvpSection() {
   });
 
   return (
-    <section className="w-full bg-[#f8f6f2] px-6 py-12 text-center">
+    <InvitationSection tone="ivory">
       <motion.div
         className="w-full space-y-8"
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
-            RSVP
-          </p>
-          <h2 className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
-            Mohon sahkan kehadiran
-          </h2>
-        </div>
+        <SectionIntro
+          eyebrow="RSVP"
+          title="Mohon sahkan kehadiran"
+          description="Kehadiran anda amat bermakna buat kami. Sila isi nama dan maklumkan kehadiran anda secara ringkas di bawah."
+        />
 
         <motion.div
           {...gentleContentReveal(0.18)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
-          <Card className="rounded-[1.75rem] border-0 bg-background py-0 text-left shadow-none">
-            <CardContent className="px-5 py-6">
-              {submittedRsvp ? (
-                <div className="space-y-4 text-center">
-                  <p className="text-sm font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                    RSVP diterima
-                  </p>
-                  <p className="font-heading text-3xl leading-tight tracking-[-0.03em] text-foreground">
-                    Terima kasih, {submittedRsvp.name}
-                  </p>
-                  <p className="text-base leading-7 text-muted-foreground">
-                    Kehadiran anda:{" "}
-                    <span className="font-medium text-foreground">
-                      {submittedRsvp.isAttend ? "Ya, hadir" : "Tidak hadir"}
-                    </span>
-                  </p>
-                </div>
-              ) : (
-                <form
-                  className="space-y-6"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    void form.handleSubmit();
+          <SoftPanel className="px-5 py-6 text-left sm:px-6">
+            {submittedRsvp ? (
+              <div className="space-y-4 text-center">
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
+                  RSVP diterima
+                </p>
+                <p className="font-heading text-4xl leading-tight tracking-[-0.04em] text-foreground">
+                  Terima kasih, {submittedRsvp.name}
+                </p>
+                <p className="text-base leading-7 text-muted-foreground">
+                  Kehadiran anda:{" "}
+                  <span className="font-semibold text-foreground">
+                    {submittedRsvp.isAttend ? "Ya, hadir" : "Tidak hadir"}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <form
+                className="space-y-6"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  void form.handleSubmit();
+                }}
+              >
+                <form.Field
+                  name="nama"
+                  validators={{
+                    onBlur: ({ value }) => validateNama(value),
+                    onChange: ({ value }) => validateNama(value),
+                    onSubmit: ({ value }) => validateNama(value),
                   }}
                 >
-                  <form.Field
-                    name="nama"
-                    validators={{
-                      onBlur: ({ value }) => validateNama(value),
-                      onChange: ({ value }) => validateNama(value),
-                      onSubmit: ({ value }) => validateNama(value),
-                    }}
-                  >
-                    {(field) => {
-                      const showError =
-                        (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
-                        !field.state.meta.isValid;
-                      const errorMessage = getFieldError(field.state.meta.errors);
+                  {(field) => {
+                    const showError =
+                      (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
+                      !field.state.meta.isValid;
+                    const errorMessage = getFieldError(field.state.meta.errors);
 
-                      return (
-                        <div className="space-y-2">
-                          <label
-                            htmlFor={field.name}
-                            className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
-                          >
-                            Nama
-                          </label>
-                          <input
-                            id={field.name}
-                            name={field.name}
-                            type="text"
-                            value={field.state.value}
-                            onBlur={field.handleBlur}
-                            onChange={(event) => field.handleChange(event.target.value)}
-                            aria-invalid={showError}
-                            aria-describedby={showError ? `${field.name}-error` : undefined}
-                            className={cn(
-                              "flex h-12 w-full rounded-full border bg-background px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
-                              showError ? "border-destructive" : "border-border",
-                            )}
-                            placeholder="Masukkan nama anda"
-                          />
-                          {showError && errorMessage ? (
-                            <p
-                              id={`${field.name}-error`}
-                              className="text-sm text-destructive"
-                            >
-                              {errorMessage}
-                            </p>
-                          ) : null}
+                    return (
+                      <div className="space-y-2">
+                        <label
+                          htmlFor={field.name}
+                          className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground"
+                        >
+                          Nama
+                        </label>
+                        <input
+                          id={field.name}
+                          name={field.name}
+                          type="text"
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(event) => field.handleChange(event.target.value)}
+                          aria-invalid={showError}
+                          aria-describedby={showError ? `${field.name}-error` : undefined}
+                          className={cn(
+                            "invitation-input flex h-[3.25rem] w-full px-5 text-base text-foreground outline-none placeholder:text-muted-foreground/70 focus-visible:ring-3 focus-visible:ring-ring/30",
+                            showError ? "border-destructive" : "border-border",
+                          )}
+                          placeholder="Masukkan nama anda"
+                        />
+                        {showError && errorMessage ? (
+                          <p id={`${field.name}-error`} className="text-sm text-destructive">
+                            {errorMessage}
+                          </p>
+                        ) : null}
+                      </div>
+                    );
+                  }}
+                </form.Field>
+
+                <form.Field
+                  name="hadir"
+                  validators={{
+                    onBlur: ({ value }) => validateHadir(value),
+                    onChange: ({ value }) => validateHadir(value),
+                    onSubmit: ({ value }) => validateHadir(value),
+                  }}
+                >
+                  {(field) => {
+                    const showError =
+                      (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
+                      !field.state.meta.isValid;
+                    const errorMessage = getFieldError(field.state.meta.errors);
+
+                    return (
+                      <fieldset className="space-y-3">
+                        <legend className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+                          Adakah anda hadir
+                        </legend>
+
+                        <div className="grid grid-cols-2 gap-3">
+                          {ATTENDANCE_OPTIONS.map((option) => {
+                            const checked = field.state.value === option.value;
+
+                            return (
+                              <label
+                                key={option.value}
+                                className={cn(
+                                  "flex h-12 cursor-pointer items-center justify-center rounded-full border text-sm font-semibold uppercase tracking-[0.2em] transition-colors",
+                                  checked
+                                    ? "border-primary bg-primary text-primary-foreground shadow-[0_10px_24px_rgba(93,67,58,0.14)]"
+                                    : "border-border bg-white/58 text-foreground hover:bg-muted/60",
+                                )}
+                              >
+                                <input
+                                  type="radio"
+                                  name={field.name}
+                                  value={option.value}
+                                  checked={checked}
+                                  onBlur={field.handleBlur}
+                                  onChange={() => field.handleChange(option.value)}
+                                  className="sr-only"
+                                />
+                                {option.label}
+                              </label>
+                            );
+                          })}
                         </div>
-                      );
-                    }}
-                  </form.Field>
 
-                  <form.Field
-                    name="hadir"
-                    validators={{
-                      onBlur: ({ value }) => validateHadir(value),
-                      onChange: ({ value }) => validateHadir(value),
-                      onSubmit: ({ value }) => validateHadir(value),
-                    }}
-                  >
-                    {(field) => {
-                      const showError =
-                        (field.state.meta.isTouched || field.state.meta.errors.length > 0) &&
-                        !field.state.meta.isValid;
-                      const errorMessage = getFieldError(field.state.meta.errors);
+                        {showError && errorMessage ? (
+                          <p id={`${field.name}-error`} className="text-sm text-destructive">
+                            {errorMessage}
+                          </p>
+                        ) : null}
+                      </fieldset>
+                    );
+                  }}
+                </form.Field>
 
-                      return (
-                        <fieldset className="space-y-3">
-                          <legend className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                            Adakah anda hadir
-                          </legend>
-
-                          <div className="grid grid-cols-2 gap-3">
-                            {ATTENDANCE_OPTIONS.map((option) => {
-                              const checked = field.state.value === option.value;
-
-                              return (
-                                <label
-                                  key={option.value}
-                                  className={cn(
-                                    "flex h-12 cursor-pointer items-center justify-center rounded-full border text-sm font-medium uppercase tracking-[0.16em] transition-colors",
-                                    checked
-                                      ? "border-foreground bg-foreground text-background"
-                                      : "border-border bg-background text-foreground hover:bg-muted",
-                                  )}
-                                >
-                                  <input
-                                    type="radio"
-                                    name={field.name}
-                                    value={option.value}
-                                    checked={checked}
-                                    onBlur={field.handleBlur}
-                                    onChange={() => field.handleChange(option.value)}
-                                    className="sr-only"
-                                  />
-                                  {option.label}
-                                </label>
-                              );
-                            })}
-                          </div>
-
-                          {showError && errorMessage ? (
-                            <p
-                              id={`${field.name}-error`}
-                              className="text-sm text-destructive"
-                            >
-                              {errorMessage}
-                            </p>
-                          ) : null}
-                        </fieldset>
-                      );
-                    }}
-                  </form.Field>
-
-                  <form.Subscribe selector={(state) => state.isSubmitting}>
-                    {(isSubmitting) => (
-                      <Button
-                        type="submit"
-                        size="lg"
-                        disabled={isSubmitting}
-                        className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
-                      >
-                        {isSubmitting ? "Menghantar..." : "Hantar RSVP"}
-                      </Button>
-                    )}
-                  </form.Subscribe>
-                </form>
-              )}
-            </CardContent>
-          </Card>
+                <form.Subscribe selector={(state) => state.isSubmitting}>
+                  {(isSubmitting) => (
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={isSubmitting}
+                      className="h-12 w-full rounded-full border border-primary/10 bg-primary/92 text-sm uppercase tracking-[0.24em] shadow-[0_14px_34px_rgba(94,67,58,0.16)] hover:bg-primary"
+                    >
+                      {isSubmitting ? "Menghantar..." : "Hantar RSVP"}
+                    </Button>
+                  )}
+                </form.Subscribe>
+              </form>
+            )}
+          </SoftPanel>
         </motion.div>
 
         <p className="text-sm leading-6 text-muted-foreground">
           Tetamu yang hadir:{" "}
-          <span className="font-medium text-foreground">
+          <span className="font-semibold text-foreground">
             {isAttendCountLoading ? "..." : attendCount ?? 0}
           </span>
         </p>
       </motion.div>
-    </section>
+    </InvitationSection>
   );
 }

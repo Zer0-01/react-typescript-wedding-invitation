@@ -3,6 +3,11 @@
 import { ChevronRight, MapPinned, X } from "lucide-react";
 import { motion } from "motion/react";
 
+import {
+  InvitationSection,
+  SectionIntro,
+  SoftPanel,
+} from "@/app/sections/section-shell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -25,51 +30,51 @@ const WAZE_URL = "https://waze.com/ul/hw234r1kbs";
 
 export function VenueSection() {
   return (
-    <section className="w-full bg-[#efdbdb] px-6 py-12 text-center">
+    <InvitationSection tone="mist">
       <motion.div
         className="w-full space-y-8"
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
-            Lokasi
-          </p>
-          <h2 className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
-            Bertempat di
-          </h2>
-        </div>
+        <SectionIntro
+          eyebrow="Lokasi"
+          title="Bertempat di"
+          description="Majlis akan berlangsung di ruang yang nyaman dan mudah diakses untuk keluarga serta sahabat terdekat."
+        />
 
         <motion.div
           {...gentleContentReveal(0.18)}
           viewport={{ ...calmViewport, amount: 0.4 }}
         >
-          <Card className="rounded-[1.75rem] border-0 bg-background/55 py-0 shadow-none backdrop-blur-sm">
-            <CardContent className="px-6 py-7">
-              <p className="font-heading text-2xl leading-tight tracking-[-0.03em] text-foreground">
+          <SoftPanel className="px-6 py-7">
+            <div className="space-y-4">
+              <div className="mx-auto flex size-14 items-center justify-center rounded-full border border-[color:var(--ornament)] bg-white/65">
+                <MapPinned className="size-5 text-primary" />
+              </div>
+              <p className="font-heading text-3xl leading-tight tracking-[-0.04em] text-foreground">
                 Dewan Serbaguna Surau Abu Bakar
               </p>
-              <p className="mt-2 text-base leading-7 text-foreground/65">
+              <p className="text-base leading-7 text-foreground/62">
                 As-Siddiq Taman Evergreen Heights
                 <br />
                 83000 Batu Pahat, Johor
               </p>
-            </CardContent>
-          </Card>
+            </div>
+          </SoftPanel>
         </motion.div>
 
         <Drawer>
           <DrawerTrigger asChild>
             <Button
               type="button"
-              className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
+              className="h-12 w-full rounded-full border border-primary/10 bg-primary/92 text-sm uppercase tracking-[0.24em] shadow-[0_14px_34px_rgba(94,67,58,0.16)] hover:bg-primary"
             >
               <MapPinned className="size-4" />
               Buka peta
             </Button>
           </DrawerTrigger>
 
-          <DrawerContent className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border bg-card px-5 pb-8 pt-4">
+          <DrawerContent className="mx-auto w-full max-w-[430px] rounded-t-[2rem] border-x border-t border-border/60 bg-card/96 px-5 pb-8 pt-4 backdrop-blur-sm">
             <DrawerHeader className="flex-row items-start justify-between gap-4 px-0 pb-0 pt-0 text-left">
               <div className="space-y-2">
                 <DrawerTitle className="font-heading text-2xl tracking-[-0.04em] text-foreground">
@@ -98,10 +103,10 @@ export function VenueSection() {
                   rel="noreferrer"
                   className="block w-full text-left"
                 >
-                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                  <Card className="rounded-[1.5rem] border-white/60 bg-background/80 py-0 shadow-none transition-colors hover:bg-muted/60">
                     <CardContent className="flex items-center justify-between px-4 py-4">
                       <div>
-                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                           Google
                         </p>
                         <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
@@ -121,10 +126,10 @@ export function VenueSection() {
                   rel="noreferrer"
                   className="block w-full text-left"
                 >
-                  <Card className="rounded-[1.5rem] bg-background py-0 transition-colors hover:bg-muted/60 ring-border/70">
+                  <Card className="rounded-[1.5rem] border-white/60 bg-background/80 py-0 shadow-none transition-colors hover:bg-muted/60">
                     <CardContent className="flex items-center justify-between px-4 py-4">
                       <div>
-                        <p className="text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                           Waze
                         </p>
                         <p className="mt-1 font-heading text-xl tracking-[-0.03em] text-foreground">
@@ -140,6 +145,6 @@ export function VenueSection() {
           </DrawerContent>
         </Drawer>
       </motion.div>
-    </section>
+    </InvitationSection>
   );
 }

@@ -16,8 +16,12 @@ import { motion } from "motion/react";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import {
+  InvitationSection,
+  SectionIntro,
+  SoftPanel,
+} from "@/app/sections/section-shell";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { firestore } from "@/lib/firebase";
 import {
   calmViewport,
@@ -74,22 +78,24 @@ function getFieldError(errors: unknown[]) {
 function getBubbleStyle(seed: string): BubbleStyle {
   const bubbleStyles: BubbleStyle[] = [
     {
-      bubbleClassName: "rounded-bl-md bg-background text-foreground",
+      bubbleClassName: "border border-white/60 bg-white/88 text-foreground",
       nameClassName: "text-muted-foreground",
       messageClassName: "text-foreground",
     },
     {
-      bubbleClassName: "rounded-bl-md bg-secondary text-secondary-foreground",
+      bubbleClassName:
+        "border border-[color:var(--ornament)] bg-[color-mix(in_oklch,var(--section-blush)_48%,white)] text-foreground",
       nameClassName: "text-muted-foreground",
-      messageClassName: "text-secondary-foreground",
+      messageClassName: "text-foreground",
     },
     {
-      bubbleClassName: "rounded-bl-md bg-accent text-accent-foreground",
+      bubbleClassName:
+        "border border-[color:var(--ornament)] bg-[color-mix(in_oklch,var(--section-mist)_58%,white)] text-foreground",
       nameClassName: "text-muted-foreground",
-      messageClassName: "text-accent-foreground",
+      messageClassName: "text-foreground",
     },
     {
-      bubbleClassName: "rounded-bl-md border border-border bg-muted text-foreground",
+      bubbleClassName: "border border-border/60 bg-[color-mix(in_oklch,var(--muted)_68%,white)] text-foreground",
       nameClassName: "text-muted-foreground",
       messageClassName: "text-foreground",
     },
@@ -171,27 +177,24 @@ export function MessageSection() {
   });
 
   return (
-    <section className="w-full bg-[#f8f6f2] px-6 py-12 text-center">
+    <InvitationSection tone="mist">
       <motion.div
         className="w-full space-y-8"
         {...gentleSectionReveal}
         viewport={calmViewport}
       >
-        <div className="space-y-3">
-          <p className="text-sm font-medium uppercase tracking-[0.28em] text-foreground/65">
-            Ucapan dan Doa
-          </p>
-          <h2 className="font-heading text-4xl leading-none tracking-[-0.04em] text-foreground">
-            Tinggalkan pesanan anda
-          </h2>
-        </div>
+        <SectionIntro
+          eyebrow="Ucapan dan Doa"
+          title="Tinggalkan pesanan anda"
+          description="Sekiranya berkelapangan, titipkan sepatah dua kata, doa, atau ucapan manis untuk memeriahkan hari bahagia kami."
+        />
 
         <motion.div
           {...gentleContentReveal(0.18)}
           viewport={{ ...calmViewport, amount: 0.3 }}
         >
-          <Card className="rounded-[1.75rem] border-0 bg-background py-0 text-left shadow-none">
-            <CardContent className="space-y-8 px-5 py-6">
+          <SoftPanel className="px-5 py-6 text-left sm:px-6">
+            <div className="space-y-8">
               <form
                 className="space-y-5"
                 onSubmit={(event) => {
@@ -218,7 +221,7 @@ export function MessageSection() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
+                          className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground"
                         >
                           Nama
                         </label>
@@ -232,16 +235,13 @@ export function MessageSection() {
                           aria-invalid={showError}
                           aria-describedby={showError ? `${field.name}-error` : undefined}
                           className={cn(
-                            "flex h-12 w-full rounded-full border bg-background px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+                            "invitation-input flex h-[3.25rem] w-full px-5 text-base text-foreground outline-none placeholder:text-muted-foreground/70 focus-visible:ring-3 focus-visible:ring-ring/30",
                             showError ? "border-destructive" : "border-border",
                           )}
                           placeholder="Masukkan nama anda"
                         />
                         {showError && errorMessage ? (
-                          <p
-                            id={`${field.name}-error`}
-                            className="text-sm text-destructive"
-                          >
+                          <p id={`${field.name}-error`} className="text-sm text-destructive">
                             {errorMessage}
                           </p>
                         ) : null}
@@ -268,7 +268,7 @@ export function MessageSection() {
                       <div className="space-y-2">
                         <label
                           htmlFor={field.name}
-                          className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground"
+                          className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground"
                         >
                           Ucapan dan doa
                         </label>
@@ -281,16 +281,13 @@ export function MessageSection() {
                           aria-invalid={showError}
                           aria-describedby={showError ? `${field.name}-error` : undefined}
                           className={cn(
-                            "flex min-h-32 w-full rounded-[1.5rem] border bg-background px-4 py-3 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground/70 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+                            "invitation-input invitation-textarea flex min-h-36 w-full px-5 py-4 text-base text-foreground outline-none placeholder:text-muted-foreground/70 focus-visible:ring-3 focus-visible:ring-ring/30",
                             showError ? "border-destructive" : "border-border",
                           )}
                           placeholder="Titipkan ucapan dan doa anda"
                         />
                         {showError && errorMessage ? (
-                          <p
-                            id={`${field.name}-error`}
-                            className="text-sm text-destructive"
-                          >
+                          <p id={`${field.name}-error`} className="text-sm text-destructive">
                             {errorMessage}
                           </p>
                         ) : null}
@@ -305,7 +302,7 @@ export function MessageSection() {
                       type="submit"
                       size="lg"
                       disabled={isSubmitting}
-                      className="h-12 w-full rounded-full text-sm uppercase tracking-[0.18em]"
+                      className="h-12 w-full rounded-full border border-primary/10 bg-primary/92 text-sm uppercase tracking-[0.24em] shadow-[0_14px_34px_rgba(94,67,58,0.16)] hover:bg-primary"
                     >
                       {isSubmitting ? "Menghantar..." : "Hantar Ucapan"}
                     </Button>
@@ -315,17 +312,17 @@ export function MessageSection() {
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
                     Pesanan tetamu
                   </p>
-                  <span className="rounded-full bg-muted px-3 py-1 text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  <span className="rounded-full border border-[color:var(--ornament)] bg-white/54 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
                     {isMessagesLoading ? "..." : messages.length}
                   </span>
                 </div>
 
                 <div
                   ref={scrollContainerRef}
-                  className="flex h-80 flex-col gap-3 overflow-y-auto rounded-[1.5rem] bg-muted/55 px-3 py-4"
+                  className="flex h-80 flex-col gap-3 overflow-y-auto rounded-[1.75rem] border border-white/55 bg-white/34 px-3 py-4"
                 >
                   {isMessagesLoading ? (
                     <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
@@ -333,7 +330,7 @@ export function MessageSection() {
                     </div>
                   ) : messages.length === 0 ? (
                     <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center text-muted-foreground">
-                      <div className="flex size-12 items-center justify-center rounded-full bg-background">
+                      <div className="flex size-12 items-center justify-center rounded-full border border-[color:var(--ornament)] bg-white/70">
                         <MessageCircleMore className="size-6" />
                       </div>
                       <p className="text-sm leading-6">
@@ -349,13 +346,13 @@ export function MessageSection() {
                         <div key={message.id} className="flex w-full justify-start">
                           <div
                             className={cn(
-                              "max-w-[85%] rounded-[1.5rem] px-4 py-3 shadow-sm",
+                              "max-w-[85%] rounded-[1.5rem] rounded-bl-md px-4 py-3 shadow-[0_10px_24px_rgba(112,82,72,0.06)]",
                               bubbleStyle.bubbleClassName,
                             )}
                           >
                             <p
                               className={cn(
-                                "text-xs font-medium uppercase tracking-[0.18em]",
+                                "text-[0.68rem] font-semibold uppercase tracking-[0.24em]",
                                 bubbleStyle.nameClassName,
                               )}
                             >
@@ -376,10 +373,10 @@ export function MessageSection() {
                   )}
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </SoftPanel>
         </motion.div>
       </motion.div>
-    </section>
+    </InvitationSection>
   );
 }
